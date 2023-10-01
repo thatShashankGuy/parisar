@@ -1,0 +1,51 @@
+/* Contact.css */
+
+.contact-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .contact-info {
+    display: flex;
+    justify-content:space-evenly;
+    align-items: flex-start;
+  }
+  
+  .mailbox,
+  .contact-form {
+    width: 45%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  p {
+    font-size: 18px;
+    color: #666;
+  }
+
+  .form-section{
+
+    
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center;
+    padding: 2%;
+  }
+  
+  

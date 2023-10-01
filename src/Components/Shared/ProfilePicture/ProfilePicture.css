@@ -1,0 +1,16 @@
+
+.profile-picture {
+    width: 150px; /* Adjust the width and height as needed */
+    height: 150px;
+    border-radius: 50%; /* Make the image round */
+    overflow: hidden; /* Hide overflow content (in case the image is larger) */
+    margin: 0 auto; /* Center the image horizontally */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  }
+  
+  /* Styling for the profile picture image */
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+  }

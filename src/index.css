@@ -1,0 +1,6 @@
+body {
+  font-family:'Courier New', Courier, monospace !important; 
+  margin: 0; /* Reset margin to remove default spacing */
+  padding: 0; /* Reset padding to remove default spacing */
+  background-color: #f2f2f2; /* Set the background color for the entire body */
+}

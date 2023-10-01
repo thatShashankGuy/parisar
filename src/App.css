@@ -1,0 +1,14 @@
+.app {
+  display: flex; /* Use flexbox to position elements */
+  flex-direction: row; /* Arrange elements horizontally */
+}
+
+#main-content{
+ padding: 2%;
+}
+
+#footer-content{
+  padding: 2%;
+ }
+
+ 

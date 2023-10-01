@@ -1,0 +1,20 @@
+/* ComingSoon.css */
+
+.coming-soon {
+    text-align: center;
+    padding: 100px;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  
+  h1 {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  p {
+    font-size: 24px;
+    color: #666;
+    margin-top: 20px;
+  }
+  
