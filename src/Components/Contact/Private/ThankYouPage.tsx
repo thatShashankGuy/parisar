@@ -1,4 +1,4 @@
-import { faCircleXmark, faMeteor, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faCircleXmark, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./ThankYouPage.css";
 

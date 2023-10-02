@@ -1,0 +1,1 @@
+ export const EmailURL = "localhost:8080/api/queryform"

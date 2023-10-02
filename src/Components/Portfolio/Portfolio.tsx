@@ -15,7 +15,9 @@ export default function Portfolio() {
       </Helmet>
       <header className="banner">
         <ProfilePicture src={image} alt="no image provided" />
-        <a>@thatshashankguy<FontAwesomeIcon icon={faMeteor} /></a>
+        <br />
+        <a id="brand-name">@thatshashankguy<FontAwesomeIcon icon={faMeteor} /></a>
+        <br />
         <div className="social-links">
           <a href="https://github.com/thatShashankGuy" target="_blank" rel="noopener noreferrer" className="social-links">
           <FontAwesomeIcon icon={faGithub} />

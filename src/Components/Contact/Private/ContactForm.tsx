@@ -1,30 +1,35 @@
 import './ContactForm.css'
 import { useState } from 'react'
-export default function ContacForm(){
-    const [query,setQuery]  = useState("0");
-    const [name , setName] = useState("")
-    const [phoneNumber , setPhoneNumber] = useState("")
-    const [email , setEmail] = useState("")
-    const [location, setlocation] = useState("")
-    const [apiResponse, setApiResponse]  = useState([])
-    const [loading ,setLoading]  = useState(false)
+import { IContactForm, IFormData } from '../../../Services/InterfaceService'
+
+export default function ContacForm(props: IContactForm){
+  let formDataObj : IFormData = {
+    query : "",
+    name : "",
+    location  : "",
+    phoneNumber :"",
+    email :""
+  }
+  const [formData, setFormData] = useState(formDataObj)
+
+    const handleFormInputChange =(e :React.ChangeEvent<HTMLInputElement>)=>{
+        const {name,value} = e.target
+        setFormData({
+          ...formData,
+          [name] : value
+        })
+    }
+    const handleFormTextChange =(e :React.ChangeEvent<HTMLTextAreaElement>)=>{
+      const {name,value} = e.target
+      setFormData({
+        ...formData,
+        [name] : value
+      })
+  }
 
     function onSubmit(e :React.MouseEvent<HTMLButtonElement, MouseEvent>){
       e.preventDefault();
-      const url = ""
-      setLoading(true)
-      fetch(url,).then( (response:Response) =>{
-        if(!response.ok){
-         throw new Error(`Error occurred : ${response.status}`)
-        }
-        return response.json();
-      }).then(data =>{
-        setApiResponse(data)
-        setLoading(false);
-      }).catch((e:any)=>{
-          console.log(e);
-          setLoading(false);
-      })
+      props.handleSubmissionFromParent(formData);
     }
     return(
         <>
@@ -35,8 +40,9 @@ export default function ContacForm(){
         id="query"
         name="query"
         rows={5}
+        value = {formData.query}
         required
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleFormTextChange}
         >
 
         </textarea>
@@ -44,8 +50,9 @@ export default function ContacForm(){
           <input
             type="text"
             name="name"
+            value={formData.name}
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleFormInputChange}
           />
         </div>
         <div className="form-group">
@@ -53,7 +60,9 @@ export default function ContacForm(){
           <input
             type="text"
             name="city"
-            onChange={(e) => setlocation(e.target.value)}
+            required
+            value={formData.location}
+            onChange={handleFormInputChange}
           />
         </div>
         <div className="form-group">
@@ -61,7 +70,9 @@ export default function ContacForm(){
           <input
             type="email"
             name="email"
-            onChange={(e) => setEmail(e.target.value)}
+            required
+            value={formData.phoneNumber}
+            onChange={handleFormInputChange}
           />
         </div>
         <div className="form-group">
@@ -69,7 +80,8 @@ export default function ContacForm(){
           <input
             type="tel"
             name="phone"
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            value={formData.phoneNumber}
+            onChange={handleFormInputChange}
             title="Please include the area code in your phone number."
           />
         </div>
