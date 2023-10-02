@@ -12,6 +12,6 @@ export interface IFormData{
   query : string 
   name : string
   location : string
-  email : string
   phoneNumber : string
+  email : string
 }

@@ -1,1 +1,1 @@
- export const EmailURL = "localhost:8080/api/queryform"
+ export const EmailURL = "http://localhost:8080/api/queryform"

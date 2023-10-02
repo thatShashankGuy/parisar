@@ -36,7 +36,7 @@ func main() {
 
 	clientURL := os.Getenv("CLIENTURL")
 	log.Println(clientURL)
-	allowedOrigins := handlers.AllowedOrigins([]string{clientURL})
+	allowedOrigins := handlers.AllowedOrigins([]string{"*"}) //[]string{clientURL})
 	allowedMethods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE"})
 	corsHandler := handlers.CORS(allowedOrigins, allowedMethods)(router)
 

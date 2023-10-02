@@ -7,8 +7,8 @@ export default function ContacForm(props: IContactForm){
     query : "",
     name : "",
     location  : "",
+    email :"",
     phoneNumber :"",
-    email :""
   }
   const [formData, setFormData] = useState(formDataObj)
 
@@ -59,9 +59,9 @@ export default function ContacForm(props: IContactForm){
           <label>City/Area*</label>
           <input
             type="text"
-            name="city"
-            required
+            name="location"
             value={formData.location}
+            required
             onChange={handleFormInputChange}
           />
         </div>
@@ -70,8 +70,8 @@ export default function ContacForm(props: IContactForm){
           <input
             type="email"
             name="email"
+            value={formData.email}
             required
-            value={formData.phoneNumber}
             onChange={handleFormInputChange}
           />
         </div>
@@ -79,7 +79,7 @@ export default function ContacForm(props: IContactForm){
           <label>Phone Number</label>
           <input
             type="tel"
-            name="phone"
+            name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleFormInputChange}
             title="Please include the area code in your phone number."

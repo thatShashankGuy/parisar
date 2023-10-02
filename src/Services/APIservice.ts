@@ -9,7 +9,6 @@ import { EmailURL } from "./URLs";
 export async function callEmailService(
   formData: IFormData
 ): Promise<IResponse> {
-  let emailResponse: IResponse;
   try {
     const response = await fetch(EmailURL, {
       method: "POST",
@@ -18,22 +17,22 @@ export async function callEmailService(
       },
       body: JSON.stringify(formData),
     });
+
     if (!response.ok) {
-      console.log(response);
-      emailResponse = {
+      console.error("Request failed with status:", response.status);
+      return {
         error: true,
         data: response.status,
       };
     }
 
-    const data = response.json();
-    emailResponse = {
+    const data = await response.json();
+    return {
       error: false,
       data: data,
     };
-    return emailResponse;
   } catch (exp: any) {
-    console.log(exp.message);
+    console.error("An error occurred:", exp.message);
     return {
       error: true,
       data: exp.message,
