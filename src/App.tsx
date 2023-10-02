@@ -3,8 +3,10 @@ import ComingSoon from "./Components/Shared/ComingSoon/ComingSoon";
 import FooterNav from "./Components/Shared/FooterNav/FooterNav";
 import Contact from "./Components/Contact/Contact";
 import _404 from "./Components/Shared/404/404";
+import Footer from "./Components/Shared/Footer/Footer";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
+
 
 function App() {
   return (
@@ -30,10 +32,9 @@ function App() {
           path="/services"
           element={
             <section id="main-content">
-              {/* <ComingSoon
+               <ComingSoon
                 name="Services"
-              /> */}
-              <_404 />
+              /> 
             </section>
           }
         />
@@ -41,7 +42,7 @@ function App() {
           path="/blogs"
           element={
             <section id="main-content">
-              <ComingSoon name="Blog" />
+              <ComingSoon name="Blogs" />
             </section>
           }
         />
@@ -58,6 +59,7 @@ function App() {
 
       <footer id="footer-content">
         <FooterNav />
+        <Footer/>
       </footer>
     </>
   );

@@ -4,14 +4,18 @@ import image from "../../assets/profpic.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngular, faGithub,faGolang,faLinkedin, faNodeJs, faPython, faReact} from "@fortawesome/free-brands-svg-icons";
 import DevSection from "./Private/DevSection";
-
+import { Helmet } from 'react-helmet'
+import { faMeteor } from "@fortawesome/free-solid-svg-icons";
 
 export default function Portfolio() {
   return (
     <div className="portfolio">
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <header className="banner">
         <ProfilePicture src={image} alt="no image provided" />
-        <a>@thatshashankguy👋🏻</a>
+        <a>@thatshashankguy<FontAwesomeIcon icon={faMeteor} /></a>
         <div className="social-links">
           <a href="https://github.com/thatShashankGuy" target="_blank" rel="noopener noreferrer" className="social-links">
           <FontAwesomeIcon icon={faGithub} />
