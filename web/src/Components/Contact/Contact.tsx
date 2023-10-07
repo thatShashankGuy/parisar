@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Contact.css";
 import ContacForm from "./Private/ContactForm";
 import ThankYouPage from "./Private/ThankYouPage";
 import { Helmet } from 'react-helmet'
-import {callEmailService} from '../../Services/APIservice'
+import {callSMSService} from '../../Services/APIservice'
 import { IResponse,IFormData } from "../../Services/InterfaceService";
 
 export default function Contact() {
@@ -12,7 +12,9 @@ export default function Contact() {
   const handleSubmission =async (formData : IFormData) =>{
     let response : IResponse;
     try {
-      response = await callEmailService(formData);
+      /** EMAIL TO BE DONE LATER */
+      //response = await callEmailService(formData);
+      response = await callSMSService(formData);
       if(!response.error){
         setQuerySubmission(true)
       }else{

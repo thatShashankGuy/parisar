@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  portfolio_backend
+
+  Sample SAM Template for portfolio_backend
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  PortfolioPushNotificationFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/
+      Handler: app.lambdaHandler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        NotifyPost:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /notify
+            Method: post
+        NotifyOption:
+          Type: Api
+          Properties:
+            Path: /notify
+            Method : options
+    Metadata: # Manage esbuild properties
+      BuildMethod: esbuild
+      BuildProperties:
+        Minify: true
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints: 
+        - app.ts
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  NotifyApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  PortfolioPushNotificationFunction:
+    Description: "Sends Push Notification for Portfolio Query Function ARN"
+    Value: !GetAtt PortfolioPushNotificationFunction.Arn
+  PortfolioPushNotificationFunctionIamRole:
+    Description: "Implicit IAM Role created for Push Notification function"
+    Value: !GetAtt PortfolioPushNotificationFunctionRole.Arn
