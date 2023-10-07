@@ -2,34 +2,34 @@ import { useState } from "react";
 import "./Contact.css";
 import ContacForm from "./Private/ContactForm";
 import ThankYouPage from "./Private/ThankYouPage";
-import { Helmet } from 'react-helmet'
-import {callSMSService} from '../../Services/APIservice'
-import { IResponse,IFormData } from "../../Services/InterfaceService";
+import { Helmet } from "react-helmet";
+import { callSMSService } from "../../Services/APIservice";
+import { IResponse, IFormData } from "../../Services/InterfaceService";
 
 export default function Contact() {
-  const [querySubmission ,setQuerySubmission] = useState(false)
+  const [querySubmission, setQuerySubmission] = useState(false);
 
-  const handleSubmission =async (formData : IFormData) =>{
-    let response : IResponse;
+  const handleSubmission = async (formData: IFormData) => {
+    let response: IResponse;
     try {
       /** EMAIL TO BE DONE LATER */
       //response = await callEmailService(formData);
       response = await callSMSService(formData);
-      if(!response.error){
-        setQuerySubmission(true)
-      }else{
-        console.log(response)
-        setQuerySubmission(false)
+      if (!response.error) {
+        setQuerySubmission(true);
+      } else {
+        console.log(response);
+        setQuerySubmission(false);
       }
     } catch (error) {
       console.log(error);
-      setQuerySubmission(false)
+      setQuerySubmission(false);
     }
-  }
+  };
 
   return (
     <>
-       <Helmet>
+      <Helmet>
         <title>Contact</title>
       </Helmet>
       <div className="contact-container">
@@ -39,34 +39,36 @@ export default function Contact() {
           <h1>Thank You for Choosing Our Service</h1>
         )}
         <div className="contact-info">
-          <div className="mailbox">
             {!querySubmission ? (
-              <section>
-                <h2>Mailbox</h2>
+              <section className="full-section">
                 <p>
-                  Please share your query by filling out the form below, or feel
-                  free to get in touch via email at 
-                  <a href="mailto:shashankforworkshekhar@gmail.com">
-                    {" "}shashankforworkshekhar@gmail.com
-                  </a>
-                  .
+                  <b>
+                    Mailbox : Please share your query by filling out the form
+                    below.
+                  </b>
+                </p>
+                <p>
+                  <b>
+                  Or feel free to get in touch via email at
+                    <a href="mailto:shashankforworkshekhar@gmail.com">
+                      {" "}
+                      shashankforworkshekhar@gmail.com
+                    </a>
+                    .
+                  </b>
                 </p>
                 <p>{"  "}</p>
+                <br />
                 <section className="form-section">
-                  <ContacForm 
-                    handleSubmissionFromParent ={handleSubmission}
-                  />
+                  <ContacForm handleSubmissionFromParent={handleSubmission} />
                 </section>
               </section>
             ) : (
               <section>
-                <ThankYouPage
-                  success = {true}
-                />
+                <ThankYouPage success={true} />
               </section>
             )}
           </div>
-        </div>
       </div>
     </>
   );

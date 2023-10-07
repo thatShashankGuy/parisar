@@ -1,7 +1,7 @@
 
 .navbar-foot {
-    background-color: transparent;
-    position: fixed;
+     background-color: transparent; 
+    position: sticky;
     bottom: 0;
     left: 0;
     width: 100%;

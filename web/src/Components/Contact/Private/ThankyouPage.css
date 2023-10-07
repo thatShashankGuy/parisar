@@ -1,18 +1,43 @@
 /* ThankYouPage.css */
 
 body, h1, h2, p {
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    color: #666;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  color: #666;
+  font-size: 14px; /* Mobile default font size */
+}
+
+h1 {
+  font-size: 24px; /* Larger text for header on mobile */
+}
+
+h2 {
+  font-size: 20px; /* Slightly larger than default for subheaders on mobile */
+  text-align: center;
+}
+
+.thank-you-page {
+  background-color: #f2f2f2;
+  padding: 15px; /* Slightly less padding for mobile */
+  text-align: center;
+}
+
+/* Larger devices (tablets and desktops) */
+@media (min-width: 768px) {
+  body, h1, h2, p {
+      font-size: 16px; /* Adjusted font size for larger screens */
   }
-  h2{
-    text-align: center;
+
+  h1 {
+      font-size: 28px; /* Larger text for header on larger screens */
+  }
+
+  h2 {
+      font-size: 24px; /* Adjusted size for subheaders on larger screens */
   }
 
   .thank-you-page {
-    background-color: #f2f2f2;
-    padding: 20px;
-    text-align: center;
+      padding: 20px; /* Original padding for larger screens */
   }
-  
+}
