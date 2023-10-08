@@ -36,7 +36,7 @@ export default function Contact() {
         {!querySubmission ? (
           <h1>Contact Us</h1>
         ) : (
-          <h1>Thank You for Choosing Our Service</h1>
+          <h1>Thank You for Choosing Our Services.</h1>
         )}
         <div className="contact-info">
             {!querySubmission ? (

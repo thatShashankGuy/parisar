@@ -39,7 +39,11 @@ export async function callEmailService(
     };
   }
 }
-
+/**
+ * 
+ * @param formData 
+ * @returns 
+ */
 export async function callSMSService(
   formData: IFormData
 ): Promise<IResponse> {
@@ -52,7 +56,7 @@ export async function callSMSService(
       body: JSON.stringify(formData),
     });
 
-    if (!response.ok) {
+    if (response.status != 200) {
       console.error("Request failed with status:", response.status);
       return {
         error: true,
@@ -60,10 +64,9 @@ export async function callSMSService(
       };
     }
 
-    const data = await response.json();
     return {
       error: false,
-      data: data,
+      data: response.status,
     };
   } catch (exp: any) {
     console.error("An error occurred:", exp.message);
