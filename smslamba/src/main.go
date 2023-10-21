@@ -15,10 +15,7 @@ import (
 
 type FormData struct {
 	Query string `json:"query"`
-	Name  string `json:"name"`
 	Email string `json:"email"`
-	Phone string `json:"phoneNumber"`
-	Loc   string `json:"location"`
 }
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -97,15 +94,9 @@ func PostHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyR
 
 	topicArn := "arn:aws:sns:ap-south-1:082291247210:portfolio-query"
 	SMS := fmt.Sprintf(`
-			QUERY FROM USER :  
-			%s
-			--------------
-			USER INFO: 
-			NAME : %s
-			PHONE : %s
-			EMAIL : %s
-			LOC : %s
-		`, formdata.Query, formdata.Name, formdata.Phone, formdata.Email, formdata.Loc)
+			Query : %s
+			Email : %s
+		`, formdata.Query,formdata.Email)
 
 	SNSResult, err := SNSServiceClient.Publish(&sns.PublishInput{
 		Message:  aws.String(SMS),

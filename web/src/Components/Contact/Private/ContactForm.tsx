@@ -3,9 +3,12 @@ import './ContactForm.css';
 import { IContactForm, IFormData } from '../../../Services/InterfaceService';
 import { TextField, Button } from '@mui/material';
 import { red } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom';
 
 const ContactForm = (props: IContactForm) => {
   const { handleSubmissionFromParent } = props;
+
+  const navigate = useNavigate()
 
   const initialFormData: IFormData = {
     query: "",
@@ -25,11 +28,12 @@ const ContactForm = (props: IContactForm) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // setFormSubmitted(true);
-    // if (formData.query && formData.email) { 
-    //   handleSubmissionFromParent(formData);
-    //   setFormSubmitted(false);
-    // }
+    navigate('/suspended-404');
+    setFormSubmitted(true);
+    if (formData.query && formData.email) { 
+      handleSubmissionFromParent(formData);
+      setFormSubmitted(false);
+    }
   };
 
   const inputStyle = (fieldValue: string) => {
@@ -68,8 +72,7 @@ const ContactForm = (props: IContactForm) => {
       />
       <br />
       <br />
-      {/* <Button variant="contained" type="submit">Submit</Button> */}
-      <Button variant="contained" href='/suspended-404'>Submit</Button>
+     <Button variant="contained" type="submit">Submit</Button> 
     </form>
   );
 }
