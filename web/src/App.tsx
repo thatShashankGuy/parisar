@@ -1,9 +1,6 @@
 import Portfolio from "./Components/Portfolio/Portfolio";
-import ComingSoon from "./Components/Shared/ComingSoon/ComingSoon";
-import FooterNav from "./Components/Shared/FooterNav/FooterNav";
 import Contact from "./Components/Contact/Contact";
 import _404 from "./Components/Shared/404/404";
-import Footer from "./Components/Shared/Footer/Footer";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -29,24 +26,6 @@ function App() {
           }
         />
         <Route
-          path="/services"
-          element={
-            <section id="main-content">
-               <ComingSoon
-                name="Services"
-              /> 
-            </section>
-          }
-        />
-        <Route
-          path="/blogs"
-          element={
-            <section id="main-content">
-              <ComingSoon name="Blogs" />
-            </section>
-          }
-        />
-        <Route
           path="/404"
           element={
             <section id="main-content">
@@ -56,11 +35,6 @@ function App() {
         />
         <Route path="*" element={<Navigate to="/404" replace={true} />} />
       </Routes>
-
-      <footer id="footer-content">
-        <FooterNav />
-        <Footer/>
-      </footer>
     </>
   );
 }

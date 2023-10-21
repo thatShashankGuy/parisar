@@ -10,8 +10,5 @@ export interface IContactForm{
 
 export interface IFormData{
   query : string 
-  name : string
-  location : string
-  phoneNumber : string
   email : string
 }

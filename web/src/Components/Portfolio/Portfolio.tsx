@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngular, faGithub,faGolang,faLinkedin, faNodeJs, faPython, faReact} from "@fortawesome/free-brands-svg-icons";
 import DevSection from "./Private/DevSection";
 import { Helmet } from 'react-helmet'
-import { faMeteor } from "@fortawesome/free-solid-svg-icons";
+import { faMeteor, faCommentDots } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Portfolio() {
   return (
@@ -14,6 +15,13 @@ export default function Portfolio() {
         <title>Home</title>
       </Helmet>
       <header className="banner">
+      
+      <Link to="/contact">
+        {" "}
+        <a target="_blank" rel="noopener noreferrer" className="contact-link">
+        <FontAwesomeIcon icon={faCommentDots} />    Contact Me
+        </a>
+      </Link>
         <ProfilePicture src={image} alt="no image provided" />
         <br />
         <a id="brand-name">@thatshashankguy<FontAwesomeIcon icon={faMeteor} /></a>

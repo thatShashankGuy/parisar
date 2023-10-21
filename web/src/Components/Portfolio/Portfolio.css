@@ -31,7 +31,21 @@ body, h1, h2, p {
     color: white;
   text-decoration: none;
   }
+  .contact-link{
+    color: white;
+  text-decoration: none;
+  display: flex;
+  }
   #brand-name{
+    color: white;
+  }
+
+  .contact-link{
+    color: white;
+  }
+  #contact_di{
+    align-content: right;
+    text-align: left;
     color: white;
   }
   

@@ -1,92 +1,76 @@
-import './ContactForm.css'
-import { useState } from 'react'
-import { IContactForm, IFormData } from '../../../Services/InterfaceService'
+import React, { useState } from 'react';
+import './ContactForm.css';
+import { IContactForm, IFormData } from '../../../Services/InterfaceService';
+import { TextField, Button } from '@mui/material';
+import { red } from '@mui/material/colors';
 
-export default function ContacForm(props: IContactForm){
-  let formDataObj : IFormData = {
-    query : "",
-    name : "",
-    location  : "",
-    email :"",
-    phoneNumber :"",
-  }
-  const [formData, setFormData] = useState(formDataObj)
+const ContactForm = (props: IContactForm) => {
+  const { handleSubmissionFromParent } = props;
 
-    const handleFormInputChange =(e :React.ChangeEvent<HTMLInputElement>)=>{
-        const {name,value} = e.target
-        setFormData({
-          ...formData,
-          [name] : value
-        })
+  const initialFormData: IFormData = {
+    query: "",
+    email: "",
+  };
+
+  const [formData, setFormData] = useState<IFormData>(initialFormData);
+  const [formSubmitted, setFormSubmitted] = useState(false); // New state to track form submission
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormSubmitted(true);
+    if (formData.query && formData.email) { 
+      handleSubmissionFromParent(formData);
+      setFormSubmitted(false);
     }
-    const handleFormTextChange =(e :React.ChangeEvent<HTMLTextAreaElement>)=>{
-      const {name,value} = e.target
-      setFormData({
-        ...formData,
-        [name] : value
-      })
-  }
+  };
 
-    function onSubmit(e :React.MouseEvent<HTMLButtonElement, MouseEvent>){
-      e.preventDefault();
-      props.handleSubmissionFromParent(formData);
-    }
-    return(
-        <>
-        <form >
-        <div className="form-group">
-        <label>Please Provide  Query*</label>
-        <textarea
-        id="query"
+  const inputStyle = (fieldValue: string) => {
+    return formSubmitted && !fieldValue ? { borderColor: red[500] } : {};
+  };
+
+  return (
+    <form onSubmit={handleSubmit} noValidate autoComplete="off">
+      <h4>
+        Fill the form or <a href="mailto:shashankforworkshekhar@gmail.com">Email  Directly</a>
+      </h4>
+      {/* Apply conditional styles based on whether the input is empty and the form has been submitted */}
+      <TextField
         name="query"
-        rows={5}
-        value = {formData.query}
+        onChange={handleInputChange}
+        id="standard-multiline-static"
+        label="Query"
+        placeholder="Press Enter for next line"
+        multiline
+        variant="standard"
+        style={inputStyle(formData.query)}
         required
-        onChange={handleFormTextChange}
-        >
+      />
+      <br />
+      <br />
+      <TextField 
+        name="email"
+        onChange={handleInputChange}
+        id="filled-basic"
+        label="Email Address"
+        placeholder="Please provide your Email For contact"
+        variant="standard"
 
-        </textarea>
-          <label>Name*</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            required
-            onChange={handleFormInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>City/Area*</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            required
-            onChange={handleFormInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Email*</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            required
-            onChange={handleFormInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Phone Number</label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleFormInputChange}
-            title="Please include the area code in your phone number."
-          />
-        </div>
-        <button type="submit" onClick={(e)=>onSubmit(e)}>Submit</button>
-      </form>
-        </>
-    )
+        style={inputStyle(formData.email)}
+        required
+      />
+      <br />
+      <br />
+      <Button variant="contained" type="submit">Submit</Button>
+    </form>
+  );
 }
+
+export default ContactForm;
