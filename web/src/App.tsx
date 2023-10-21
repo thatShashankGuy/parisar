@@ -29,7 +29,15 @@ function App() {
           path="/404"
           element={
             <section id="main-content">
-              <_404 />
+              <_404 suspended = {false}/>
+            </section>
+          }
+        />
+          <Route
+          path="/suspended-404"
+          element={
+            <section id="main-content">
+              <_404 suspended = {true}/>
             </section>
           }
         />
