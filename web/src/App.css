@@ -1,14 +1,17 @@
-.app {
-  display: flex; /* Use flexbox to position elements */
-  flex-direction: row; /* Arrange elements horizontally */
+.switch-board {
+  position: fixed !important; 
+  top: 0 !important;
+  right: 0 !important;
+  padding: 10px !important; 
+  border-radius: 0 0 0 10px !important; /* Rounded bottom-left corner for aesthetics */
+  z-index: 1000 !important; /* High z-index to ensure it's on top */
 }
 
-#main-content{
- padding: 2%;
+.socials {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;  /* Adjusted from right to left */
+  padding: 10px !important;
+  border-radius: 0 10px 10px 0 !important; /* Adjusted the border-radius for aesthetics */
+  z-index: 1000 !important;
 }
-
-#footer-content{
-  padding: 2%;
- }
-
- 

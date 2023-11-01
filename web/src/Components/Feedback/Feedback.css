@@ -1,15 +1,23 @@
+.feedback-container{
+    display: flex !important;
+    width: 100%;
+    height: 100%;
+    padding: 10%;
+    padding-top: 25%;
+  }
 
-.profile-picture {
-    width: 150px; /* Adjust the width and height as needed */
-    height: 150px;
+
+  .success {
+    width: 600px; /* Adjust the width and height as needed */
+    height: 600;
     border-radius: 50%; /* Make the image round */
     overflow: hidden; /* Hide overflow content (in case the image is larger) */
     margin: 0 auto; /* Center the image horizontally */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+    padding-right: 10%;
   }
   
   /* Styling for the profile picture image */
-  .profile-picture img {
+  .success img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Maintain aspect ratio and cover the entire container */
