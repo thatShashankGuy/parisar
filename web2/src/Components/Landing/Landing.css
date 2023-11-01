@@ -15,13 +15,14 @@
     object-fit: cover; /* Maintain aspect ratio and cover the entire container */
   }
   .landing-container{
-    display: flex;
+    display: block;
     padding: 10%;
-    padding-top: 20%;
+    padding-top: 2%;
+    padding-left: 20%;
+    padding-bottom: 2%;
   }
 
-  .message {
-    padding-top:12% ;    
+  .message {  
     padding-left: 6%;
     font-size: xx-large;
   }

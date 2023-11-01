@@ -28,3 +28,4 @@ dist-ssr
 
 #AWS BUILD
 *.aws-sam
+web2/ZPROMPTER.md

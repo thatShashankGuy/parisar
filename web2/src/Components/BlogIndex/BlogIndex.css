@@ -4,8 +4,13 @@
     height: 100%;
     padding: 10%;
     padding-top: 25%;
+    padding-bottom: 15%;
   }
 .primary-text{
+    font-size: larger !important;
+    font-weight: bolder !important;
+}
+.list-text{
     font-size: larger !important;
     font-weight: bolder !important;
 }
@@ -13,3 +18,23 @@
 h1{
     padding-right: 10%;
 }
+
+
+.success {
+    width: 600px; /* Adjust the width and height as needed */
+    height: 600;
+    border-radius: 50%; /* Make the image round */
+    overflow: hidden; /* Hide overflow content (in case the image is larger) */
+    margin: 0 auto; /* Center the image horizontally */
+
+  }
+  
+  /* Styling for the profile picture image */
+  .success img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+  }
+  .dec-header{
+    display: flexbox;
+  }

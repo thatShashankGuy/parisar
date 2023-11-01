@@ -4,6 +4,7 @@ import React from 'react';
 import { CssBaseline, Stack } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Index from './Components/Index';
+import Socials from './Components/Socials/Socials';
 function App() {
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -72,7 +73,7 @@ function App() {
           </Stack>
         </div>        
         <div className="socials">
-        <span>Linkdeln</span><span>   </span><span>Github</span>
+        <Socials darkMode={darkMode}/>
     </div>
         <Index/>
 
