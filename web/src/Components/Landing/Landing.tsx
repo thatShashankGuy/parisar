@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import success from  '../../assets/welcome.svg'
 import './Landing.css'
+import { faMeteor } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const Landing = () => {
-    const fullWelcomeMessage = "Hello There!!"
+    const fullWelcomeMessage = "Hello and welcome! I'm Shashank, and I'm thrilled to have you here."
     const [welcomeMessage, setWelcomeMessage] = useState('')
     const [index,setIndex] = useState(0)
 
@@ -26,7 +28,7 @@ const Landing = () => {
         <img src={success} alt={"Image not Found"} />
         </div>
         <div className='message'>
-        <h1>{welcomeMessage}<span>!</span></h1>
+        <h2>{welcomeMessage}<span><FontAwesomeIcon icon={faMeteor} /></span></h2>
         </div>
         </div>
         </>

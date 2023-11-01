@@ -4,7 +4,18 @@ import BlogIndex from "./BlogIndex/BlogIndex"
 import Landing from "./Landing/Landing"
 
 const Index = () => {
-  const items : string[]= ["The Typescript Guide"]
+  const items : any[]= [{
+    key : 1,
+    name : "The Typescript Guide", 
+    address : "https://github.com/thatShashankGuy/Guides/wiki/The-TypeScript-Guide"
+  },
+  {
+    key : 2,
+    name :"Pointers in Go",
+    address:"https://github.com/thatShashankGuy/Guides/wiki/Understanding-Pointers-In-Go"
+  }
+
+]
   const landingRef  = useRef<HTMLElement | null>(null)
   const blogIndexRef = useRef<HTMLElement | null>(null)
   const feedbackRef = useRef<HTMLElement | null>(null)

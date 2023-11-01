@@ -1,13 +1,13 @@
 
-import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import './BlogIndex.css'
 import React from 'react';
 import success from '../../assets/support.svg'
-import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type IndexProps = {
-    items: string[];
+    items: any[];
 }
 
 
@@ -29,9 +29,21 @@ const BlogIndex: React.FC<IndexProps> = ({ items }) => {
                         <h2>
                             <ListItem key={index}>
                                 <ListItemIcon>
-                                    <FontAwesomeIcon icon={faBook} />
+                                    <FontAwesomeIcon icon={faMeteor} />
                                 </ListItemIcon>
-                                <ListItemText primary={item} className='list-text' />
+                                <a href={item.address} target="_blank" rel="noopener noreferrer" >
+                                <ListItemText primary={
+                                    <Typography
+                                    sx={{ display: 'inline', textDecoration:'underline'}}
+                                    component="h2"
+                                    variant="h3"
+                                    color="text.primary"
+                                    >
+                                        {item.name}
+                                    </Typography>
+                                   
+                                    }  />
+                                </a>
                             </ListItem>
                         </h2>
                     ))}

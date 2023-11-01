@@ -57,6 +57,7 @@ function App() {
     palette: {
       mode: darkMode ? 'dark' : 'light',
     },
+
   });
 
   return (
@@ -68,7 +69,7 @@ function App() {
             <MaterialUISwitch
               checked={darkMode}
               onChange={() => setDarkMode(!darkMode)}
-              inputProps={{ 'aria-label': 'controlled' }}
+              inputProps={{ 'aria-label': 'controlled'}}
             />
           </Stack>
         </div>        
