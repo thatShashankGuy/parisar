@@ -1,0 +1,15 @@
+.blog-Index-container{
+    display: flex !important;
+    width: 100%;
+    height: 100%;
+    padding: 10%;
+    padding-top: 25%;
+  }
+.primary-text{
+    font-size: larger !important;
+    font-weight: bolder !important;
+}
+
+h1{
+    padding-right: 10%;
+}
