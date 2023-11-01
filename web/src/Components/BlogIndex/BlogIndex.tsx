@@ -16,7 +16,7 @@ const BlogIndex: React.FC<IndexProps> = ({ items }) => {
 
         <div className='blog-Index-container'>
             <div className='dec-header'>
-                <h1>Check back soon for More interesting blogs!   </h1>
+                <h1>Check back soon for More interesting blogs!<FontAwesomeIcon icon={faMeteor} />   </h1>
                     <div className='success'>
                         <img src={success} alt={"Image not Found"} />
                     </div>
