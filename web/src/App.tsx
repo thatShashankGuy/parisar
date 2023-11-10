@@ -3,8 +3,9 @@ import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
 import React from 'react';
 import { CssBaseline, Stack } from '@mui/material';
 import Switch from '@mui/material/Switch';
-import Index from './Components/Index';
+import Main from './Components/Main';
 import Socials from './Components/Socials/Socials';
+import Arrows from './Components/Shared/Arrows';
 function App() {
   const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -76,8 +77,10 @@ function App() {
         <div className="socials">
         <Socials darkMode={darkMode}/>
     </div>
-        <Index/>
-
+        <Main/>
+        <div className="arrow">
+        <Arrows />
+    </div>
       </ThemeProvider>
     </>
   )

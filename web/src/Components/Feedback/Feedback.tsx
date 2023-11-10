@@ -1,65 +1,70 @@
-import './Feedback.css'
-import { TextField, Button } from '@mui/material';
-import success from '../../assets/relaxation.svg'
+import  { useState } from 'react';
+import { TextField, Button, Grid, Typography, Box, Container } from '@mui/material';
+import relax from '../../assets/relaxation.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
+import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import Service404 from '../Shared/Service404';
-import { useState } from 'react';
-import { faMeteor } from '@fortawesome/free-solid-svg-icons/faMeteor';
-const Feedback = () => {
-  const [show404, setShow404] = useState(false)
 
-  function submitFeedBack(){
-    setShow404(true)
-  }
+
+const Feedback = () => {
+  const [show404, setShow404] = useState(false);
+  const submitFeedBack = () => {
+    setShow404(true);
+  };
 
   return (
-  <div>
-    <div className='feedback-container'>
-    <div className='success'>
-        <img src={success} alt={"Image not Found"} />
-    </div>
-    {
-  show404? 
-  <Service404 component='feedback'/>
-  :<form  noValidate autoComplete="off">
-    <h1>Thank you for Dropping By! <FontAwesomeIcon icon={faMeteor} /></h1>
-      <h4>
-      <FontAwesomeIcon icon={faMessage} /> We will love some feedback . Fill the form or <a href="mailto:shashankforworkshekhar@gmail.com">Email  Directly</a>
-      </h4>
-      {/* Apply conditional styles based on whether the input is empty and the form has been submitted */}
-      <TextField
-        name="query"
-     //   onChange={}
-        id="standard-multiline-static"
-        label="Submit your Feedback"
-        placeholder="Press Enter for next line"
-        multiline
-        variant="standard"
-       // style={inputStyle(formData.query)}
-        required
-      />
-      <br />
-      <br />
-      <TextField 
-        name="email"
-      //  onChange={handleInputChange}
-        id="filled-basic"
-        label="Email Address"
-        placeholder="Please provide your Email"
-        variant="standard"
-
-        //style={inputStyle(formData.email)}
-        required
-      />
-      <br />
-      <br />
-     <Button variant="contained" type="submit" onClick={()=>submitFeedBack()}>Submit</Button> 
-    </form>
-}
-    </div>
-    </div>
+    <Container maxWidth="md">
+      <Box my={4}>
+        <Grid container spacing={3} alignItems="center" justifyContent="center">
+          <Grid item xs={12} md={6}>
+            <img src={relax} alt="Relaxation" style={{ maxWidth: '100%', height: 'auto' }} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            {show404 ? (
+              <Service404 component='feedback' />
+            ) : (
+              <Box>
+                <Typography variant="h4" gutterBottom>
+                  Thank you for Dropping By! <FontAwesomeIcon icon={faMeteor} />
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  <FontAwesomeIcon icon={faMessage} /> We would love some feedback. Fill the form or <a href="mailto:shashankforworkshekhar@gmail.com">Email Directly</a>
+                </Typography>
+                <form noValidate autoComplete="off">
+                  <TextField
+                    fullWidth
+                    name="query"
+                    id="standard-multiline-static"
+                    label="Submit your Feedback"
+                    placeholder="Press Enter for next line"
+                    multiline
+                    rows={4}
+                    variant="standard"
+                    margin="normal"
+                    required
+                  />
+                  <TextField 
+                    fullWidth
+                    name="email"
+                    id="filled-basic"
+                    label="Email Address"
+                    placeholder="Please provide your Email"
+                    variant="standard"
+                    margin="normal"
+                    required
+                  />
+                  <Box mt={2}>
+                    <Button variant="contained" onClick={submitFeedBack}>Submit</Button> 
+                  </Box>
+                </form>
+              </Box>
+            )}
+          </Grid>
+        </Grid>
+      </Box>
+    </Container>
   );
-}
+};
 
 export default Feedback;

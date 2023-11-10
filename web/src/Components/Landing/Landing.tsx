@@ -1,39 +1,33 @@
-import { useEffect, useState } from 'react'
-import success from  '../../assets/welcome.svg'
-import './Landing.css'
-import { faMeteor } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import success from '../../assets/welcome.svg';
+import { faMeteor } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grid, Box, Typography } from '@mui/material';
+import { landing } from '../../Constants/DataObjects';
 
 const Landing = () => {
-    const fullWelcomeMessage = "Hello and welcome! I'm Shashank, and I'm thrilled to have you here."
-    const [welcomeMessage, setWelcomeMessage] = useState('')
-    const [index,setIndex] = useState(0)
+  const welcomeMessage = landing.message
+  return (
+    <Grid container spacing={2} alignItems="center" justifyContent="center" className="landing-grid">
+      <Grid item xs={4}>
+        <Box className='success' display="flex" justifyContent="center" p={5}>
+          <img src={success} alt="Welcome" style={{ width: '100%', maxWidth: '360px', height: 'auto' }}  />
+        </Box>
+      </Grid>
+      <Grid item xs={8}>
+      <Box className="message" textAlign="center" p={5} sx={{
+        wordWrap: 'break-word',
+        overflowWrap: 'break-word', 
+    }}>
+      <Typography variant="h5" component="h1" gutterBottom sx={{
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+          wordBreak: 'break-word' 
+      }}>  {welcomeMessage}
+      <span><FontAwesomeIcon icon={faMeteor} /></span>
+    </Typography>
+        </Box>
+      </Grid>
+    </Grid>
+  );
+};
 
-    useEffect(()=>{
-        if(index < fullWelcomeMessage.length){
-            const timer = setTimeout(()=>{
-                setWelcomeMessage(prev => prev + fullWelcomeMessage[index])
-                setIndex(i=> i + 1  )
-            },100)
-
-            return ()=> clearTimeout(timer)
-        }
-    },[index,fullWelcomeMessage])
-    
-    return(
-        <>
-        <div className='landing-container'>
-        <div className='success'>
-        <img src={success} alt={"Image not Found"} />
-        </div>
-        <div className='message'>
-        <h2>{welcomeMessage}<span><FontAwesomeIcon icon={faMeteor} /></span></h2>
-        </div>
-        </div>
-        </>
-    ) 
-}
-
-
-export default Landing
+export default Landing;

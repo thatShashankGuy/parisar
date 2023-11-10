@@ -1,6 +1,8 @@
+
 type Service404Props = {
     component : string
 }
+
 
 const Service404 : React.FC<Service404Props> = ({component}) =>{
 
