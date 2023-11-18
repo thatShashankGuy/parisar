@@ -24,6 +24,11 @@ export type CareerTimelineProps = {
 export type BlogProps = {
     blogs : blogLinksType[]
 }
+
+export type modeProps = {
+    darkMode :boolean
+}
+
   
   
 

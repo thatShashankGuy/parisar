@@ -3,13 +3,11 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../../Styles/Socials.css'
+import { modeProps } from "../../Constants/Types";
 
 
-type SocialProps =  {
-   darkMode :boolean
-}
 
-const Socials : React.FC<SocialProps> = ({darkMode}) =>{
+const Socials : React.FC<modeProps> = ({darkMode}) =>{
    const [modeClass,setModeClass] = useState('social-links')
 
    useEffect(()=>{

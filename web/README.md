@@ -32,4 +32,3 @@ If you are developing a production application, we recommend updating the config
 - `npm run build` 
 - `aws s3 sync dist/ s3://thatshashankguy-portfolio-website`
 
-name server aron.ns.cloudflare.com
