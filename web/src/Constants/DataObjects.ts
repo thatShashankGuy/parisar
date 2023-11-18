@@ -45,5 +45,5 @@ export const AboutMe = {
 }
 
 export const landing = {
-    message : "Hello and Welcome. I am Shashank and I appreciate you visitng my website.Please scroll down to know more about me"
+    message : "Hello and Welcome. I am Shashank and I appreciate you visitng my website."
 }
