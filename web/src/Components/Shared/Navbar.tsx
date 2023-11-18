@@ -8,7 +8,7 @@ import { modeProps } from '../../Constants/Types';
 const Navbar : React.FC<modeProps> = () => {
     return (
         <div>  
-        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0,  boxShadow: 'none', }} elevation={10}>
+        <Paper sx={{ opacity:0.7 ,position: 'fixed', bottom: 0, left: 0, right: 0,  boxShadow: 'none', }} elevation={10}>
         <BottomNavigation
           showLabels
         >
