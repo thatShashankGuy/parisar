@@ -29,7 +29,7 @@ const Feedback = () => {
                   Thank you for Dropping By! <FontAwesomeIcon icon={faMeteor} />
                 </Typography>
                 <Typography variant="subtitle1" gutterBottom>
-                  <FontAwesomeIcon icon={faMessage} /> We would love some feedback. Fill the form or <a href="mailto:shashankforworkshekhar@gmail.com">Email Directly</a>
+                  <FontAwesomeIcon icon={faMessage} /> I would love some feedback. Fill the form or <a href="mailto:shashankforworkshekhar@gmail.com">Email Directly</a>
                 </Typography>
                 <form noValidate autoComplete="off">
                   <TextField
