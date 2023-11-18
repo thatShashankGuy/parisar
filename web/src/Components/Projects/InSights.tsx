@@ -57,7 +57,7 @@ const Blogs: React.FC<BlogProps> = ({ blogs }) => {
             variant="h6"
             color="text.primary"
         
-        >Note : We are actively Looking for contributors for Insight. Please <a href="mailto:shashankforworkshekhar@gmail.com">reach out</a> if you are interested.</Typography>
+        >Note : The _InSights Project is actively looking for contributors. Please <a href="mailto:shashankforworkshekhar@gmail.com">reach out</a> if you are interested.</Typography>
       </Grid>
     </Grid>
   );
