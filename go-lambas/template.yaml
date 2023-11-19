@@ -40,16 +40,55 @@ Resources:
         Variables:
           PARAM1: VALUE
   
+  AudioLogFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Metadata:
+      BuildMethod: go1.x
+    Properties:
+      CodeUri: src/
+      Handler: bootstrap
+      Runtime: provided.al2
+      Architectures:
+        - x86_64
+      Events:
+        AUDIOPOST:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /audiolog
+            Method: POST
+        AUDIOOPTIONS:
+          Type: Api
+          Properties:
+            Path : /audiolog
+            Method : OPTIONS
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: sns:Publish
+              Resource: arn:aws:sns:ap-south-1:082291247210:portfolio-query 
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          PARAM1: VALUE
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  SMSSENDERAPI:
-    Description: "API Gateway endpoint URL for Prod environment for First Function"
+  PORTFOLIOAPI:
+    Description: "API Gateway endpoint URL for Portfolio Backend"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
   SMSSenderFunction:
     Description: "First Lambda Function ARN"
     Value: !GetAtt SMSSenderFunction.Arn
   SMSSenderFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
+    Description: "Implicit IAM Role created for SMS Sender function"
     Value: !GetAtt SMSSenderFunctionRole.Arn
+  AudioLogFunction:
+    Description: "First Lambda Function ARN"
+    Value: !GetAtt SMSSenderFunction.Arn
+  AudioLogFunctionIamRole:
+    Description: "Implicit IAM Role created for Audio Log function"
+    Value: !GetAtt SMSSenderFunctionRole.Arn
+  
+
+
+  

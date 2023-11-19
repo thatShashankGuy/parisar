@@ -6,6 +6,7 @@ import CareerTimeline from './CareerTimline/CareerTimeline'
 import About from './About/About';
 import Service404 from './Shared/Service404';
 import {careerEvents,blogLinks} from '../Constants/DataObjects'
+import AudioPlayer from './Podcast/AudioPlayer';
 
 const Main = () => {
   return (
@@ -15,6 +16,7 @@ const Main = () => {
         <Route path="/career" element={<CareerTimeline jobs={careerEvents}/>}/>
         <Route path="/project" element={<Blog blogs={blogLinks} />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/podcast" element={<AudioPlayer />} />
         <Route path = "*" element={<Service404 component={""}/>}/>
       </Routes>
   );

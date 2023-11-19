@@ -5,7 +5,7 @@ import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineDot from '@mui/lab/TimelineDot';
 import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material';
+import { Container, Grid } from '@mui/material';
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import  homerun from '../../assets/homerun.svg'
@@ -14,10 +14,12 @@ import { faReact, faAngular, faNode, faGolang, faPython, faAws } from '@fortawes
 
 const CareerTimeline: React.FC<CareerTimelineProps> = ({ jobs }) => {
   return (
-    <div>
-      <Grid container spacing={2}>
-      <Grid item xs={4} >
-      <img src={homerun} alt="Welcome" style={{ width: '100%', maxWidth: '300px', height: 'auto' }} />
+    <>
+
+      <Grid container spacing={1}>
+      <Container maxWidth="lg"> 
+      <Grid item xs={2} >
+      <img src={homerun} alt="Welcome" style={{ width: '80%', maxWidth: '300px', height: 'auto' }} />
       <br/>
       <span style={{padding:"2%"}}><FontAwesomeIcon icon={faReact} size="2xl" /></span>
       <span style={{padding:"2%"}}><FontAwesomeIcon icon={faAngular} size="2xl" /></span>
@@ -26,8 +28,8 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ jobs }) => {
       <span style={{padding:"2%"}}><FontAwesomeIcon icon={faPython} size="2xl" /></span>
       <span style={{padding:"2%"}}><FontAwesomeIcon icon={faAws} size="2xl" /></span>
       </Grid>
-        <Grid item xs={8} style={{padding:"10%"}}></Grid>
-
+      </Container>
+        <Container maxWidth="xl" style={{zIndex:-5}}> 
         <Timeline position="alternate">
           {jobs.map((job: any, index: any) => (
             <TimelineItem key={index}>
@@ -36,7 +38,7 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ jobs }) => {
                 {index < jobs.length - 1 && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>
-                <Typography variant="h5" component="h1">
+                <Typography variant="h6" component="article">
                   {job.title}<FontAwesomeIcon icon={faMeteor} />
                 </Typography>
                 <Typography>{job.date}</Typography>
@@ -45,8 +47,10 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ jobs }) => {
             </TimelineItem>
           ))}
         </Timeline>
+        </Container>
         </Grid>
-    </div >
+    
+    </ >
   );
 };
 

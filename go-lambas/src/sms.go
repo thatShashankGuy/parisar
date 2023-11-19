@@ -1,13 +1,13 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sns"
@@ -18,7 +18,7 @@ type FormData struct {
 	Email string `json:"email"`
 }
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func smsHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	var greeting string
 	var err error
 	var response events.APIGatewayProxyResponse
@@ -32,7 +32,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 	switch request.HTTPMethod {
 	case "POST":
-		response, err = PostHandler(request)
+		response, err = smsPOST(request)
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
@@ -40,7 +40,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 			}, nil
 		}
 	case "OPTIONS":
-		response, _ = OptionsHandler()
+		response, _ = smsOPTIONS()
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
@@ -58,7 +58,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 
 }
 
-func PostHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func smsPOST(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	var formdata FormData
 	if request.Body == "" {
 		return events.APIGatewayProxyResponse{
@@ -96,7 +96,7 @@ func PostHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyR
 	SMS := fmt.Sprintf(`
 			Query : %s
 			Email : %s
-		`, formdata.Query,formdata.Email)
+		`, formdata.Query, formdata.Email)
 
 	SNSResult, err := SNSServiceClient.Publish(&sns.PublishInput{
 		Message:  aws.String(SMS),
@@ -120,7 +120,7 @@ func PostHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyR
 	return response, nil
 }
 
-func OptionsHandler() (events.APIGatewayProxyResponse, error) {
+func smsOPTIONS() (events.APIGatewayProxyResponse, error) {
 	response := events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Headers: map[string]string{
@@ -131,8 +131,4 @@ func OptionsHandler() (events.APIGatewayProxyResponse, error) {
 		Body: "Handled OPTIONS",
 	}
 	return response, nil
-}
-
-func main() {
-	lambda.Start(handler)
 }
