@@ -1,8 +1,9 @@
 package main
 
 import (
+	"bytes"
 	"context"
-	"io/ioutil"
+	"encoding/base64"
 	"log"
 	"os"
 
@@ -16,10 +17,10 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 	var err error
 	var response events.APIGatewayProxyResponse
 	switch request.HTTPMethod {
-	case "POST":
-		bucketName := "bucketName"
-		objectKey := "objectKey"
-		fileContent, err := audioPOST(bucketName, objectKey)
+	case "GET":
+		bucketName := os.Getenv("AUDIO_BUCKET")
+		objectKey := os.Getenv("AUDIO_KEY")
+		fileContent, err := audioGET(bucketName, objectKey)
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
@@ -29,6 +30,7 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 
 		return events.APIGatewayProxyResponse{
 			StatusCode:      200,
+			Headers:         map[string]string{"Content-Type": "audio/ogg"},
 			IsBase64Encoded: true,
 			Body:            string(fileContent),
 		}, nil
@@ -51,14 +53,15 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 
 }
 
-func audioPOST(bucketName string, objectKey string) ([]byte, error) {
+func audioGET(bucketName string, objectKey string) (string, error) {
 	_session, err := session.NewSession(&aws.Config{
-		Region: aws.String(os.Getenv("AWS_REGION")), // Get AWS region from environment variable
+		Region: aws.String(os.Getenv("MY_AWS_REGION")), // Get AWS region from environment variable
 	})
 
 	if err != nil {
+		log.Println("error in audioGET line 60")
 		log.Println(err)
-		return nil, err
+		return "", err
 	}
 
 	svc := s3.New(_session)
@@ -70,18 +73,26 @@ func audioPOST(bucketName string, objectKey string) ([]byte, error) {
 
 	result, err := svc.GetObject(input)
 	if err != nil {
+		log.Println("error in audioGET line 74")
 		log.Println(err)
-		return nil, err
+		return "", err
 	}
 
 	defer result.Body.Close()
+	buf := new(bytes.Buffer)
+	buf.ReadFrom(result.Body)
+	noneEncodedData := buf.Bytes()
 
-	fileContent, err := ioutil.ReadAll(result.Body)
-	if err != nil {
-		return nil, err
-	}
+	encodedData := base64.StdEncoding.EncodeToString(noneEncodedData)
+	// fileContent, err := io.ReadAll(result.Body)
+	// if err != nil {
+	// 	log.Println("error in audioGET line 83")
+	// 	log.Println(err)
+	// 	return nil, err
+	// }
+	// return fileContent, nil
 
-	return fileContent, nil
+	return encodedData, nil
 }
 
 func audioOPTIONS() (events.APIGatewayProxyResponse, error) {

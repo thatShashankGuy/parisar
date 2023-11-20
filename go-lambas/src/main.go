@@ -9,9 +9,7 @@ import (
 
 func main() {
 	lambda.Start(func(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-		if request.Path == "/triggerSMS" {
-			return smsHandler(ctx, request)
-		} else if request.Path == "/audiolog" {
+		if request.Path == "/audiolog" {
 			return audioHandler(ctx, request)
 		} else {
 			return events.APIGatewayProxyResponse{
