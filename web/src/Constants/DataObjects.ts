@@ -1,4 +1,4 @@
-import { blogLinksType,careerEventsType } from "./Types";
+import { blogLinksType,careerEventsType} from "./Types";
 
 export const blogLinks : blogLinksType[]= [{
     key : 1,
@@ -11,6 +11,9 @@ export const blogLinks : blogLinksType[]= [{
     address:"https://github.com/thatShashankGuy/_InSights/wiki/The-Go-Programming-Guide"
   }]
 
+export const URLS ={
+  audio :"https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/audiolog"
+}
 export  const careerEvents  : careerEventsType[]= [
     {
       title: 'Senior Software Engineer @Winjit',
