@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,10 +9,9 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import convo from '../../assets/convo.svg'
-import test from '../../assets/testAudio.ogg'
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { URLS } from '../../Constants/DataObjects';
 const Widget = styled('div')(({ theme }) => ({
   padding: 16,
   marginLeft: 260,
@@ -51,10 +50,38 @@ const TinyText = styled(Typography)({
 export default function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [audioSrc,setAudioSrc] = useState('')
   const audioRef :any = useRef<HTMLAudioElement | null>(null);
+  
   const theme = useTheme();
-  const duration = 5; 
 
+  async function fetchAudio() {
+    try {
+      const response = await fetch(URLS.audio);
+      const audioString = await response.json();
+      const binaryString = window.atob(audioString)
+      const bytesStore = new Uint8Array(binaryString.length)
+      for (let i = 0; i < binaryString.length; i++) {
+          bytesStore[i] = binaryString.charCodeAt(i)
+      }
+
+      const audioData =  bytesStore.buffer;
+      const blob = new Blob([audioData], { type: 'audio/ogg' });
+      const audioUrl = URL.createObjectURL(blob);
+      setAudioSrc(audioUrl);
+  } catch (e: any) {
+      console.log("error getting audio file: " + e.message)
+  }
+  }
+  
+  useEffect(()=>{
+      fetchAudio();
+  },[])
+  
+  const handleMetadataLoaded = (e:any) => {
+    setDuration(e.target.duration);
+};
 
   function formatDuration(value: number) {
     const minute = Math.floor(value / 60);
@@ -116,8 +143,9 @@ export default function AudioPlayer() {
             controls
             onTimeUpdate={handleTimeUpdate}
             onEnded={() => setIsPlaying(false)}
+            onLoadedMetadata={handleMetadataLoaded}
           >
-            <source src={test} type="audio/ogg" />
+            <source src={audioSrc} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
         </Box>
