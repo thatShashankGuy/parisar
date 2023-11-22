@@ -6,8 +6,7 @@ import { styled } from '@mui/material/styles';
 import React from 'react';
 import { AudioIndexItem } from '../../Constants/Types';
 import { URLS } from '../../Constants/DataObjects';
-import { Navigate } from "react-router";
-
+import { useNavigate } from 'react-router-dom';
 
 export const Widget = styled('div')(({ theme }) => ({
     padding: 16,
@@ -51,10 +50,12 @@ export const generate = () => {
   }
 
 const CustomListItem : React.FC<AudioIndexItem> = ({nameText}) =>{
+  const navigate = useNavigate();
   async function playRequestedAudio(){
+    
     const audioUrl = await fetchAudio();
     if(audioUrl){
-      Navigate({to:'/player', state: { data: audioUrl } })
+      navigate('/player', {state: { data: audioUrl }} )
     }   
   }
 
@@ -76,28 +77,24 @@ const CustomListItem : React.FC<AudioIndexItem> = ({nameText}) =>{
 
 export async function fetchAudio() {
   try {
-    const response = await fetch(URLS.devAudio,{
-      method : "GET",
-      headers:{
-        "Content-Type" :"application/json"
+    const response = await fetch(URLS.devAudio, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
       }
     });
-    console.log(response)
-    const audioString = await response.json();
-    const binaryString = window.atob(audioString)
-    const bytesStore = new Uint8Array(binaryString.length)
-    for (let i = 0; i < binaryString.length; i++) {
-        bytesStore[i] = binaryString.charCodeAt(i)
+    console.log(response);
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status: ${response.status}`);
     }
 
-    const audioData =  bytesStore.buffer;
-    const blob = new Blob([audioData], { type: 'audio/ogg' });
-    const audioUrl = URL.createObjectURL(blob);
-    console.log(audioUrl)
-    return audioUrl
-  
-} catch (e: any) {
-    console.log("error getting audio file: " + e.message)
+    const audioBlob = await response.blob(); 
+    const audioUrl = URL.createObjectURL(audioBlob);
+    console.log(audioUrl);
+    return audioUrl;
+
+  } catch (e) {
+    console.error("error getting audio file: ", e);
+  }
 }
-}
-  
