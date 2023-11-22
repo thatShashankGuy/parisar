@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/base64"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -14,7 +15,7 @@ import (
 )
 
 func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	var response events.APIGatewayProxyResponse
+
 	headers := map[string]string{
 		"Access-Control-Allow-Origin":  "*",
 		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
@@ -22,40 +23,37 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 	}
 	switch request.HTTPMethod {
 	case "GET":
-		bucketName := os.Getenv("AUDIO_BUCKET")
+		bucketName := os.Getenv("STORAGE_BUCKET")
 		objectKey := os.Getenv("AUDIO_KEY")
 		fileContent, err := getAudioFromS3(bucketName, objectKey)
 		headers["Content-Type"] = "audio/ogg"
 		if err != nil {
 			return events.APIGatewayProxyResponse{
-				StatusCode: 500,
+				StatusCode: http.StatusInternalServerError,
 				Headers:    headers,
 				Body:       err.Error(),
 			}, nil
 		}
 
 		return events.APIGatewayProxyResponse{
-			StatusCode:      200,
+			StatusCode:      http.StatusOK,
 			Headers:         headers,
 			IsBase64Encoded: true,
 			Body:            fileContent,
 		}, nil
 	case "OPTIONS":
-		response := events.APIGatewayProxyResponse{
-			StatusCode: 200,
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
 			Headers:    headers,
 			Body:       "Handled OPTIONS",
-		}
-		return response, nil
+		}, nil
 	default:
-		response = events.APIGatewayProxyResponse{
+		return events.APIGatewayProxyResponse{
 			Body:       "NO VALID REQUEST",
 			Headers:    headers,
-			StatusCode: 200,
-		}
+			StatusCode: http.StatusBadRequest,
+		}, nil
 	}
-
-	return response, nil
 
 }
 

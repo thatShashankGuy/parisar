@@ -11,6 +11,9 @@ func main() {
 	lambda.Start(func(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 		if request.Path == "/audiolog" {
 			return audioHandler(ctx, request)
+		}
+		if request.Path == "/resume" {
+			return resumeHandler(ctx, request)
 		} else {
 			return events.APIGatewayProxyResponse{
 				StatusCode: 404,
