@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
@@ -11,82 +11,21 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import convo from '../../assets/convo.svg'
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { URLS } from '../../Constants/DataObjects';
-const Widget = styled('div')(({ theme }) => ({
-  padding: 16,
-  marginLeft: 260,
-  borderRadius: 16,
-  width: 900,
-  maxWidth: '100%',
-  position: 'relative',
-  zIndex: 1,
-  backgroundColor:
-    theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.4)',
-  backdropFilter: 'blur(40px)',
-  opacity: 0.8
-}));
 
-const CoverImage = styled('div')({
-  width: 300,
-  height: 200,
-  objectFit: 'fill',
-  overflow: 'hidden',
-  flexShrink: 0,
-  borderRadius: 8,
-  backgroundColor: 'rgba(0,0,0,0.08)',
-  '& > img': {
-    width: '100%',
-    height: '100%'
-  },
-});
+import { Widget,TinyText, CoverImage} from './Misc';
+import { useLocation } from 'react-router';
 
-const TinyText = styled(Typography)({
-  fontSize: '0.75rem',
-  opacity: 0.38,
-  fontWeight: 500,
-  letterSpacing: 0.2,
-});
 
 export default function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const audioSrcRef = useRef<string>('')
   const audioRef :any = useRef<HTMLAudioElement | null>(null);
   
   const theme = useTheme();
-
-  async function fetchAudio() {
-    try {
-      const response = await fetch(URLS.devAudio,{
-        method : "GET",
-        headers:{
-          "Content-Type" :"application/json"
-        }
-      });
-      console.log(response)
-      const audioString = await response.json();
-      const binaryString = window.atob(audioString)
-      const bytesStore = new Uint8Array(binaryString.length)
-      for (let i = 0; i < binaryString.length; i++) {
-          bytesStore[i] = binaryString.charCodeAt(i)
-      }
-
-      const audioData =  bytesStore.buffer;
-      const blob = new Blob([audioData], { type: 'audio/ogg' });
-      const audioUrl = URL.createObjectURL(blob);
-      console.log(audioUrl)
-      audioSrcRef.current = audioUrl
-    
-  } catch (e: any) {
-      console.log("error getting audio file: " + e.message)
-  }
-  }
-  
-  useEffect(()=>{
-      fetchAudio();
-  },[])
-  
+  const location = useLocation();
+  const audioSrc = location.state?.data;
+ 
   const handleMetadataLoaded = (e:any) => {
     setDuration(e.target.duration);
 };
@@ -153,7 +92,7 @@ export default function AudioPlayer() {
             onEnded={() => setIsPlaying(false)}
             onLoadedMetadata={handleMetadataLoaded}
           >
-            <source src={audioSrcRef.current} type="audio/ogg" />
+            <source src={audioSrc} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
         </Box>
