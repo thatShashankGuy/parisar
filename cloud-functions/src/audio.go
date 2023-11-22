@@ -25,6 +25,7 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 		bucketName := os.Getenv("AUDIO_BUCKET")
 		objectKey := os.Getenv("AUDIO_KEY")
 		fileContent, err := getAudioFromS3(bucketName, objectKey)
+		headers["Content-Type"] = "audio/ogg"
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
@@ -35,9 +36,9 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 
 		return events.APIGatewayProxyResponse{
 			StatusCode:      200,
-			Headers:         map[string]string{"Content-Type": "application/json"},
+			Headers:         headers,
 			IsBase64Encoded: true,
-			Body:            string(fileContent),
+			Body:            fileContent,
 		}, nil
 	case "OPTIONS":
 		response := events.APIGatewayProxyResponse{

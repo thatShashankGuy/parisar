@@ -29,6 +29,10 @@ export type modeProps = {
     darkMode :boolean
 }
 
+export type AudioIndexItem ={
+    nameText : string
+}
+
   
   
 
