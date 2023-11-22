@@ -14,37 +14,42 @@ import (
 )
 
 func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	var err error
 	var response events.APIGatewayProxyResponse
+	headers := map[string]string{
+		"Access-Control-Allow-Origin":  "*",
+		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
+		"Access-Control-Allow-Headers": "Content-Type",
+	}
 	switch request.HTTPMethod {
 	case "GET":
 		bucketName := os.Getenv("AUDIO_BUCKET")
 		objectKey := os.Getenv("AUDIO_KEY")
-		fileContent, err := audioGET(bucketName, objectKey)
+		fileContent, err := getAudioFromS3(bucketName, objectKey)
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
+				Headers:    headers,
 				Body:       err.Error(),
 			}, nil
 		}
 
 		return events.APIGatewayProxyResponse{
 			StatusCode:      200,
-			Headers:         map[string]string{"Content-Type": "audio/ogg"},
+			Headers:         map[string]string{"Content-Type": "application/json"},
 			IsBase64Encoded: true,
 			Body:            string(fileContent),
 		}, nil
 	case "OPTIONS":
-		response, _ = audioOPTIONS()
-		if err != nil {
-			return events.APIGatewayProxyResponse{
-				StatusCode: 500,
-				Body:       err.Error(),
-			}, nil
+		response := events.APIGatewayProxyResponse{
+			StatusCode: 200,
+			Headers:    headers,
+			Body:       "Handled OPTIONS",
 		}
+		return response, nil
 	default:
 		response = events.APIGatewayProxyResponse{
 			Body:       "NO VALID REQUEST",
+			Headers:    headers,
 			StatusCode: 200,
 		}
 	}
@@ -53,7 +58,7 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 
 }
 
-func audioGET(bucketName string, objectKey string) (string, error) {
+func getAudioFromS3(bucketName string, objectKey string) (string, error) {
 	_session, err := session.NewSession(&aws.Config{
 		Region: aws.String(os.Getenv("MY_AWS_REGION")), // Get AWS region from environment variable
 	})
@@ -84,26 +89,5 @@ func audioGET(bucketName string, objectKey string) (string, error) {
 	noneEncodedData := buf.Bytes()
 
 	encodedData := base64.StdEncoding.EncodeToString(noneEncodedData)
-	// fileContent, err := io.ReadAll(result.Body)
-	// if err != nil {
-	// 	log.Println("error in audioGET line 83")
-	// 	log.Println(err)
-	// 	return nil, err
-	// }
-	// return fileContent, nil
-
 	return encodedData, nil
-}
-
-func audioOPTIONS() (events.APIGatewayProxyResponse, error) {
-	response := events.APIGatewayProxyResponse{
-		StatusCode: 200,
-		Headers: map[string]string{
-			"Access-Control-Allow-Origin":  "*",
-			"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
-			"Access-Control-Allow-Headers": "Content-Type",
-		},
-		Body: "Handled OPTIONS",
-	}
-	return response, nil
 }

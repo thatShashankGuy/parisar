@@ -12,7 +12,8 @@ export const blogLinks : blogLinksType[]= [{
   }]
 
 export const URLS ={
-  audio :"https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/audiolog"
+  devAudio : "http://localhost:3000/audiolog",
+  prodAudio :"https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/audiolog"
 }
 export  const careerEvents  : careerEventsType[]= [
     {

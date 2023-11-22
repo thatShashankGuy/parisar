@@ -58,19 +58,13 @@ export default function AudioPlayer() {
 
   async function fetchAudio() {
     try {
-      const preflightResponse = await fetch(URLS.audio, {
-      method: "OPTIONS",
-      headers: {
-      "Content-Type": "application/json",
-      },
-    });
-    if(preflightResponse.status == 200){
-      const response = await fetch(URLS.audio,{
+      const response = await fetch(URLS.devAudio,{
         method : "GET",
         headers:{
-          "Content-Type" :"audio/ogg"
+          "Content-Type" :"application/json"
         }
       });
+      console.log(response)
       const audioString = await response.json();
       const binaryString = window.atob(audioString)
       const bytesStore = new Uint8Array(binaryString.length)
@@ -83,7 +77,7 @@ export default function AudioPlayer() {
       const audioUrl = URL.createObjectURL(blob);
       console.log(audioUrl)
       audioSrcRef.current = audioUrl
-    }
+    
   } catch (e: any) {
       console.log("error getting audio file: " + e.message)
   }
@@ -159,7 +153,7 @@ export default function AudioPlayer() {
             onEnded={() => setIsPlaying(false)}
             onLoadedMetadata={handleMetadataLoaded}
           >
-            <source src={audioSrcRef} type="audio/ogg" />
+            <source src={audioSrcRef.current} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
         </Box>
