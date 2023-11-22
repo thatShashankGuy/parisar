@@ -51,14 +51,26 @@ export default function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [audioSrc,setAudioSrc] = useState('')
+  const audioSrcRef = useRef<string>('')
   const audioRef :any = useRef<HTMLAudioElement | null>(null);
   
   const theme = useTheme();
 
   async function fetchAudio() {
     try {
-      const response = await fetch(URLS.audio);
+      const preflightResponse = await fetch(URLS.audio, {
+      method: "OPTIONS",
+      headers: {
+      "Content-Type": "application/json",
+      },
+    });
+    if(preflightResponse.status == 200){
+      const response = await fetch(URLS.audio,{
+        method : "GET",
+        headers:{
+          "Content-Type" :"audio/ogg"
+        }
+      });
       const audioString = await response.json();
       const binaryString = window.atob(audioString)
       const bytesStore = new Uint8Array(binaryString.length)
@@ -69,7 +81,9 @@ export default function AudioPlayer() {
       const audioData =  bytesStore.buffer;
       const blob = new Blob([audioData], { type: 'audio/ogg' });
       const audioUrl = URL.createObjectURL(blob);
-      setAudioSrc(audioUrl);
+      console.log(audioUrl)
+      audioSrcRef.current = audioUrl
+    }
   } catch (e: any) {
       console.log("error getting audio file: " + e.message)
   }
@@ -145,7 +159,7 @@ export default function AudioPlayer() {
             onEnded={() => setIsPlaying(false)}
             onLoadedMetadata={handleMetadataLoaded}
           >
-            <source src={audioSrc} type="audio/ogg" />
+            <source src={audioSrcRef} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
         </Box>
