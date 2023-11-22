@@ -35,7 +35,7 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 
 		return events.APIGatewayProxyResponse{
 			StatusCode:      200,
-			Headers:         map[string]string{"Content-Type": "application/json"},
+			Headers:         headers,
 			IsBase64Encoded: true,
 			Body:            string(fileContent),
 		}, nil
