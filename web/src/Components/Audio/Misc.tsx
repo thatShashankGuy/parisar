@@ -44,7 +44,7 @@ export const TinyText = styled(Typography)({
   });
 
 export const generate = () => {
-    return [{ID : 1, Name:"PODCAST#1 - Welcome All!"},{ID : 2, Name:"PODCAST#1 - OOPS!"}].map((obj) =>
+    return [{ID : 1, Name:"PODCAST#1 - Welcome All!"}].map((obj) =>
       <CustomListItem key={obj.ID} nameText={obj.Name}></CustomListItem>
     );
   }
@@ -77,7 +77,7 @@ const CustomListItem : React.FC<AudioIndexItem> = ({nameText}) =>{
 
 export async function fetchAudio() {
   try {
-    const response = await fetch(URLS.devAudio, {
+    const response = await fetch(URLS.prod.Audio, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -89,10 +89,8 @@ export async function fetchAudio() {
       throw new Error(`Request failed with status: ${response.status}`);
     }
 
-    const audioBlob = await response.blob(); 
-    const audioUrl = URL.createObjectURL(audioBlob);
-    console.log(audioUrl);
-    return audioUrl;
+    const audioResponse = await response.json(); 
+    return audioResponse.url
 
   } catch (e) {
     console.error("error getting audio file: ", e);

@@ -1,6 +1,8 @@
 import { Grid, Typography, List, Box } from "@mui/material"
 import { Widget, CoverImage,generate } from "./Misc";
 import audInd from '../../assets/podcast.svg'
+import { faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const PodcastIndex = () => {
@@ -19,7 +21,7 @@ const PodcastIndex = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-                NAME NOT DECIDED
+            thatShashankGuy Audio logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
             </Typography>
             <List>
               {generate()}

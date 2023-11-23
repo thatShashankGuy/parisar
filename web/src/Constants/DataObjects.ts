@@ -11,9 +11,15 @@ export const blogLinks : blogLinksType[]= [{
     address:"https://github.com/thatShashankGuy/_InSights/wiki/The-Go-Programming-Guide"
   }]
 
-export const URLS ={
-  devAudio : "http://localhost:3000/audiolog",
-  prodAudio :"https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/audiolog"
+export const URLS = {
+  dev: {
+    Audio: "http://localhost:3000/audiolog",
+    Resume: "http://localhost:3000/resume"
+  },
+  prod: {
+    Audio: "https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/audiolog",
+    Resume: "https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/resume",
+  }
 }
 export  const careerEvents  : careerEventsType[]= [
     {

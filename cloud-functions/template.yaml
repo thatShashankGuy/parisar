@@ -39,8 +39,40 @@ Resources:
               Resource: arn:aws:s3:::thatshashankguy-storage-bucket/*  
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          AUDIO_BUCKET: thatshashankguy-storage-bucket
+          STORAGE_BUCKET: thatshashankguy-storage-bucket
           AUDIO_KEY : podcast/podcast1.ogg
+          MY_AWS_REGION : ap-south-1  
+  ResumeDownloadFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Metadata:
+      BuildMethod: go1.x
+    Properties:
+      CodeUri: src/
+      Handler: bootstrap
+      Runtime: provided.al2
+      Architectures:
+        - x86_64
+      Events:
+        RESUMEGET:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /resume
+            Method: GET
+        AUDIOOPTIONS:
+          Type: Api
+          Properties:
+            Path : /resume
+            Method : OPTIONS
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject 
+              Resource: arn:aws:s3:::thatshashankguy-storage-bucket/*  
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          STORAGE_BUCKET: thatshashankguy-storage-bucket
+          RESUME_KEY : documents/Resume.pdf
           MY_AWS_REGION : ap-south-1
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -50,10 +82,16 @@ Outputs:
     Description: "API Gateway endpoint URL for Portfolio Backend"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/portfolio/"
   AudioLogFunction:
-    Description: "First Lambda Function ARN"
+    Description: "Audio log Lambda Function ARN"
     Value: !GetAtt AudioLogFunction.Arn
   AudioLogFunctionIamRole:
     Description: "Implicit IAM Role created for Audio Log function"
+    Value: !GetAtt AudioLogFunctionRole.Arn
+  ResumeDownloadFunction:
+    Description: "Resume Download Lambda Function ARN"
+    Value: !GetAtt AudioLogFunction.Arn
+  ResumeDownloadFunctionIamRole:
+    Description: "Implicit IAM Role created for Resume Download Function"
     Value: !GetAtt AudioLogFunctionRole.Arn
   
 
