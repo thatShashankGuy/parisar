@@ -9,7 +9,7 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import convo from '../../assets/convo.svg'
-import { faMeteor } from '@fortawesome/free-solid-svg-icons';
+import { faHeadphonesAlt, faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Widget,TinyText, CoverImage} from './Misc';
@@ -75,13 +75,10 @@ export default function AudioPlayer() {
           </CoverImage>
           <Box sx={{ ml: 3, minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
-              thatShashankGuy <FontAwesomeIcon icon={faMeteor} />
+              thatShashankGuy Audio logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
             </Typography>
             <Typography noWrap>
-              <b>A Very Simple Podcast #1- </b>
-            </Typography>
-            <Typography noWrap letterSpacing={-0.25}>
-              Sunday Venting &mdash; EP1
+              <b>Podcast #1&mdash;Welcome All! <FontAwesomeIcon icon={faMeteor}/> </b>
             </Typography>
           </Box>
           <audio

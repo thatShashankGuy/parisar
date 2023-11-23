@@ -2,10 +2,11 @@ package main
 
 import (
 	"context"
-	"io"
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
@@ -13,7 +14,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
-func fetchResumeFromS3() ([]byte, error) {
+type PresignedURLResumeResponse struct {
+	URL string `json:"url"`
+}
+
+func getPreSignedURLForResumeDownload() (string, error) {
 	sess := session.Must(session.NewSession())
 	svc := s3.New(sess)
 	bucketName := os.Getenv("STORAGE_BUCKET")
@@ -23,25 +28,21 @@ func fetchResumeFromS3() ([]byte, error) {
 		Key:    aws.String(objectKey),
 	}
 
-	result, err := svc.GetObject(input)
-	if err != nil {
-		return nil, err
-	}
-	defer result.Body.Close()
+	req, _ := svc.GetObjectRequest(input)
 
-	resume, err := io.ReadAll(result.Body)
+	url, err := req.Presign(15 * time.Minute) // Presigned URL is valid for 15 minutes
 	if err != nil {
-		return nil, err
+		return "", err
 	}
-	log.Println(resume)
-	return resume, nil
+
+	return url, nil
 }
 
 func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	headers := map[string]string{
 		"Access-Control-Allow-Origin":  "*",
 		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
-		"Access-Control-Allow-Headers": "Content-Type,Content-Disposition",
+		"Access-Control-Allow-Headers": "Content-Type",
 	}
 	switch request.HTTPMethod {
 	case "OPTIONS":
@@ -51,20 +52,29 @@ func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (
 			Body:       "Handled OPTIONS",
 		}, nil
 	case "GET":
-		pdfData, err := fetchResumeFromS3()
+
+		preSignedURL, err := getPreSignedURLForResumeDownload()
 		if err != nil {
+			log.Println(err)
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
-				Body:       "Failed to fetch PDF",
+				Body:       "Failed to Genrate URL ",
 			}, err
 		}
 
-		headers["Content-Type"] = "application/pdf"
-		headers["Content-Disposition"] = `attachment; filename="resume.pdf"`
+		responseBody, err := json.Marshal(PresignedURLResumeResponse{URL: preSignedURL})
+		if err != nil {
+			log.Println("Failed to marshal JSON response:", err)
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Body:       "Failed to marshal JSON response",
+			}, err
+		}
+		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusOK,
 			Headers:    headers,
-			Body:       string(pdfData),
+			Body:       string(responseBody),
 		}, nil
 	default:
 		return events.APIGatewayProxyResponse{
