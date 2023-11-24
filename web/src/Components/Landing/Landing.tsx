@@ -21,10 +21,7 @@ const Landing = () => {
       <Typography variant="h5" component="h1" gutterBottom sx={{
           fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
           wordBreak: 'break-word' 
-      }}> Hello, I am <span style={{
-        fontFamily: "monospace",
-        fontWeight: 'bold',
-      }}>Shashank</span>, and welcome to my very elaborate business card.
+      }}>  {welcomeMessage}
       <span><FontAwesomeIcon icon={faMeteor} /></span>
     </Typography>
         </Box>
