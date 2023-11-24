@@ -16,8 +16,8 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ jobs }) => {
   return (
     <>
 
-      <Grid container spacing={1}>
-      <Container maxWidth="lg"> 
+      <Grid container spacing={5}>
+      <Container maxWidth="md"> 
       <Grid item xs={2} >
       <img src={homerun} alt="Welcome" style={{ width: '80%', maxWidth: '300px', height: 'auto' }} />
       <br/>
@@ -30,7 +30,7 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ jobs }) => {
       </Grid>
       </Container>
         <Container maxWidth="xl" style={{zIndex:-5}}> 
-        <Timeline position="alternate">
+        <Timeline position="alternate-reverse">
           {jobs.map((job: any, index: any) => (
             <TimelineItem key={index}>
               <TimelineSeparator>

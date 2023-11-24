@@ -21,7 +21,7 @@ const PodcastIndex = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            thatShashankGuy Audio logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
+            thatShashankGuy Audio Logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
             </Typography>
             <List>
               {generate()}

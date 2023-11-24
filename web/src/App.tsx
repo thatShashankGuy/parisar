@@ -12,7 +12,7 @@ function App() {
           <Socials darkMode={true} />
         </div>
         <Main />
-        <div className="arrow">
+        <div className="navbar">
           <Navbar darkMode={true}/>
         </div>
       </ModeSetter>

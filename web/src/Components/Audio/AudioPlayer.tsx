@@ -9,11 +9,12 @@ import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
 import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
 import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import convo from '../../assets/convo.svg'
-import { faHeadphonesAlt, faMeteor } from '@fortawesome/free-solid-svg-icons';
+import { faCircleChevronLeft, faHeadphonesAlt, faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { Widget,TinyText, CoverImage} from './Misc';
 import { useLocation } from 'react-router';
+import { BottomNavigationAction } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 export default function AudioPlayer() {
@@ -64,8 +65,14 @@ export default function AudioPlayer() {
 
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   return (
+    <>
+          <Box sx={{ ml: 3, minWidth: 0,display: 'grid', alignItems: 'center'}}>
+ 
+      </Box>
+
     <Box sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
       <Widget>
+      <BottomNavigationAction component={Link} to='/podcast' label="Podcast" icon={<FontAwesomeIcon icon={faCircleChevronLeft} size='lg'/>}/>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <CoverImage>
             <img
@@ -75,7 +82,7 @@ export default function AudioPlayer() {
           </CoverImage>
           <Box sx={{ ml: 3, minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
-              thatShashankGuy Audio logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
+              thatShashankGuy Audio Logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
             </Typography>
             <Typography noWrap>
               <b>Podcast #1&mdash;Welcome All! <FontAwesomeIcon icon={faMeteor}/> </b>
@@ -168,5 +175,6 @@ export default function AudioPlayer() {
 
       </Widget>
     </Box>
+    </>
   );
 }
