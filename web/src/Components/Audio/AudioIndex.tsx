@@ -1,17 +1,14 @@
 import { Grid, Typography, List, Box } from "@mui/material"
-import { Widget, CoverImage,generate } from "./Misc";
+import  GenerateAudioList  from "./GenerateAudioList";
+import { Widget,CoverImage } from "./Private/StyleComponents";
 import audInd from '../../assets/podcast.svg'
 import { faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 const PodcastIndex = () => {
-
   return <>
-
-
     <Widget>
-
       <Box sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
@@ -21,15 +18,14 @@ const PodcastIndex = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            thatShashankGuy Audio Logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
+            The half-byte broadcast  <FontAwesomeIcon icon={faHeadphonesAlt}/>
             </Typography>
             <List>
-              {generate()}
+              {GenerateAudioList()}
             </List>
           </Grid>
         </Grid>
       </Box>
-
     </Widget>
   </>
 }

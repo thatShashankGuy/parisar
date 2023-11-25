@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -51,10 +52,14 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
 		"Access-Control-Allow-Headers": "Content-Type",
 	}
+
 	switch request.HTTPMethod {
 	case "GET":
+		logId := request.QueryStringParameters["logId"]
 		bucketName := os.Getenv("STORAGE_BUCKET")
-		objectKey := os.Getenv("AUDIO_KEY")
+		audioFolder := os.Getenv("AUDIO_ADDRESS")
+		objectKey := fmt.Sprintf("%s/%s.ogg", audioFolder, logId)
+		log.Println(objectKey)
 		preSignedURL, err := getPresignedURLForAudio(bucketName, objectKey)
 		if err != nil {
 			log.Println(err)
@@ -80,6 +85,7 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 			Body:            string(responseBody),
 		}, nil
 	case "OPTIONS":
+		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusOK,
 			Headers:    headers,

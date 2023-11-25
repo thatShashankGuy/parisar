@@ -30,7 +30,9 @@ export type modeProps = {
 }
 
 export type AudioIndexItem ={
-    nameText : string
+    name : string,
+    logId : string,
+    episodeId : string
 }
 
   

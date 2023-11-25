@@ -17,7 +17,7 @@ const Main = () => {
         <Route path="/career" element={<CareerTimeline jobs={careerEvents}/>}/>
         <Route path="/project" element={<Blog blogs={blogLinks} />} />
         <Route path="/feedback" element={<Feedback />} />
-        <Route path="/podcast" element={<AudioIndex />} />
+        <Route path="/audio" element={<AudioIndex />} />
         <Route path="/player" element={<AudioPlayer />} />
         <Route path = "*" element={<Service404 component={""}/>}/>
       </Routes>
