@@ -1,4 +1,4 @@
-import { env } from "./environment"
+import { env } from "./env"
 
 type URL = {
     Audio :string,
