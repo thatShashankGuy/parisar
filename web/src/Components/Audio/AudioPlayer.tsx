@@ -72,7 +72,7 @@ export default function AudioPlayer() {
 
     <Box sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
       <Widget>
-      <BottomNavigationAction component={Link} to='/podcast' label="Podcast" icon={<FontAwesomeIcon icon={faCircleChevronLeft} size='lg'/>}/>
+      <BottomNavigationAction component={Link} to='/audio' label="Podcast" icon={<FontAwesomeIcon icon={faCircleChevronLeft} size='lg'/>}/>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <CoverImage>
             <img
