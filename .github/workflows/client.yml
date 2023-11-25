@@ -32,12 +32,13 @@ jobs:
 
 
     - name: Deploy to S3
-      uses: jakejarvis/s3-sync-action@v0.5.1
+      uses: reggionick/s3-deploy@v1
       with:
-        args: --acl public-read --follow-symlinks --delete
-      env:
-        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}  
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ap-south-1  
-        SOURCE_DIR: dist
+        folder: dist
+        bucket: ${{ secrets.AWS_S3_BUCKET }}
+        bucket-region: ${{ secrets.AWS_REGION }}
+        access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        no-cache: true
+        delete-removed: true
+        distribution-folder: web
