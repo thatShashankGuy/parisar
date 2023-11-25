@@ -2,7 +2,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Typography } from '@mui/material';
 import { useState,useEffect } from 'react';
-import { URLS } from '../../Constants/DataObjects';
+import { URLS } from '../../config';
 
 const ResumeDownloadButton = () => {
     const [downloadUrl, setDownloadUrl] = useState(null);
@@ -11,7 +11,7 @@ const ResumeDownloadButton = () => {
 
       const fetchPresignedURL = async () => {  
         try {
-          const response = await fetch(URLS.prod.Resume);
+          const response = await fetch(URLS.Resume);
           if (!response.ok) {
             throw new Error('Failed to fetch presigned URL');
           }

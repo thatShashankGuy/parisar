@@ -11,7 +11,7 @@ import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import convo from '../../assets/convo.svg'
 import { faCircleChevronLeft, faHeadphonesAlt, faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Widget,TinyText, CoverImage} from './Misc';
+import { Widget,TinyText, CoverImage} from './Private/StyleComponents';
 import { useLocation } from 'react-router';
 import { BottomNavigationAction } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,13 @@ export default function AudioPlayer() {
   
   const theme = useTheme();
   const location = useLocation();
-  const audioSrc = location.state?.data;
+  const locationState = {
+    audioSrc : location.state?.data,
+    id : location.state?.logId,
+    name : location.state?.name,
+    episode : location.state?.episodeId
+  };
+  
  
   const handleMetadataLoaded = (e:any) => {
     setDuration(e.target.duration);
@@ -82,10 +88,10 @@ export default function AudioPlayer() {
           </CoverImage>
           <Box sx={{ ml: 3, minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
-              thatShashankGuy Audio Logs <FontAwesomeIcon icon={faHeadphonesAlt}/>
+              The half-byte broadcast <FontAwesomeIcon icon={faHeadphonesAlt}/>
             </Typography>
             <Typography noWrap>
-              <b>Podcast #1&mdash;Welcome All! <FontAwesomeIcon icon={faMeteor}/> </b>
+              <b>{locationState.episode}&mdash;{locationState.name} <FontAwesomeIcon icon={faMeteor}/> </b>
             </Typography>
           </Box>
           <audio
@@ -96,7 +102,7 @@ export default function AudioPlayer() {
             onEnded={() => setIsPlaying(false)}
             onLoadedMetadata={handleMetadataLoaded}
           >
-            <source src={audioSrc} type="audio/ogg" />
+            <source src={locationState.audioSrc} type="audio/ogg" />
             Your browser does not support the audio element.
           </audio>
         </Box>

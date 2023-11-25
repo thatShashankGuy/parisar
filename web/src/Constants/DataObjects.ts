@@ -11,16 +11,6 @@ export const blogLinks : blogLinksType[]= [{
     address:"https://github.com/thatShashankGuy/_InSights/wiki/The-Go-Programming-Guide"
   }]
 
-export const URLS = {
-  dev: {
-    Audio: "http://localhost:3000/audiolog",
-    Resume: "http://localhost:3000/resume"
-  },
-  prod: {
-    Audio: "https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/audiolog",
-    Resume: "https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/resume",
-  }
-}
 export  const careerEvents  : careerEventsType[]= [
     {
       title: 'Senior Software Engineer @Winjit',
@@ -57,3 +47,22 @@ export const AboutMe = {
 export const landing = {
     message : "Hello, I am Shashank, and welcome to my very elaborate business card."
 }
+
+export const PodcastList = [{
+    ID : 1, 
+    EpisodeId :"Episode#1",
+    Name:"Welcome To All!",
+    logId : "podcast1"
+  },
+  {
+    ID : 1,  
+    EpisodeId :"Episode#1.5",
+    Name:"We have a name!",
+    logId : "bonus1"
+  },
+  {
+    ID : 2, 
+    EpisodeId :"Episode#2",
+    Name:"Lets talk virtualization!" ,
+    logId : "podcast2"
+  }]
