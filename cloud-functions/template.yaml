@@ -40,7 +40,7 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
-          AUDIO_KEY : podcast/podcast1.ogg
+          AUDIO_ADDRESS : podcast
           MY_AWS_REGION : ap-south-1  
   ResumeDownloadFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
