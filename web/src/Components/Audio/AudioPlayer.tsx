@@ -12,9 +12,9 @@ import convo from '../../assets/convo.svg'
 import { faCircleChevronLeft, faHeadphonesAlt, faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Widget,TinyText, CoverImage} from './Private/StyleComponents';
-import { useLocation } from 'react-router';
-import { BottomNavigationAction } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router';
+import { Button } from '@mui/material';
+
 
 
 export default function AudioPlayer() {
@@ -25,6 +25,8 @@ export default function AudioPlayer() {
   
   const theme = useTheme();
   const location = useLocation();
+
+  const navigate = useNavigate();
   const locationState = {
     audioSrc : location.state?.data,
     id : location.state?.logId,
@@ -72,13 +74,13 @@ export default function AudioPlayer() {
   const mainIconColor = theme.palette.mode === 'dark' ? '#fff' : '#000';
   return (
     <>
-          <Box sx={{ ml: 3, minWidth: 0,display: 'grid', alignItems: 'center'}}>
- 
-      </Box>
-
     <Box sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
       <Widget>
-      <BottomNavigationAction component={Link} to='/audio' label="Podcast" icon={<FontAwesomeIcon icon={faCircleChevronLeft} size='lg'/>}/>
+      <Button
+      variant="text"
+      startIcon={<FontAwesomeIcon icon={faCircleChevronLeft} size="lg" />}
+      onClick={() => navigate('/audio')}
+    >Back</Button>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <CoverImage>
             <img
@@ -97,7 +99,7 @@ export default function AudioPlayer() {
           <audio
             style={{ display: "none" }}
             ref={audioRef}
-            controls
+            controls={false}
             onTimeUpdate={handleTimeUpdate}
             onEnded={() => setIsPlaying(false)}
             onLoadedMetadata={handleMetadataLoaded}
