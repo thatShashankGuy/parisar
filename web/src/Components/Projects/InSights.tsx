@@ -21,7 +21,7 @@ const Blogs = () => {
                   variant="h4" component="h1"
                   color="text.primary"
                 >
-                  Check Out <a href='https://github.com/thatShashankGuy/_InSights'> The _InSights Project</a> - a comprehensive and evolving repository where we document concise, practical reference materials encountered during our tech learning and usage journey { }
+                  Check Out <a href='https://thatshashankguy.github.io/_InSights/'> The _InSights Project</a> - a comprehensive and evolving repository where we document concise, practical reference materials encountered during our tech learning and usage journey { }
                   <FontAwesomeIcon icon={faMeteor} />
                 </Typography>
               }
@@ -34,7 +34,7 @@ const Blogs = () => {
             variant="h6"
             color="text.primary"
         
-        >Note : The _InSights Project is actively looking for contributors. Please <a href="mailto:shashankforworkshekhar@gmail.com">reach out</a> if you are interested.</Typography>
+        >Note : The _InSights Project is actively looking for contributors. Please reach out over <a href="mailto:shashankforworkshekhar@gmail.com">email</a> or check out the <a href='https://github.com/thatShashankGuy/_InSights'>git repo</a> if you are interested.</Typography>
       </Grid>
     </Grid>
   );
