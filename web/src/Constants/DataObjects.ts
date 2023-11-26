@@ -1,15 +1,4 @@
-import { blogLinksType,careerEventsType} from "./Types";
-
-export const blogLinks : blogLinksType[]= [{
-    key : 1,
-    name : "The Typescript Guide", 
-    address : "https://github.com/thatShashankGuy/_InSights/wiki/The-TypeScript-Guide"
-  },
-  {
-    key : 2,
-    name :"The Go Programming Guide",
-    address:"https://github.com/thatShashankGuy/_InSights/wiki/The-Go-Programming-Guide"
-  }]
+import { careerEventsType} from "./Types";
 
 export  const careerEvents  : careerEventsType[]= [
     {
