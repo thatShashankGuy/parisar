@@ -35,11 +35,6 @@ export type AudioIndexItem ={
     episodeId : string
 }
 
-export type catapultType = {
-    engine: Matter.Engine;
-    runner: Matter.Runner;
-    render: Matter.Render;
-    canvas: HTMLCanvasElement;
-    destroy: () => void;
-}
+  
+  
 

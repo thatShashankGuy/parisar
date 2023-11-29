@@ -1,29 +1,31 @@
 import success from '../../assets/welcome.svg';
-import Animation from './Animation';
-import { Grid, Box, } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import { faMeteor } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Grid, Box, Typography } from '@mui/material';
+import { landing } from '../../Constants/DataObjects';
+
 const Landing = () => {
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const welcomeMessage = landing.message
   return (
     <Grid container spacing={2} alignItems="center" justifyContent="center" className="landing-grid">
-      {!isMobile ? <Grid item xs={4}>
+      <Grid item xs={4}>
         <Box className='success' display="flex" justifyContent="center" p={5}>
-          <img src={success} alt="Welcome" style={{ width: '100%', maxWidth: '360px', height: 'auto' }} />
+          <img src={success} alt="Welcome" style={{ width: '100%', maxWidth: '360px', height: 'auto' }}  />
         </Box>
-      </Grid> : 
-       <Grid item lg={4}>
-       <Box className='success' display="flex" justifyContent="center" p={5}>
-         <img src={success} alt="Welcome" style={{ width: '100%',  height: 'auto' }} />
-       </Box>
-     </Grid>
-      
-      }
-      {
-        !isMobile && <Grid item xs={8}>
-          <Animation />
-        </Grid>
-      }
-
+      </Grid>
+      <Grid item xs={8}>
+      <Box className="message" textAlign="center" p={5} sx={{
+        wordWrap: 'break-word',
+        overflowWrap: 'break-word', 
+    }}>
+      <Typography variant="h5" component="h1" gutterBottom sx={{
+          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
+          wordBreak: 'break-word' 
+      }}>  {welcomeMessage}
+      <span><FontAwesomeIcon icon={faMeteor} /></span>
+    </Typography>
+        </Box>
+      </Grid>
     </Grid>
   );
 };
