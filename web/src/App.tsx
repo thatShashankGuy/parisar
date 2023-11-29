@@ -1,8 +1,9 @@
 import './App.css'
+import ModeSetter from './Components/Shared/ModeSetter';
 import Main from './Components/Main';
 import Socials from './Components/Shared/Socials';
 import Navbar from './Components/Shared/Navbar';
-import ModeSetter from './Components/Shared/ModeSetter';
+
 import { useLocation } from 'react-router';
 
 function App() {

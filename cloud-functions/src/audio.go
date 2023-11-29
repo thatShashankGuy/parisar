@@ -58,7 +58,7 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 		logId := request.QueryStringParameters["logId"]
 		bucketName := os.Getenv("STORAGE_BUCKET")
 		audioFolder := os.Getenv("AUDIO_ADDRESS")
-		objectKey := fmt.Sprintf("%s/%s.ogg", audioFolder, logId)
+		objectKey := fmt.Sprintf("%s/%s.mp3", audioFolder, logId)
 		log.Println(objectKey)
 		preSignedURL, err := getPresignedURLForAudio(bucketName, objectKey)
 		if err != nil {
