@@ -1,11 +1,8 @@
 import success from '../../assets/welcome.svg';
-import { faMeteor } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grid, Box, Typography } from '@mui/material';
-import { landing } from '../../Constants/DataObjects';
+import Animation from './Animation';
+import { Grid, Box,  } from '@mui/material';
 
 const Landing = () => {
-  const welcomeMessage = landing.message
   return (
     <Grid container spacing={2} alignItems="center" justifyContent="center" className="landing-grid">
       <Grid item xs={4}>
@@ -14,17 +11,9 @@ const Landing = () => {
         </Box>
       </Grid>
       <Grid item xs={8}>
-      <Box className="message" textAlign="center" p={5} sx={{
-        wordWrap: 'break-word',
-        overflowWrap: 'break-word', 
-    }}>
-      <Typography variant="h5" component="h1" gutterBottom sx={{
-          fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
-          wordBreak: 'break-word' 
-      }}>  {welcomeMessage}
-      <span><FontAwesomeIcon icon={faMeteor} /></span>
-    </Typography>
-        </Box>
+
+        <Animation/>
+    
       </Grid>
     </Grid>
   );
