@@ -104,7 +104,7 @@ export default function AudioPlayer() {
             onEnded={() => setIsPlaying(false)}
             onLoadedMetadata={handleMetadataLoaded}
           >
-            <source src={locationState.audioSrc} type="audio/ogg" />
+            <source src={locationState.audioSrc} type="audio/mp3" />
             Your browser does not support the audio element.
           </audio>
         </Box>
