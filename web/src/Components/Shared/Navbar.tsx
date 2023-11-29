@@ -15,8 +15,8 @@ const Navbar: React.FC<modeProps> = () => {
           <BottomNavigationAction component={Link} to='/' label="Home" icon={<FontAwesomeIcon icon={faHouseChimney} size='lg' />} />
           <BottomNavigationAction component={Link} to='/about' label="About Me" icon={<FontAwesomeIcon icon={faAddressCard} size='lg' />} />
          { !isMobile && <BottomNavigationAction component={Link} to='/career' label="Career Timeline" icon={<FontAwesomeIcon icon={faTimeline} size='lg' />} />}
-          <BottomNavigationAction component={Link} to='/audio' label="The half byte broadcast" icon={<FontAwesomeIcon icon={faHeadphones} size='lg' />} />
-          <BottomNavigationAction component={Link} to='/project' label="_InSights Project" icon={<FontAwesomeIcon icon={faDiagramProject} size='lg' />} />
+          <BottomNavigationAction component={Link} to='/audio' label={!isMobile ?"The half-byte broadcast" :"half-byte"} icon={<FontAwesomeIcon icon={faHeadphones} size='lg' />} />
+          <BottomNavigationAction component={Link} to='/project' label="_InSights" icon={<FontAwesomeIcon icon={faDiagramProject} size='lg' />} />
          { !isMobile && <BottomNavigationAction component={Link} to='/feedback' label="Feedback" icon={<FontAwesomeIcon icon={faComments} size='lg' />} />}
       
         </BottomNavigation>
