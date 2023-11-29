@@ -4,9 +4,10 @@ import { Widget,CoverImage } from "./Private/StyleComponents";
 import podcast from '../../assets/podcast.svg'
 import { faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { useMediaQuery } from '@mui/material';
 
 const PodcastIndex = () => {
+  const isMobile = useMediaQuery('(max-width:600px)');
   return <>
 <Widget>
   <Box sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
@@ -23,11 +24,11 @@ const PodcastIndex = () => {
       </Grid>
 
       {/* Cover image grid */}
-      <Grid item xs={12} sm={3} md={3}>
+      {!isMobile ? <Grid item xs={12} sm={3} md={3}>
         <CoverImage>
           <img alt="Conversations" src={podcast} />
         </CoverImage>
-      </Grid>
+      </Grid>: <></> }
 
     </Grid>
   </Box>
@@ -37,3 +38,5 @@ const PodcastIndex = () => {
 }
 
 export default PodcastIndex
+
+
