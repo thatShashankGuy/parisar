@@ -5,7 +5,7 @@ import Feedback from './Feedback/Feedback';
 import CareerTimeline from './CareerTimline/CareerTimeline'
 import About from './About/About';
 import Service404 from './Shared/Service404';
-import {careerEvents,blogLinks} from '../Constants/DataObjects'
+import {careerEvents} from '../Constants/DataObjects'
 import AudioIndex from './Audio/AudioIndex';
 import AudioPlayer from './Audio/AudioPlayer';
 
@@ -15,7 +15,7 @@ const Main = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/about" element={<About/>}/>
         <Route path="/career" element={<CareerTimeline jobs={careerEvents}/>}/>
-        <Route path="/project" element={<Blog blogs={blogLinks} />} />
+        <Route path="/project" element={<Blog  />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/audio" element={<AudioIndex />} />
         <Route path="/player" element={<AudioPlayer />} />
