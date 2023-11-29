@@ -27,9 +27,9 @@ function catapult() {
             showAngleIndicator: true,
             showCollisions: true,
             showVelocity: true,
-            wireframes: false,
-            
-            
+            wireframes: true,
+
+
         },
 
 
@@ -45,26 +45,42 @@ function catapult() {
    // add bodies
    var rows = 10,
        yy = 600 - 25 - 40 * rows;
-   
+
    var stack = Composites.stack(400, yy, 5, rows, 0, 0, function(x:any, y:any) {
-       return Bodies.rectangle(x, y, 40, 40);
+       return Bodies.rectangle(x, y, 30, 30);
    });
-   
+
    Composite.add(world, [
        stack,
        // walls
        Bodies.rectangle(400, 0, 800, 50, { isStatic: true }),
        Bodies.rectangle(400, 600, 800, 50, { isStatic: true }),
-       Bodies.rectangle(800, 300, 50, 600, { isStatic: true }),
        Bodies.rectangle(0, 300, 50, 600, { isStatic: true })
    ]);
+
+   var ball = Bodies.circle(50, 200, 25, { 
+    density: 0.04, 
+    frictionAir: 0.005,
+    render :{
+        fillStyle:"#c03416",
+        strokeStyle: '#c03416',
+        lineWidth: 1 
+   }});
+
    
-   var ball = Bodies.circle(50, 200, 25, { density: 0.04, frictionAir: 0.005});
+
+    
    
    Composite.add(world, ball);
    Composite.add(world, Constraint.create({
        pointA: { x: 300, y: 100 },
-       bodyB: ball
+       bodyB: ball,
+       render: {
+        visible: true, 
+        lineWidth: 2,
+        strokeStyle: '#c03416', 
+        type: 'line'
+    }
    }));
 
    // add mouse control
@@ -93,16 +109,16 @@ function catapult() {
    Events.on(render, 'afterRender', function() {
     var context = render.context;
     var text = 'Hello and Welcome';
-    var x = 90; 
-    var y = 148; 
+    var x = 90;
+    var y = 148;
     var fontSize = 24;
 
     context.font = fontSize + 'px monospace';
-    context.fillStyle = '#4c51ed';
+    context.fillStyle = '#c03416';
     context.fillText(text, x, y);
     var textWidth = context.measureText(text).width;
     context.beginPath();
-    context.strokeStyle = '#4c51ed';
+    context.strokeStyle = '#c03416';
     context.lineWidth = 2;
     context.moveTo(x, y + 5); // 5 is the approximate offset for the underline
     context.lineTo(x + textWidth, y + 5);
