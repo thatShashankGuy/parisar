@@ -24,10 +24,10 @@ func main() {
 			return resumeHandler(ctx, request)
 
 		case "/admin/audio/":
-			return audioDashboardHandler(ctx, request)
+			return audioInfoDashboardHandler(ctx, request)
 
 		case "/admin/upload-url":
-			return uploadURLHandler(ctx, request)
+			return uploadAudioViaDashboardHandler(ctx, request)
 		default:
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusBadRequest,
