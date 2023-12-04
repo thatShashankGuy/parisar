@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="./admin.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Admin Dashboard</title>
+</head>
+
+<body class="bg-gray-100">
+    <h1 class="text-5xl font-bold-monospace text-center text-purple-800 p-6">Admin Dashboard</h1>
+    <div class="max-w-2xl mx-auto p-6 bg-gray-200 shadow-lg">
+        <h2 class="text-3xl font-bold-monspace text-left text-purple-800">Audio Panel</h2>
+        <div x-data="{ open: false }" class="p-6">
+            <button type="button" @click="open = !open"
+            class="px-4 py-2 bg-purple-800 hover:bg-purple-700 rounded text-white focus:outline-none"
+            >Open Audio Grid</button>
+            <span x-show="open">
+               List of all Audio Files
+            </span>
+        </div>
+        <div x-data="{file : null}" class="p-6">
+            <input type="file" accept=".mp3" name="latest 
+            audio file"  @change="file = $event.target.files[0]"
+            id="file-input" class="p-6 text-stone-500
+            ">
+            <button type="button" 
+                @click="uploadAudio()" 
+                id="upload-button"
+                class="px-4 py-2 bg-purple-800 hover:bg-purple-700 
+                rounded text-white 
+                focus:outline-none"
+                :disabled="!file" >
+                Upload Mp3
+            </button>
+            <br>
+            <span x-show="!file" class="text-lg text-purple-500 text-right">*No file selected</span>
+        </div>
+    </div>
+
+</body>
+</html>
