@@ -47,12 +47,6 @@ func getPresignedURLForAudio(bucketName string, objectKey string) (string, error
 
 func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
-	headers := map[string]string{
-		"Access-Control-Allow-Origin":  "*",
-		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
-		"Access-Control-Allow-Headers": "Content-Type",
-	}
-
 	switch request.HTTPMethod {
 	case "GET":
 		logId := request.QueryStringParameters["logId"]
@@ -84,6 +78,7 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 			IsBase64Encoded: true,
 			Body:            string(responseBody),
 		}, nil
+
 	case "OPTIONS":
 		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{

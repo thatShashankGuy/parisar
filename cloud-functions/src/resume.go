@@ -39,11 +39,6 @@ func getPreSignedURLForResumeDownload() (string, error) {
 }
 
 func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	headers := map[string]string{
-		"Access-Control-Allow-Origin":  "*",
-		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
-		"Access-Control-Allow-Headers": "Content-Type",
-	}
 	switch request.HTTPMethod {
 	case "OPTIONS":
 		return events.APIGatewayProxyResponse{

@@ -74,6 +74,39 @@ Resources:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
           RESUME_KEY : documents/Resume.pdf
           MY_AWS_REGION : ap-south-1
+  AdminFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Metadata:
+      BuildMethod: go1.x
+    Properties:
+      CodeUri: src/
+      Handler: bootstrap
+      Runtime: provided.al2
+      Architectures:
+        - x86_64
+      Events:
+        POSTUPLOADURL:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /admin/upload-url
+            Method: POST
+        OPTIONSUPLOADURL:
+          Type: Api
+          Properties:
+            Path : /admin/upload-url
+            Method : OPTIONS
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+                - s3:PutObject
+              Resource: arn:aws:s3:::thatshashankguy-storage-bucket/*  
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          STORAGE_BUCKET: thatshashankguy-storage-bucket
+          AUDIO_ADDRESS : podcast
+          MY_AWS_REGION : ap-south-1  
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
@@ -93,6 +126,12 @@ Outputs:
   ResumeDownloadFunctionIamRole:
     Description: "Implicit IAM Role created for Resume Download Function"
     Value: !GetAtt AudioLogFunctionRole.Arn
+  AdminFunction:
+    Description: "Admin Panel function"
+    Value: !GetAtt AdminFunction.Arn
+  AdminFunctionIamRole:
+    Description: "Implicit IAM Role created for Admin Panel function"
+    Value: !GetAtt AdminFunctionRole.Arn
   
 
 
