@@ -24,12 +24,22 @@ Resources:
         AUDIOGET:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /audiolog
+            Path: /portfolio/audiolog
             Method: GET
         AUDIOOPTIONS:
           Type: Api
           Properties:
-            Path : /audiolog
+            Path : /portfolio/audiolog
+            Method : OPTIONS
+        RESUMEGET:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /portfolio/resume
+            Method: GET
+        RESUMEOPTIONS:
+          Type: Api
+          Properties:
+            Path : /portfolio/resume
             Method : OPTIONS
       Policies:
         - Statement:
@@ -41,39 +51,8 @@ Resources:
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
           AUDIO_ADDRESS : podcast
-          MY_AWS_REGION : ap-south-1  
-  ResumeDownloadFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-    Metadata:
-      BuildMethod: go1.x
-    Properties:
-      CodeUri: src/
-      Handler: bootstrap
-      Runtime: provided.al2
-      Architectures:
-        - x86_64
-      Events:
-        RESUMEGET:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
-          Properties:
-            Path: /resume
-            Method: GET
-        AUDIOOPTIONS:
-          Type: Api
-          Properties:
-            Path : /resume
-            Method : OPTIONS
-      Policies:
-        - Statement:
-            - Effect: Allow
-              Action:
-                - s3:GetObject 
-              Resource: arn:aws:s3:::thatshashankguy-storage-bucket/*  
-      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
-        Variables:
-          STORAGE_BUCKET: thatshashankguy-storage-bucket
           RESUME_KEY : documents/Resume.pdf
-          MY_AWS_REGION : ap-south-1
+          MY_AWS_REGION : ap-south-1  
   AdminFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Metadata:
@@ -85,8 +64,18 @@ Resources:
       Architectures:
         - x86_64
       Events:
+        GETAUDIOINFO:
+          Type: Api 
+          Properties:
+            Path: /admin/audio
+            Method: GET
+        OPTIONSAUDIOINFO:
+          Type: Api
+          Properties:
+            Path : /admin/audio
+            Method : OPTIONS
         POSTUPLOADURL:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Type: Api 
           Properties:
             Path: /admin/upload-url
             Method: POST
@@ -102,6 +91,10 @@ Resources:
                 - s3:GetObject
                 - s3:PutObject
               Resource: arn:aws:s3:::thatshashankguy-storage-bucket/*  
+            - Effect: Allow
+              Action:
+                - s3:ListBucket
+              Resource: arn:aws:s3:::thatshashankguy-storage-bucket/
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
@@ -114,17 +107,11 @@ Outputs:
   PORTFOLIOAPI:
     Description: "API Gateway endpoint URL for Portfolio Backend"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/portfolio/"
-  AudioLogFunction:
-    Description: "Audio log Lambda Function ARN"
+  PortfolioFunction:
+    Description: "Portfolio Lambda Function ARN"
     Value: !GetAtt AudioLogFunction.Arn
-  AudioLogFunctionIamRole:
-    Description: "Implicit IAM Role created for Audio Log function"
-    Value: !GetAtt AudioLogFunctionRole.Arn
-  ResumeDownloadFunction:
-    Description: "Resume Download Lambda Function ARN"
-    Value: !GetAtt AudioLogFunction.Arn
-  ResumeDownloadFunctionIamRole:
-    Description: "Implicit IAM Role created for Resume Download Function"
+  PortfolioFunctionIamRole:
+    Description: "Implicit IAM Role created for Portfolio function"
     Value: !GetAtt AudioLogFunctionRole.Arn
   AdminFunction:
     Description: "Admin Panel function"
