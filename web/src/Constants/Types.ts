@@ -43,3 +43,7 @@ export type catapultType = {
     destroy: () => void;
 }
 
+export type URL = {
+    Audio: string,
+    Resume: string
+  }
