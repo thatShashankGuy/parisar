@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -110,15 +109,19 @@ func getAudioInfoDashboard() ([]AudioInfo, error) {
 	if err != nil {
 		return []AudioInfo{}, err
 	}
+
 	input := &s3.ListObjectsInput{
 		Bucket: aws.String(storageBucket),
-		Prefix: aws.String(audioFolder),
+		Prefix: aws.String(audioFolder + "/"),
 	}
-	_, info := svc.ListObjectsRequest(input)
-	log.Println(info)
+	result, err := svc.ListObjects(input)
+	if err != nil {
+		return []AudioInfo{}, err
+	}
+
 	var audioInfo []AudioInfo
 
-	for _, item := range info.Contents {
+	for _, item := range result.Contents {
 		audioInfo = append(audioInfo, AudioInfo{
 			Name:         *item.Key,
 			Size:         *item.Size,
