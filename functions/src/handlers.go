@@ -4,9 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
-	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 )
@@ -22,16 +20,13 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 	switch request.HTTPMethod {
 	case "GET":
 		logId := request.QueryStringParameters["logId"]
-		bucketName := os.Getenv("STORAGE_BUCKET")
-		audioFolder := os.Getenv("AUDIO_ADDRESS")
 		objectKey := fmt.Sprintf("%s/%s.mp3", audioFolder, logId)
-		log.Println(objectKey)
-		preSignedURL, err := getPresignedURLForAudioPlayer(bucketName, objectKey)
+
+		preSignedURL, err := getPresignedURLForAudioPlayer(objectKey)
 		if err != nil {
-			log.Println(err)
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
-				Body:       "Failed to Genrate URL ",
+				Body:       err.Error(),
 			}, err
 		}
 		responseBody, err := json.Marshal(PresignedURLAudioResponse{URL: preSignedURL})
@@ -86,19 +81,18 @@ func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (
 
 		preSignedURL, err := getPreSignedURLForResumeDownload()
 		if err != nil {
-			log.Println(err)
+
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
-				Body:       "Failed to Genrate URL ",
+				Body:       err.Error(),
 			}, err
 		}
 
 		responseBody, err := json.Marshal(PresignedURLResumeResponse{URL: preSignedURL})
 		if err != nil {
-			log.Println("Failed to marshal JSON response:", err)
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
-				Body:       "Failed to marshal JSON response",
+				Body:       err.Error(),
 			}, err
 		}
 		headers["Content-Type"] = "application/json"
@@ -136,9 +130,8 @@ func uploadAudioViaDashboardHandler(ctx context.Context, request events.APIGatew
 			}, nil
 		}
 
-		bucketName := os.Getenv("STORAGE_BUCKET")
-		audioFolder := os.Getenv("AUDIO_ADDRESS") + "/" + req.FileName
-		preSignedURL, err := generatePreSignedURLForUpload(bucketName, audioFolder)
+		audioFolder := audioFolder + "/" + req.FileName
+		preSignedURL, err := generatePreSignedURLForUpload(audioFolder)
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
@@ -183,14 +176,34 @@ get info on all audio stored in s3 as json
 Have Get and Options
 *
 */
-func audioInfoDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func getAudioInfoDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	switch request.HTTPMethod {
 	case "GET":
+		audioList, err := getAudioInfoDashboard()
+		if err != nil {
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		jsonResp, err := json.Marshal(audioList)
+
+		if err != nil {
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		headers["Content-Type"] = "application/json"
+
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusOK,
 			Headers:    headers,
-			Body:       "Handled OPTIONS",
+			Body:       string(jsonResp),
 		}, nil
+
 	case "OPTION":
 		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{
@@ -198,6 +211,7 @@ func audioInfoDashboardHandler(ctx context.Context, request events.APIGatewayPro
 			Headers:    headers,
 			Body:       "Handled OPTIONS",
 		}, nil
+
 	default:
 		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{

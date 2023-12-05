@@ -15,3 +15,9 @@ type PresignedURLAudioResponse struct {
 type PresignedURLResumeResponse struct {
 	URL string `json:"url"`
 }
+
+type AudioInfo struct {
+	Name         string `json:"name"`
+	Size         int64  `json:"size"`
+	LastModified string `json:"last_modified"`
+}

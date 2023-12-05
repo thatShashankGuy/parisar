@@ -1,1 +1,1 @@
-export const env: "PROD" | "DEV" = "PROD";
+export const env: "PROD" | "DEV" = "DEV";
