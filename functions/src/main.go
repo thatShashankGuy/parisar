@@ -15,26 +15,26 @@ var (
 		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
 		"Access-Control-Allow-Headers": "Content-Type",
 	}
-	storageBucket = os.Getenv("STORAGE_BUCKET")
-	audioFolder   = os.Getenv("AUDIO_ADDRESS")
-	resumeKey     = os.Getenv("RESUME_KEY")
-	awsRegion     = os.Getenv("MY_AWS_REGION")
+	storageBucket   = os.Getenv("STORAGE_BUCKET")
+	halfByteBFolder = os.Getenv("HBB_ADDRESS")
+	documentFolder  = os.Getenv("DOCS_ADDRESS")
+	awsRegion       = os.Getenv("MY_AWS_REGION")
 )
 
 func main() {
 	lambda.Start(func(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 		switch request.Path {
-		case "/portfolio/audiolog":
-			return audioHandler(ctx, request)
+		case "/api/v1/broadcast":
+			return halfByteBHandler(ctx, request)
 
-		case "/portfolio/resume":
+		case "/api/v1/resume":
 			return resumeHandler(ctx, request)
 
-		case "/admin/audio":
-			return getAudioInfoDashboardHandler(ctx, request)
+		case "/admin/v1/broadcast":
+			return halfByteBInfoDashboardHandler(ctx, request)
 
-		case "/admin/upload-url":
-			return uploadAudioViaDashboardHandler(ctx, request)
+		case "/admin/v1/upload-broadcast":
+			return uploadhalfByteBViaDashboardHandler(ctx, request)
 		default:
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusBadRequest,

@@ -10,7 +10,7 @@ Globals:
     MemorySize: 128
 
 Resources:
-  AudioLogFunction:
+  ParisarWebBackend:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Metadata:
       BuildMethod: go1.x
@@ -24,22 +24,22 @@ Resources:
         AUDIOGET:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /portfolio/audiolog
+            Path: /api/v1/broadcast
             Method: GET
         AUDIOOPTIONS:
           Type: Api
           Properties:
-            Path : /portfolio/audiolog
+            Path : /api/v1/broadcast
             Method : OPTIONS
         RESUMEGET:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /portfolio/resume
+            Path: /api/v1/resume
             Method: GET
         RESUMEOPTIONS:
           Type: Api
           Properties:
-            Path : /portfolio/resume
+            Path : /api/v1/resume
             Method : OPTIONS
       Policies:
         - Statement:
@@ -50,10 +50,10 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
-          AUDIO_ADDRESS : podcast
-          RESUME_KEY : documents/Resume.pdf
+          HBB_ADDRESS : podcast
+          DOCS_ADDRESS : documents
           MY_AWS_REGION : ap-south-1  
-  AdminFunction:
+  AdminDashboard:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Metadata:
       BuildMethod: go1.x
@@ -67,22 +67,22 @@ Resources:
         GETAUDIOINFO:
           Type: Api 
           Properties:
-            Path: /admin/audio
+            Path: /admin/v1/broadcast
             Method: GET
         OPTIONSAUDIOINFO:
           Type: Api
           Properties:
-            Path : /admin/audio
+            Path : /admin/v1/broadcast
             Method : OPTIONS
         POSTUPLOADURL:
           Type: Api 
           Properties:
-            Path: /admin/upload-url
+            Path: /admin/v1/upload-broadcast
             Method: POST
         OPTIONSUPLOADURL:
           Type: Api
           Properties:
-            Path : /admin/upload-url
+            Path : /admin/v1/upload-broadcast
             Method : OPTIONS
       Policies:
         - Statement:
@@ -98,25 +98,25 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
-          AUDIO_ADDRESS : podcast
+          HBB_ADDRESS : podcast
           MY_AWS_REGION : ap-south-1  
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  PORTFOLIOAPI:
+  ParisarAPIGateway:
     Description: "API Gateway endpoint URL for Portfolio Backend"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/portfolio/"
-  PortfolioFunction:
+  ParisarWebBackendFunction:
     Description: "Portfolio Lambda Function ARN"
     Value: !GetAtt AudioLogFunction.Arn
-  PortfolioFunctionIamRole:
+  ParisarWebBackendIamRole:
     Description: "Implicit IAM Role created for Portfolio function"
     Value: !GetAtt AudioLogFunctionRole.Arn
-  AdminFunction:
+  ParisarAdminBackendFunction:
     Description: "Admin Panel function"
     Value: !GetAtt AdminFunction.Arn
-  AdminFunctionIamRole:
+  ParisarAdminBackendIamRole:
     Description: "Implicit IAM Role created for Admin Panel function"
     Value: !GetAtt AdminFunctionRole.Arn
   

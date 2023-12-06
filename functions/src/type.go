@@ -8,7 +8,7 @@ type uploadURLRequestBody struct {
 	FileName string `json:"fileName"`
 }
 
-type PresignedURLAudioResponse struct {
+type PresignedURLhalfByteBResponse struct {
 	URL string `json:"url"`
 }
 
@@ -16,7 +16,7 @@ type PresignedURLResumeResponse struct {
 	URL string `json:"url"`
 }
 
-type AudioInfo struct {
+type HalfByteBInfo struct {
 	Name         string `json:"name"`
 	Size         int64  `json:"size"`
 	LastModified string `json:"last_modified"`

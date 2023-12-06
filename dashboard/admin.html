@@ -4,7 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="//unpkg.com/alpinejs" defer></script>
-    <script src="./admin.js" defer></script>
+    <script>
+        let ENV = "DEV"
+        let BASEURL = "http://127.0.0.1:3000/admin/v1/"
+        
+        if( ENV === "PROD"){  
+            BASEURL =  "https://210fv34fi9.execute-api.ap-south-1.amazonaws.com/Prod/api/v1"
+        }
+   
+
+
+        async function uploadAudio() {
+            const file = document.getElementById('file-input').files[0]
+            if (file) {
+                try {
+                    const response = await fetch(`${BASEURL}upload-broadcast`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            fileName: file.name
+                        })
+                    })
+                    const data = await response.json();
+                    fetch(data.url, {
+                        method: "PUT",
+                        body: file
+                    }).then(response => {
+                        if (response.ok) {
+                            alert("successfully uploaded")
+                        } else {
+                            alert("something went wrong")
+                        }
+                    }).catch(e => console.log("error::", e))
+                } catch (error) {
+                    console.log(error.message)
+                }
+            } else {
+                console.log(file);
+                alert("NO FILE SELECTED")
+            }
+        }
+
+        async function getAudioInfo() {
+            try {
+                const response = await fetch(`${BASEURL}broadcast`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                })
+                let data = await response.json()
+
+                return data
+            } catch (error) {
+                console.log(error.message)
+                return []
+            }
+        }
+
+
+        function tableComponent() {
+            return {
+                data: [],
+                init() {
+                    getAudioInfo().then(r => this.data = r).catch(e => console.log(e))
+                }
+            }
+        }
+
+
+    </script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Admin Dashboard</title>
 </head>
@@ -13,26 +84,53 @@
     <h1 class="text-5xl font-bold-monospace text-center text-purple-800 p-6">Admin Dashboard</h1>
     <div class="max-w-2xl mx-auto p-6 bg-gray-200 shadow-lg">
         <h2 class="text-3xl font-bold-monspace text-left text-purple-800">Audio Panel</h2>
-        <div x-data="{ open: false }" class="p-6">
-            <button type="button" @click="open = !open"
-            class="px-4 py-2 bg-purple-800 hover:bg-purple-700 rounded text-white focus:outline-none"
-            >Open Audio Grid</button>
-            <span x-show="open">
-               List of all Audio Files
-            </span>
+        <div x-data="tableComponent()" class="p-6">
+            <table class="min-w-full leading-normal">
+                <thead>
+                    <tr>
+                        <th scope="row"
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Name
+                        </th>
+                        <th scope="row"
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Size
+                        </th>
+                        <th scope="row"
+                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Last Modified
+                        </th>
+                        <!-- Add more headers as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <template x-for="item in data" :key="item.name">
+                        <tr>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <div class="flex items-center">
+                                    <div class="ml-3">
+                                        <p class="text-gray-900 whitespace-no-wrap" x-text="item.name"></p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap" x-text="item.size"></p>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap" x-text="item.last_modified"></p>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
         </div>
         <div x-data="{file : null}" class="p-6">
             <input type="file" accept=".mp3" name="latest 
-            audio file"  @change="file = $event.target.files[0]"
-            id="file-input" class="p-6 text-stone-500
+            audio file" @change="file = $event.target.files[0]" id="file-input" class="p-6 text-stone-500
             ">
-            <button type="button" 
-                @click="uploadAudio()" 
-                id="upload-button"
-                class="px-4 py-2 bg-purple-800 hover:bg-purple-700 
+            <button type="button" @click="uploadAudio()" id="upload-button" class="px-4 py-2 bg-purple-800 hover:bg-purple-700 
                 rounded text-white 
-                focus:outline-none"
-                :disabled="!file" >
+                focus:outline-none" :disabled="!file">
                 Upload Mp3
             </button>
             <br>
@@ -41,4 +139,5 @@
     </div>
 
 </body>
+
 </html>
