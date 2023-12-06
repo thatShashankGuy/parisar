@@ -29,6 +29,7 @@ If you are developing a production application, we recommend updating the config
 - ### React + vite
 
 ## Deployment Steps
-- `npm run build` 
-- `aws s3 sync dist/ s3://thatshashankguy-portfolio-website`
+- `npm run build`
+
+## DEPLOYED ON CLOUD FLAIR PAGES
 

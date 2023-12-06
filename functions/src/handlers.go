@@ -9,27 +9,21 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-/*
-*
-request audio from s3 to download and listen
-Have Get and Options
-*
-*/
-func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func halfByteBHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	switch request.HTTPMethod {
 	case "GET":
 		logId := request.QueryStringParameters["logId"]
-		objectKey := fmt.Sprintf("%s/%s.mp3", audioFolder, logId)
+		objectKey := fmt.Sprintf("%s/%s.mp3", halfByteBFolder, logId)
 
-		preSignedURL, err := getPresignedURLForAudioPlayer(objectKey)
+		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, objectKey, "download")
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
 				Body:       err.Error(),
 			}, err
 		}
-		responseBody, err := json.Marshal(PresignedURLAudioResponse{URL: preSignedURL})
+		responseBody, err := json.Marshal(PresignedURLhalfByteBResponse{URL: preSignedURL})
 		headers["Content-Type"] = "application/json"
 		if err != nil {
 			return events.APIGatewayProxyResponse{
@@ -63,12 +57,6 @@ func audioHandler(ctx context.Context, request events.APIGatewayProxyRequest) (e
 
 }
 
-/*
-*
-request resume from s3 to download
-Have Get and Options
-*
-*/
 func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	switch request.HTTPMethod {
 	case "OPTIONS":
@@ -78,8 +66,8 @@ func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (
 			Body:       "Handled OPTIONS",
 		}, nil
 	case "GET":
-
-		preSignedURL, err := getPreSignedURLForResumeDownload()
+		objectKey := documentFolder + "/Resume.pdf"
+		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, objectKey, "download")
 		if err != nil {
 
 			return events.APIGatewayProxyResponse{
@@ -110,13 +98,7 @@ func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (
 	}
 }
 
-/*
-*
-Upload Audio to S3 from client
-Have Post and Options
-*
-*/
-func uploadAudioViaDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func uploadhalfByteBViaDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	switch request.HTTPMethod {
 	case "POST":
@@ -130,8 +112,8 @@ func uploadAudioViaDashboardHandler(ctx context.Context, request events.APIGatew
 			}, nil
 		}
 
-		audioFolder := audioFolder + "/" + req.FileName
-		preSignedURL, err := generatePreSignedURLForUpload(audioFolder)
+		halfByteBFolder := halfByteBFolder + "/" + req.FileName
+		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, halfByteBFolder, "upload")
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
@@ -171,15 +153,14 @@ func uploadAudioViaDashboardHandler(ctx context.Context, request events.APIGatew
 }
 
 /*
-*
-get info on all audio stored in s3 as json
-Have Get and Options
-*
+Handler to provide Half-byte Broadcast audio files to front
 */
-func getAudioInfoDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func halfByteBInfoDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	switch request.HTTPMethod {
 	case "GET":
-		audioList, err := getAudioInfoDashboard()
+		var halfByteBInfo []HalfByteBInfo
+
+		hbb_result, err := readItemsFromBucketHelper(storageBucket, halfByteBFolder)
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
@@ -187,7 +168,15 @@ func getAudioInfoDashboardHandler(ctx context.Context, request events.APIGateway
 				Body:       err.Error(),
 			}, nil
 		}
-		jsonResp, err := json.Marshal(audioList)
+		for _, item := range hbb_result.Contents {
+			halfByteBInfo = append(halfByteBInfo, HalfByteBInfo{
+				Name:         *item.Key,
+				Size:         *item.Size,
+				LastModified: item.LastModified.Format("2006-01-02T15:04:05Z07:00"),
+			})
+		}
+
+		jsonResp, err := json.Marshal(halfByteBInfo)
 
 		if err != nil {
 			return events.APIGatewayProxyResponse{
@@ -204,7 +193,7 @@ func getAudioInfoDashboardHandler(ctx context.Context, request events.APIGateway
 			Body:       string(jsonResp),
 		}, nil
 
-	case "OPTION":
+	case "OPTIONS":
 		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusOK,
