@@ -109,16 +109,16 @@ Outputs:
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/portfolio/"
   ParisarWebBackendFunction:
     Description: "Portfolio Lambda Function ARN"
-    Value: !GetAtt AudioLogFunction.Arn
+    Value: !GetAtt ParisarWebBackend.Arn
   ParisarWebBackendIamRole:
     Description: "Implicit IAM Role created for Portfolio function"
-    Value: !GetAtt AudioLogFunctionRole.Arn
-  ParisarAdminBackendFunction:
+    Value: !GetAtt ParisarWebBackendRole.Arn
+  AdminDashboardFunction:
     Description: "Admin Panel function"
-    Value: !GetAtt AdminFunction.Arn
-  ParisarAdminBackendIamRole:
+    Value: !GetAtt AdminDashboard.Arn
+  AdminDashboardIamRole:
     Description: "Implicit IAM Role created for Admin Panel function"
-    Value: !GetAtt AdminFunctionRole.Arn
+    Value: !GetAtt AdminDashboardRole.Arn
   
 
 

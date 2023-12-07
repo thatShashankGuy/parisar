@@ -17,9 +17,10 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
-s3_prefix = "go-backend"
+s3_prefix = "parisar-backend"
 region = "ap-south-1"
 image_repositories = []
+stack_name = "parisar-backend"
 
 [default.package.parameters]
 resolve_s3 = true
