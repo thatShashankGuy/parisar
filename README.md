@@ -1,4 +1,4 @@
-# Welcome to Parishar
+# Welcome to _**parisar**_
 
 _**parisar**_ (campus) is my personal one stop shop for all my project showcases , announcements , podcast and portfolio.
 
