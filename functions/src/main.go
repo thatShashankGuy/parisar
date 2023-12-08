@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"log"
 	"net/http"
 	"os"
 
@@ -31,6 +32,7 @@ func main() {
 			return resumeHandler(ctx, request)
 
 		case "/admin/v1/broadcast":
+			log.Println("TESTING ----___")
 			return halfByteBInfoDashboardHandler(ctx, request)
 
 		case "/admin/v1/upload-broadcast":

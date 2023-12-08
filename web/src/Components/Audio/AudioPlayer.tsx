@@ -6,8 +6,6 @@ import Slider from '@mui/material/Slider';
 import IconButton from '@mui/material/IconButton';
 import PauseRounded from '@mui/icons-material/PauseRounded';
 import PlayArrowRounded from '@mui/icons-material/PlayArrowRounded';
-import FastForwardRounded from '@mui/icons-material/FastForwardRounded';
-import FastRewindRounded from '@mui/icons-material/FastRewindRounded';
 import convo from '../../assets/convo.svg'
 import { faCircleChevronLeft, faHeadphonesAlt, faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -160,9 +158,6 @@ export default function AudioPlayer() {
             mt: -1,
           }}
         >
-          <IconButton aria-label="previous song" disabled>
-            <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
-          </IconButton>
           <IconButton
             aria-label={!isPlaying ? 'play' : 'pause'}
             onClick={togglePlay}
@@ -175,9 +170,6 @@ export default function AudioPlayer() {
             ) : (
               <PauseRounded sx={{ fontSize: '3rem' }} htmlColor={mainIconColor} />
             )}
-          </IconButton>
-          <IconButton aria-label="next song" disabled>
-            <FastForwardRounded fontSize="large" htmlColor={mainIconColor}  />
           </IconButton>
         </Box>
 
