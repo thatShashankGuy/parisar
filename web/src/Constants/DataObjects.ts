@@ -59,4 +59,11 @@ export const PodcastList = [{
     EpisodeId :"Episode#3",
     Name:"Conainterization and Docker Discussion!" ,
     logId : "podcast3"
-  }]
+  },
+  {
+    ID : 4, 
+    EpisodeId :"Episode#4",
+    Name:"Orchestration with Kubernates!" ,
+    logId : "podcast4"
+  }
+]

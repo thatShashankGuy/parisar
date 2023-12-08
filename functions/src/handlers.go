@@ -23,7 +23,7 @@ func halfByteBHandler(ctx context.Context, request events.APIGatewayProxyRequest
 				Body:       err.Error(),
 			}, err
 		}
-		responseBody, err := json.Marshal(PresignedURLhalfByteBResponse{URL: preSignedURL})
+		responseBody, err := json.Marshal(PresignedURLhalfByteBResponse{URL: preSignedURL.URL})
 		headers["Content-Type"] = "application/json"
 		if err != nil {
 			return events.APIGatewayProxyResponse{
@@ -76,7 +76,7 @@ func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (
 			}, err
 		}
 
-		responseBody, err := json.Marshal(PresignedURLResumeResponse{URL: preSignedURL})
+		responseBody, err := json.Marshal(PresignedURLResumeResponse{URL: preSignedURL.URL})
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
@@ -121,7 +121,7 @@ func uploadhalfByteBViaDashboardHandler(ctx context.Context, request events.APIG
 				Body:       err.Error(),
 			}, nil
 		}
-		responseBody, err := json.Marshal(uploadURLResponse{URL: preSignedURL})
+		responseBody, err := json.Marshal(uploadURLResponse{URL: preSignedURL.URL})
 		headers["Content-Type"] = "application/json"
 		if err != nil {
 			return events.APIGatewayProxyResponse{
@@ -158,9 +158,9 @@ Handler to provide Half-byte Broadcast audio files to front
 func halfByteBInfoDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	switch request.HTTPMethod {
 	case "GET":
-		var halfByteBInfo []HalfByteBInfo
 
-		hbb_result, err := readItemsFromBucketHelper(storageBucket, halfByteBFolder)
+		folder := halfByteBFolder
+		hbb_result, err := readItemsFromBucketHelper(storageBucket, folder)
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
@@ -168,15 +168,8 @@ func halfByteBInfoDashboardHandler(ctx context.Context, request events.APIGatewa
 				Body:       err.Error(),
 			}, nil
 		}
-		for _, item := range hbb_result.Contents {
-			halfByteBInfo = append(halfByteBInfo, HalfByteBInfo{
-				Name:         *item.Key,
-				Size:         *item.Size,
-				LastModified: item.LastModified.Format("2006-01-02T15:04:05Z07:00"),
-			})
-		}
 
-		jsonResp, err := json.Marshal(halfByteBInfo)
+		jsonResp, err := json.Marshal(hbb_result)
 
 		if err != nil {
 			return events.APIGatewayProxyResponse{
