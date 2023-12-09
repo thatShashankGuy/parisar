@@ -9,12 +9,12 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
-func halfByteBHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func vartalaapHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	switch request.HTTPMethod {
 	case "GET":
 		logId := request.QueryStringParameters["logId"]
-		objectKey := fmt.Sprintf("%s/%s.mp3", halfByteBFolder, logId)
+		objectKey := fmt.Sprintf("%s/%s.mp3", vartalaapFolder, logId)
 
 		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, objectKey, "download")
 		if err != nil {
@@ -23,7 +23,7 @@ func halfByteBHandler(ctx context.Context, request events.APIGatewayProxyRequest
 				Body:       err.Error(),
 			}, err
 		}
-		responseBody, err := json.Marshal(PresignedURLhalfByteBResponse{URL: preSignedURL.URL})
+		responseBody, err := json.Marshal(PresignedURLAudioResponse{URL: preSignedURL.URL})
 		headers["Content-Type"] = "application/json"
 		if err != nil {
 			return events.APIGatewayProxyResponse{
@@ -98,7 +98,7 @@ func resumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (
 	}
 }
 
-func uploadhalfByteBViaDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func uploadvartalaapViaDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 
 	switch request.HTTPMethod {
 	case "POST":
@@ -112,8 +112,8 @@ func uploadhalfByteBViaDashboardHandler(ctx context.Context, request events.APIG
 			}, nil
 		}
 
-		halfByteBFolder := halfByteBFolder + "/" + req.FileName
-		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, halfByteBFolder, "upload")
+		vartalaapFolder := vartalaapFolder + "/" + req.FileName
+		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, vartalaapFolder, "upload")
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,
@@ -155,11 +155,11 @@ func uploadhalfByteBViaDashboardHandler(ctx context.Context, request events.APIG
 /*
 Handler to provide Half-byte Broadcast audio files to front
 */
-func halfByteBInfoDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func vartalaapInfoDashboardHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	switch request.HTTPMethod {
 	case "GET":
 
-		folder := halfByteBFolder
+		folder := vartalaapFolder
 		hbb_result, err := readItemsFromBucketHelper(storageBucket, folder)
 		if err != nil {
 			return events.APIGatewayProxyResponse{

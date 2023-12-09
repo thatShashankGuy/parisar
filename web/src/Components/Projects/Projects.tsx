@@ -3,7 +3,8 @@ import support from '../../assets/support.svg';
 import { faMeteor } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useMediaQuery } from '@mui/material';
-const Blogs = () => {
+import {ImpRef} from '../../Constants/DataObjects'
+const Projects = () => {
   const isMobile = useMediaQuery('(max-width:600px)');
   return (
     <Grid container spacing={2}>
@@ -22,7 +23,7 @@ const Blogs = () => {
                   variant={!isMobile ? "h4" :'body2' } component={!isMobile ? "h1" : "body"}
                   color="text.primary"
                 >
-                  Check Out <a href='https://thatshashankguy.github.io/_InSights/'> The _InSights Project</a> - a comprehensive and evolving repository where we document concise, practical reference materials encountered during our tech learning and usage journey { }
+                  Check Out <a href={ImpRef.nibandh_pages}> nibandh</a> - a comprehensive and evolving repository where we document concise, practical reference materials encountered during our tech learning and usage journey { }
                   <FontAwesomeIcon icon={faMeteor} />
                 </Typography>
               }
@@ -35,10 +36,10 @@ const Blogs = () => {
             variant={!isMobile ? "h4" :'body2' }
             color="text.primary"
         
-        >Note : The _InSights Project is actively looking for contributors. Please reach out over <a href="mailto:shashankforworkshekhar@gmail.com">email</a> or check out the <a href='https://github.com/thatShashankGuy/_InSights'>git repo</a> if you are interested.</Typography>
+        >Note : nibandh is actively looking for contributors. Please reach out over <a href="mailto:shashankforworkshekhar@gmail.com">email</a> or check out the <a href={ImpRef.nibandh_repo}>git repo</a> if you are interested.</Typography>
       </Grid>
     </Grid>
   );
 };
 
-export default Blogs;
+export default Projects;

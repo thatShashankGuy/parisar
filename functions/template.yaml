@@ -50,7 +50,7 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
-          HBB_ADDRESS : podcast
+          AUDIO_ADDRESS : podcast
           DOCS_ADDRESS : documents
           MY_AWS_REGION : ap-south-1
           SECRET : planetscalesecret
@@ -100,7 +100,7 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
-          HBB_ADDRESS : podcast
+          AUDIO_ADDRESS : podcast
           MY_AWS_REGION : ap-south-1  
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

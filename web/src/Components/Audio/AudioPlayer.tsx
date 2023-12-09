@@ -88,7 +88,7 @@ export default function AudioPlayer() {
           </CoverImage>
           <Box sx={{ ml: 3, minWidth: 0 }}>
             <Typography variant="caption" color="text.secondary" fontWeight={500}>
-              The half-byte broadcast <FontAwesomeIcon icon={faHeadphonesAlt}/>
+              Vartalaap <FontAwesomeIcon icon={faHeadphonesAlt}/>
             </Typography>
             <Typography noWrap>
               <b>{locationState.episode}&mdash;{locationState.name} <FontAwesomeIcon icon={faMeteor}/> </b>
