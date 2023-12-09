@@ -16,7 +16,7 @@ const PodcastIndex = () => {
       {/* Audio list grid */}
       <Grid item xs={12} sm={9} md={9}>
         <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          The half-byte broadcast <FontAwesomeIcon icon={faHeadphonesAlt}/>
+          Vartalaap <FontAwesomeIcon icon={faHeadphonesAlt}/>
         </Typography>
         <List>
           {GenerateAudioList()}

@@ -33,8 +33,8 @@ const Landing = () => {
           <img src={success} alt="Welcome" style={{ width: '100%', maxWidth: '360px', height: 'auto' }} />
         </Box>
         <Typography variant='body1' sx={{paddingLeft:"30%",color:"grey"}}>
-          Checkout my podcast Half-Byte Broadcast 
-        and know more open source project  _InSights!
+          Checkout <strong>Vartalap </strong>
+        and know more open source project  <strong>Nibandh</strong>
         <FontAwesomeIcon icon={faMeteor} />
         </Typography>
         </Grid>

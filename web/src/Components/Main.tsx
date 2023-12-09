@@ -1,6 +1,6 @@
 import {  Routes, Route } from 'react-router-dom';
 import Landing from './Landing/Landing'
-import Blog from './Projects/InSights';
+import Projects from './Projects/Projects';
 import Feedback from './Feedback/Feedback';
 import CareerTimeline from './CareerTimline/CareerTimeline'
 import About from './About/About';
@@ -15,7 +15,7 @@ const Main = () => {
         <Route path="/" element={<Landing />} />
         <Route path="/about" element={<About/>}/>
         <Route path="/career" element={<CareerTimeline jobs={careerEvents}/>}/>
-        <Route path="/project" element={<Blog  />} />
+        <Route path="/project" element={<Projects />} />
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/audio" element={<AudioIndex />} />
         <Route path="/player" element={<AudioPlayer />} />
