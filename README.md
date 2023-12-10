@@ -11,7 +11,7 @@ Started as barely porforlio exercise I quickly realised most of my work has been
 - I will also post annoucments about things I am learning , upskilling on or just in general exicted about.
 - I have a my career timeline and updated resume for potential employeers.
 I also host a semi technical podcast called
-`Half-byte Broadcast` in here .
+  `Vartalaap` in here .
 So if intrested please check it out.
 
 
