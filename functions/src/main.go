@@ -19,10 +19,16 @@ var (
 	vartalaapFolder = os.Getenv("AUDIO_ADDRESS")
 	documentFolder  = os.Getenv("DOCS_ADDRESS")
 	awsRegion       = os.Getenv("MY_AWS_REGION")
+	applicationEnv  = os.Getenv("APP_ENV")
 )
 
 func main() {
+
 	lambda.Start(func(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+		if applicationEnv == "PROD" {
+			headers["Access-Control-Allow-Origin"] = "https://shashankshekhar.pages.dev"
+		}
+
 		switch request.Path {
 		case "/api/v1/broadcast":
 			return vartalaapHandler(ctx, request)

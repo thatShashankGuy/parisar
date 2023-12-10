@@ -67,6 +67,11 @@ Resources:
               Action:
                 - s3:GetObject 
               Resource: arn:aws:s3:::thatshashankguy-storage-bucket/*  
+        - Statement:
+           - Effect: Allow
+             Action:
+               - secretsmanager:GetSecretValue
+             Resource: arn:aws:secretsmanager:ap-south-1:082291247210:secret:planetscalesecret-HtVoZj
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
@@ -74,7 +79,8 @@ Resources:
           DOCS_ADDRESS : documents
           MY_AWS_REGION : ap-south-1
           SECRET : planetscalesecret
-          
+          APP_ENV : PROD 
+
   AdminDashboard:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Metadata:
@@ -117,11 +123,18 @@ Resources:
               Action:
                 - s3:ListBucket
               Resource: arn:aws:s3:::thatshashankguy-storage-bucket/
+        - Statement:
+           - Effect: Allow
+             Action:
+               - secretsmanager:GetSecretValue
+             Resource: arn:aws:secretsmanager:ap-south-1:082291247210:secret:planetscalesecret-HtVoZj
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           STORAGE_BUCKET: thatshashankguy-storage-bucket
           AUDIO_ADDRESS : podcast
-          MY_AWS_REGION : ap-south-1  
+          MY_AWS_REGION : ap-south-1
+          SECRET : planetscalesecret
+          APP_ENV : PROD 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
