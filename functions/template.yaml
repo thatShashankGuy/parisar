@@ -41,6 +41,16 @@ Resources:
           Properties:
             Path : /api/v1/resume
             Method : OPTIONS
+        FEEDBACKPOST:
+          Type: Api
+          Properties:
+            Path : /api/v1/feedback
+            Method : POST
+        FEEDBACKOPTIONS:
+          Type : Api
+          Properties :
+            Path : /api/v1/feedback
+            Method : OPTIONS
       Policies:
         - Statement:
             - Effect: Allow

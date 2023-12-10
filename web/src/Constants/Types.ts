@@ -45,5 +45,6 @@ export type catapultType = {
 
 export type URL = {
     Audio: string,
-    Resume: string
+    Resume: string,
+    Feedback : string
   }
