@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type uploadURLResponse struct {
 	URL string `json:"url"`
 }
@@ -20,4 +22,22 @@ type VartalaapInfo struct {
 	Name         string `json:"name"`
 	Size         int64  `json:"size"`
 	LastModified string `json:"last_modified"`
+}
+
+type SecretInfo struct {
+	DSN string `json:"DSN"`
+}
+
+type Feedback struct {
+	Comment string `json:"comment"`
+	Email   string `json:"email"`
+	Source  string `json:"source"`
+}
+
+type CustomError struct {
+	message string
+}
+
+func (E CustomError) Error() string {
+	return fmt.Sprintf("error : %s", E.message)
 }

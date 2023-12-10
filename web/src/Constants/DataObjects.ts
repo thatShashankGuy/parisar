@@ -35,13 +35,19 @@ export const AboutMe = {
 export const PodcastList = [{
     ID : 1, 
     EpisodeId :"Vartalaap#0",
-    Name:"Welcome to Vartalaap!",
+    Name:"Welcome to Vartalaap 👋🏻",
     logId : "vartalaap00"
   },{
     ID: 2,
     EpisodeId : "Vartalaap#1",
-    Name : "But Why Though ?",
+    Name : "But Why Though ¿ ",
     logId :"vartalaap01"
+  },
+  {
+    ID: 3,
+    EpisodeId : "Vartalaap#2",
+    Name : "That one burnout story 🕯",
+    logId :"vartalaap02"
   }
 ]
 

@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"log"
 	"net/http"
 	"os"
 
@@ -31,12 +30,15 @@ func main() {
 		case "/api/v1/resume":
 			return resumeHandler(ctx, request)
 
+		case "/api/v1/feedback":
+			return feedbackHandler(ctx, request)
+
 		case "/admin/v1/broadcast":
-			log.Println("TESTING ----___")
 			return vartalaapInfoDashboardHandler(ctx, request)
 
 		case "/admin/v1/upload-broadcast":
 			return uploadvartalaapViaDashboardHandler(ctx, request)
+
 		default:
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusBadRequest,

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -194,6 +195,54 @@ func vartalaapInfoDashboardHandler(ctx context.Context, request events.APIGatewa
 			Body:       "Handled OPTIONS",
 		}, nil
 
+	default:
+		headers["Content-Type"] = "application/json"
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "Invalid API Request",
+			Headers:    headers,
+		}, nil
+	}
+}
+
+func feedbackHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	switch request.HTTPMethod {
+	case "OPTIONS":
+		headers["Content-Type"] = "application/json"
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
+			Headers:    headers,
+			Body:       "Handled POST",
+		}, nil
+	case "POST":
+		headers["Content-Type"] = "application/json"
+		log.Println(request.Body)
+		var feedbackObj Feedback
+		err := json.Unmarshal([]byte(request.Body), &feedbackObj)
+
+		if err != nil {
+			log.Fatalf("failed to add marsh feedback json : %v", err)
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		_, err = add_feedback(feedbackObj)
+		if err != nil {
+			log.Fatalf("failed to add feedback: %v", err)
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
+			Headers:    headers,
+			Body:       "Feedback Added Successfully",
+		}, nil
 	default:
 		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{

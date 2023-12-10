@@ -3,37 +3,39 @@ package main
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"log"
-	"os"
 
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/aws/aws-sdk-go/aws"
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
 )
 
 /*Database connector*/
-func databaseConnector() {
+func databaseConnector() (*sql.DB, error) {
+	secretString := secretManagerConnector()
+	var secret SecretInfo
+	json.Unmarshal([]byte(secretString), &secret)
 
-	db, err := sql.Open("mysql", os.Getenv("DSN"))
+	db, err := sql.Open("mysql", secret.DSN)
 	if err != nil {
 		log.Fatalf("failed to connect: %v", err)
+		return nil, err
 	}
-	defer db.Close()
 
 	if err := db.Ping(); err != nil {
 		log.Fatalf("failed to ping: %v", err)
+		return nil, err
 	}
 
-	log.Println("Successfully connected to PlanetScale!")
+	return db, nil
 
 }
 
 /* Secret manager Connectors*/
-func secretManagerConnector() {
+func secretManagerConnector() string {
 	secretName := "planetscalesecret"
 	region := "ap-south-1"
 
@@ -60,5 +62,5 @@ func secretManagerConnector() {
 	// Decrypts secret using the associated KMS key.
 	var secretString string = *result.SecretString
 
-	// Your code goes here.
+	return secretString
 }
