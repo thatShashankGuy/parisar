@@ -33,6 +33,9 @@ func main() {
 		case "/api/v1/feedback":
 			return feedbackHandler(ctx, request)
 
+		case "/api/v1/episodelist":
+			return vartalaapIndexHandler(ctx, request)
+
 		case "/admin/v1/broadcast":
 			return vartalaapInfoDashboardHandler(ctx, request)
 

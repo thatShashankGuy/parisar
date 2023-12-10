@@ -51,6 +51,16 @@ Resources:
           Properties :
             Path : /api/v1/feedback
             Method : OPTIONS
+        EPISODELISTGET:
+          Type: Api
+          Properties:
+            Path : /api/v1/episodelist
+            Method : GET
+        EPISODELISTOPTIONS:
+          Type : Api
+          Properties :
+            Path : /api/v1/episodelist
+            Method : OPTIONS      
       Policies:
         - Statement:
             - Effect: Allow

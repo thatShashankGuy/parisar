@@ -32,24 +32,6 @@ export const AboutMe = {
     P3 : `My keen interest in computer science goes beyond my day job and i like fiddling around new paradigms , languages and abstract concepts which fills most of my unstructured git repositories.`,
     P4 : `I am an avid reader and prefer hardcopies over ebooks. I love gaming and between that and my job i spend most of time staring at different screens`
 }
-export const PodcastList = [{
-    ID : 1, 
-    EpisodeId :"Vartalaap#0",
-    Name:"Welcome to Vartalaap 👋🏻",
-    logId : "vartalaap00"
-  },{
-    ID: 2,
-    EpisodeId : "Vartalaap#1",
-    Name : "But Why Though ¿ ",
-    logId :"vartalaap01"
-  },
-  {
-    ID: 3,
-    EpisodeId : "Vartalaap#2",
-    Name : "That one burnout story 🕯",
-    logId :"vartalaap02"
-  }
-]
 
 export const ImpRef = {
   nibandh_repo : "https://github.com/thatShashankGuy/nibandh",

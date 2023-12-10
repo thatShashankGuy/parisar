@@ -34,6 +34,12 @@ type Feedback struct {
 	Source  string `json:"source"`
 }
 
+type VartalaapIndex struct {
+	SerialNo  string `json:"logId"`
+	EpisodeId string `json:"EpisodeId"`
+	Name      string `json:"Name"`
+}
+
 type CustomError struct {
 	message string
 }

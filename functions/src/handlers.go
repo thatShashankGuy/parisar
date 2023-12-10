@@ -205,6 +205,9 @@ func vartalaapInfoDashboardHandler(ctx context.Context, request events.APIGatewa
 	}
 }
 
+/*
+Handler to submit feedback to database
+*/
 func feedbackHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	switch request.HTTPMethod {
 	case "OPTIONS":
@@ -243,6 +246,58 @@ func feedbackHandler(ctx context.Context, request events.APIGatewayProxyRequest)
 			Headers:    headers,
 			Body:       "Feedback Added Successfully",
 		}, nil
+	default:
+		headers["Content-Type"] = "application/json"
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusBadRequest,
+			Body:       "Invalid API Request",
+			Headers:    headers,
+		}, nil
+	}
+}
+
+/*
+Handler to read vartaalap list of items
+*/
+func vartalaapIndexHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	switch request.HTTPMethod {
+
+	case "OPTIONS":
+		headers["Content-Type"] = "application/json"
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
+			Headers:    headers,
+			Body:       "Handled OPTIONS",
+		}, nil
+
+	case "GET":
+		headers["Content-Type"] = "application/json"
+
+		sqlResult, err := retrieve_ListOfEpisode_Vartalaap()
+
+		if err != nil {
+			log.Fatalf("Error occurred while retrieving data from sql %v", err)
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		jsonResult, err := json.Marshal(&sqlResult)
+		if err != nil {
+			log.Fatalf("Error occurred while marshing sql data %v", err)
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
+			Headers:    headers,
+			Body:       string(jsonResult),
+		}, nil
+
 	default:
 		headers["Content-Type"] = "application/json"
 		return events.APIGatewayProxyResponse{

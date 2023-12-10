@@ -35,6 +35,13 @@ export type AudioIndexItem ={
     episodeId : string
 }
 
+export type eplist ={
+    Name : string,
+    logId : string,
+    EpisodeId : string,
+    metadata? : {}
+}
+
 export type catapultType = {
     engine: Matter.Engine;
     runner: Matter.Runner;
@@ -46,5 +53,6 @@ export type catapultType = {
 export type URL = {
     Audio: string,
     Resume: string,
-    Feedback : string
+    Feedback : string,
+    Episodelist : string
   }
