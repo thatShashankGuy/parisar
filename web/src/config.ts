@@ -12,7 +12,8 @@ if( ENV === "PROD"){
 export const URLS: URL = {
   Audio: `${BASEURL}broadcast`,
   Resume: `${BASEURL}resume`,
-  Feedback : `${BASEURL}feedback`
+  Feedback : `${BASEURL}feedback`,
+  Episodelist : `${BASEURL}episodelist`
 }
 
 
