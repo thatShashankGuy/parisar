@@ -7,7 +7,7 @@ _**parisar**_ (campus) is my personal one stop shop for all my project showcases
 Started as barely porforlio exercise I quickly realised most of my work has been with clients and have little to show on my personal Github, I started shaping  parisar to become my long term application to express my self.
 
 ### What will you find here ?
-- I am planning to host all my new personal projects here like my podast `Half-byte Broadcast` and open source project `The _InSight Project`.
+- I am planning to host all my new personal projects here like my podast `vartalaap` and open source project `nibandh`.
 - I will also post annoucments about things I am learning , upskilling on or just in general exicted about.
 - I have a my career timeline and updated resume for potential employeers.
 I also host a semi technical podcast called
