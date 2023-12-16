@@ -21,7 +21,7 @@ jobs:
 
       - name: Build and package AWS SAM application
         run: |
-          sam build --template functions/template.yml
+          sam build --template functions/template.yaml
           sam package --output-template-file packaged.yaml
 
       - name: Deploy AWS SAM application
