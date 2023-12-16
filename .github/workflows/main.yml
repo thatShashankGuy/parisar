@@ -22,16 +22,7 @@ jobs:
       - name: Build and package AWS SAM application
         run: |
           sam build --template functions/template.yaml
-          sam package --output-template-file packaged.yaml
 
       - name: Deploy AWS SAM application
         run: |
-          sam deploy \
-            --template-file packaged.yaml \
-            --stack-name parisar-backend \
-            --capabilities CAPABILITY_IAM
-            --no-confirm-changeset
-
-      - name: Clean up
-        run: |
-          rm -f packaged.yaml
+          sam deploy --config-file functions/samconfig.toml
