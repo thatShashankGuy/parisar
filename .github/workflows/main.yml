@@ -28,8 +28,9 @@ jobs:
         run: |
           sam deploy \
             --template-file packaged.yaml \
-            --stack-name YourLambdaStackName \
+            --stack-name parisar-backend \
             --capabilities CAPABILITY_IAM
+            --no-confirm-changeset
 
       - name: Clean up
         run: |
