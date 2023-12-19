@@ -29,9 +29,11 @@ type SecretInfo struct {
 }
 
 type Feedback struct {
-	Comment string `json:"comment"`
-	Email   string `json:"email"`
-	Source  string `json:"source"`
+	Comment   string `json:"comment"`
+	Email     string `json:"email"`
+	Source    string `json:"source"`
+	CreatedAt string `json:"createdAt"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
 type VartalaapIndex struct {

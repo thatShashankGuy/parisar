@@ -48,6 +48,9 @@ func main() {
 		case "/admin/v1/upload-broadcast":
 			return uploadvartalaapViaDashboardHandler(ctx, request)
 
+		case "/admin/v1/feedback":
+			return feedbackHandler(ctx, request)
+
 		default:
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusBadRequest,
