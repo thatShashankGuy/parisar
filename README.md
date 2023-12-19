@@ -1,7 +1,9 @@
-# Welcome 
-_**parisar**_ (campus) is my repository setup on github for `Web UI + Backend Code + AWS infra configuration` for all my project showcases , announcements , podcast and portfolio.
+# Welcome to _parisar_ 
 
-__**daftarkhana**__ (record room) is a small `database + object storage (AWS S3) setup along with various CI/CD tooling` helping me to keep parisar up and running
+### What is _parisar_?
+
+  My one true repository hosting `Web UI + Backend Code + AWS infra configuration` for all my project showcases , announcements , podcast and portfolio.
+
 
 ### Why I started this ?
 
@@ -23,7 +25,7 @@ So if interested please check it out.
 
 - `Admin CLI Tool` -I have also been Light weight Dashboard is still in progress and is built in `go`'s std library as  a CLI tool
 
-- `Database` - for database I utilize `Planet Scale DaaS with mySQL`  - part of  `DaftarKhana` .  `Parisar` saves the data in `DaftarKhana` tables as well as utilizes `AWS S3` for object storage.
+- `Database` - for database I utilize `Planet Scale DaaS with mySQL`I fondly named `Daftarkhana` .  `Parisar` saves the data in `Daftarkhana` tables as well as utilizes `AWS S3` for object storage.
 
 - `Hosting` - Both UIs are hosted with `CloudFlare Pages ` while `nibandh ` utilizes `Github pages`
 
