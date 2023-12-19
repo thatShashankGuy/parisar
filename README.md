@@ -1,5 +1,4 @@
-# Welcome to _**parisar + dafatarkhana**_
-
+# Welcome 
 _**parisar**_ (campus) is my repository setup on github for `Web UI + Backend Code + AWS infra configuration` for all my project showcases , announcements , podcast and portfolio.
 
 __**daftarkhana**__ (record room) is a small `database + object storage (AWS S3) setup along with various CI/CD tooling` helping me to keep parisar up and running
