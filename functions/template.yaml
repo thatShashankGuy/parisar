@@ -81,7 +81,7 @@ Resources:
           SECRET : planetscalesecret
           APP_ENV : PROD 
 
-  AdminDashboard:
+  ParisarAdminBackend:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Metadata:
       BuildMethod: go1.x
@@ -112,6 +112,11 @@ Resources:
           Properties:
             Path : /admin/v1/upload-broadcast
             Method : OPTIONS
+        GETALLFEEDBACK:
+          Type: Api
+          Properties:
+            Path : /admin/v1/feedback
+            Method : GET
       Policies:
         - Statement:
             - Effect: Allow
