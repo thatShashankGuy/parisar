@@ -34,6 +34,6 @@ and currently `Parisar` saves the data in `DaftarKhana` tables as well as utiliz
 
 ### Architecture Diagram
 
-![Alt text](/assets/image.png)
+![Alt text](/assets/fullarch.png)
 Leave a star if you like it.
 
