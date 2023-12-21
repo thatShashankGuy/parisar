@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Lambda to send SMS
+  Group Of Parisar Lambdas
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -80,7 +80,6 @@ Resources:
           MY_AWS_REGION : ap-south-1
           SECRET : planetscalesecret
           APP_ENV : PROD 
-
   ParisarAdminBackend:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Metadata:
@@ -153,12 +152,12 @@ Outputs:
   ParisarWebBackendIamRole:
     Description: "Implicit IAM Role created for Portfolio function"
     Value: !GetAtt ParisarWebBackendRole.Arn
-  AdminDashboardFunction:
+  ParisarAdminBackendFunction:
     Description: "Admin Panel function"
-    Value: !GetAtt AdminDashboard.Arn
-  AdminDashboardIamRole:
+    Value: !GetAtt ParisarAdminBackend.Arn
+  ParisarAdminBackendIamRole:
     Description: "Implicit IAM Role created for Admin Panel function"
-    Value: !GetAtt AdminDashboardRole.Arn
+    Value: !GetAtt ParisarAdminBackendRole.Arn
   
 
 
