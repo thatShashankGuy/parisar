@@ -31,7 +31,5 @@ dist-ssr
 web2/ZPROMPTER.md
 *http
 
-dashboard/*.mak
+daftarkhana/misc/*.mak
 
-webui1
-webUI
