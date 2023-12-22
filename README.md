@@ -19,13 +19,13 @@ So if interested please check it out.
 
 
 ### Technical Architecture
-- `Web UI` - The UI is written in `React` and `Typescript` using `Material` as primary CSS library. UI is responsive and works well with desktop and mobile views.
+- `UI - Kendra` - The The central UI is written in `React` and `Typescript` using `Material` as primary CSS library. UI is responsive and works well with desktop and mobile views.Consist of porfolio and show case project info
 
-- `Severless Backend` - To Keep things simpler, I chose to use serverless AWS lamba architecture. `All lambdas` are written in `Go` providing small bundle sizes and fast response time
+- `UI - Vartalaap` - The Audio Podcast UI written in `Sveltekit` and `JavaScript`. UI is mobile first and is lean with Minimal third party dependency. 
 
-- `Admin CLI Tool` -I have also been Light weight Dashboard is still in progress and is built in `go`'s std library as  a CLI tool
+- `Backend - Daftar` - To Keep things simpler, I chose to use serverless AWS lamba architecture and is a central backbone of `Daftar`. `All lambdas` are written in `Go` providing small bundle sizes and fast response time
 
-- `Database` - for database I utilize `Planet Scale DaaS with mySQL`I fondly named `Daftarkhana` .  `Parisar` saves the data in `Daftarkhana` tables as well as utilizes `AWS S3` for object storage.
+- `Database - Daftarkhana` - for database I utilize `Planet Scale DaaS with mySQL`I fondly named `Daftarkhana` .  `Daftar` saves the data in `Daftarkhana` tables as well as utilizes `AWS S3` for object storage.
 
 - `Hosting` - Both UIs are hosted with `CloudFlare Pages ` while `nibandh ` utilizes `Github pages`
 
