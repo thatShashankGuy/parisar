@@ -23,7 +23,7 @@ So if interested please check it out.
 
 - `UI - Vartalaap` - The Audio Podcast UI written in `Sveltekit` and `JavaScript`. UI is mobile first and is lean with Minimal third party dependency. 
 
-- `Backend - Daftar` - To Keep things simpler, I chose to use serverless AWS lamba architecture and is a central backbone of `Daftar`. `All lambdas` are written in `Go` providing small bundle sizes and fast response time
+- `Backend - Daftar` - To Keep things simpler, I chose to use serverless AWS lamba architecture and is a central backbone named `Daftar`. `All lambdas` are written in `Go` providing small bundle sizes and fast response time
 
 - `Database - Daftarkhana` - for database I utilize `Planet Scale DaaS with mySQL`I fondly named `Daftarkhana` .  `Daftar` saves the data in `Daftarkhana` tables as well as utilizes `AWS S3` for object storage.
 
