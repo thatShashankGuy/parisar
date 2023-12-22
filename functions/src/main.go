@@ -25,9 +25,9 @@ var (
 func main() {
 
 	lambda.Start(func(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-		if applicationEnv == "PROD" {
-			headers["Access-Control-Allow-Origin"] = "https://shashankshekhar.pages.dev"
-		}
+		// if applicationEnv == "PROD" {
+		// 	headers["Access-Control-Allow-Origin"] = "https://shashankshekhar.pages.dev,https://shashankshekhar-micro.pages.dev"
+		// }
 
 		switch request.Path {
 		case "/api/v1/broadcast":
