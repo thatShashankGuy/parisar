@@ -106,6 +106,8 @@
     transition: border-color 0.25s;
     border: 1px solid black;
     border-radius: 5px;
+    color: #0a0a0a;
+    border-color: black;
   }
 
   button:hover {

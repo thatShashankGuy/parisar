@@ -74,16 +74,5 @@
       color: #0a0a0a;
       font-size: smaller;
     }
-
-    button {
-      color: #0a0a0a;
-      border-color: black;
-      font-size: 1.1rem;
-    }
-
-    ul {
-      font-size: 1.1rem;
-      padding: 0.1rem;
-    }
   }
 </style>
