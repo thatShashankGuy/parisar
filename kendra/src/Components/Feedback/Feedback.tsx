@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import { TextField, Button, Grid, Typography, Box, Container } from '@mui/material';
+import { TextField, Button, Grid, Typography, Box, Container, useMediaQuery } from '@mui/material';
 import relax from '../../assets/relaxation.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-regular-svg-icons';
@@ -14,7 +14,7 @@ const Feedback = () => {
   const [email,setEmail] = useState("");
   const [show200,setShow200] = useState(false)
   const [errors,setErrors] = useState({comment:false, email:false})
-
+  const isMobile = useMediaQuery('(max-width:600px)');
   const validateFields = () => {
     const newErrors = {
       comment : false,
@@ -41,7 +41,7 @@ const Feedback = () => {
           body:JSON.stringify({
             email : email,
             comment : comment,
-            source : "vartalaap feedback"
+            source : "kendra feedback"
           })
         })
 
@@ -61,9 +61,9 @@ const Feedback = () => {
     <Container maxWidth="md">
       <Box my={4}>
         <Grid container spacing={3} alignItems="center" justifyContent="center">
-          <Grid item xs={12} md={6}>
+          {!isMobile ? <Grid item xs={12} md={6}>
             <img src={relax} alt="Relaxation" style={{ maxWidth: '100%', height: 'auto' }} />
-          </Grid>
+          </Grid> : null}
           <Grid item xs={12} md={6}>
             {show404 ? (
               <Service404 component='feedback' />

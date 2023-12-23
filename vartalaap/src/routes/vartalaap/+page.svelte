@@ -30,9 +30,8 @@
           <ul key={index}>
             <button on:click={goTo(item.logId)}>
               <strong>
-                <i class="fa-regular fa-lightbulb"> &nbsp;
-                  {item.EpisodeId} &dash; {item.Name} &nbsp;
-                  <i class="fa-solid fa-play"></i>
+                <i class="fa-regular fa-lightbulb"></i> &nbsp;
+                  {item.EpisodeId} &dash; {item.Name} 
                 </strong>
               </button>
           </ul>
@@ -43,7 +42,7 @@
       {/if}
     </div>
     <div class="homebtn">
-      <button on:click={goHome}><i class="fa-solid fa-house-flag">&nbsp; Back to Home </i></button>
+      <button on:click={goHome}><i class="fa-solid fa-house-flag"> </i>&nbsp; Back to Home</button>
     </div>
   </main>
 
@@ -51,16 +50,44 @@
     ul {
       padding-top: 0.6em;
     }
-  
+    ul button{
+      background: none;
+      border: none;
+    }
     .homebtn {
       position: fixed;
       top: 1rem; 
       right: 1rem;
-       
+      font-family:monospace; 
+      font-size: 1.5rem;
+
     }
     .homebtn button{
       background: none;
       border: none;
+    }
+
+    @media (max-width: 768px) {
+
+      ul {
+      padding-top: 0.6em;
+    }
+    ul button{
+      background: none;
+      border: none;
+    }
+    .homebtn {
+      position: fixed;
+      top: 1rem; 
+      right: 1rem;
+      font-family:monospace; 
+      font-size: 1.1rem;
+
+    }
+    .homebtn button{
+      background: none;
+      border: none;
+    }
     }
   </style>
   

@@ -14,7 +14,7 @@ const About = () => {
                 <Grid container spacing={2}>
                     <Grid item lg={3}>
 
-                        <img src={avatar} alt="Welcome" style={{ width: !isMobile?"100%":"15%", maxWidth: '360px', height: 'auto' }} />
+                        <img src={avatar} alt="Welcome" style={{ width: !isMobile?"100%":"0%", maxWidth: '360px', height: 'auto' }} />
                         <span style={{ margin: '0 12px' }}></span> 
                         <ResumeDownloadButton/>
                     </Grid>

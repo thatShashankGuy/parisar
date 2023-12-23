@@ -2,7 +2,7 @@
   import "@fortawesome/fontawesome-free/css/all.min.css";
   import WaveSurfer from "https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.esm.js";
   import { fetchAudio } from "$lib/index.js";
-  import { onMount } from "svelte";
+  import { onMount,onDestroy } from "svelte";
   import "@fortawesome/fontawesome-free/css/all.min.css";
   import { goto } from '$app/navigation';
   export let data;
@@ -76,12 +76,18 @@
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
 
+  onDestroy(() => {
+    if (wavesurfer) {
+      wavesurfer.destroy();
+    }
+  });
+
 </script>
 
 <main>
-    <button on:click={goTOEp}><i class="fa-solid fa-headphones">&nbsp; episodes</i> </button>
-    <button on:click={goHome}><i class="fa-solid fa-house-flag">&nbsp; home </i></button>
-    <button on:click={submitFeedback}><i class="fa-solid fa-pen-nib">&nbsp; feedback</i></button>
+    <button on:click={goTOEp}><i class="fa-solid fa-headphones"></i>&nbsp; episodes </button>
+    <button on:click={goHome}><i class="fa-solid fa-house-flag"></i>&nbsp; home </button>
+    <button on:click={submitFeedback}><i class="fa-solid fa-pen-nib"></i>&nbsp; feedback</button>
     <div class="card">
     <div id="waveform">
       {#if isLoading}
@@ -136,5 +142,47 @@
   button{
     background: none;
     border: none;
+    font-family:monospace; 
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+        width: 100%;
+        font-size: 1.8rem; 
+    }
+    button {
+    height: 1.1rem;
+    margin: 0.2rem 0; 
+    font-size: 1rem; 
+    border-radius: 2%;
+    border-color: black;
+    margin-left: 3rem; 
+  }
+  #waveform {
+    width: 80%;
+    height: 20rem;
+
+  }
+  .audio-timer {
+    padding-left: 1.1rem; 
+    padding-right: 1,1rem;
+    display: flex;
+    font-size: 1.1rem;
+    justify-content:space-between; 
+    align-items: left; 
+  }
+  .audio-timer button {
+    margin-right: 1rem; 
+    background: none;
+    border: none;
+  }
+  button{
+    background: none;
+    border: none;
+    font-family:monospace; 
+    font-size: 1.1rem;
+  }
+
   }
 </style>

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouseChimney, faDiagramProject, faTimeline, faComments, faAddressCard, faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { faHouseChimney, faDiagramProject, faTimeline, faComments, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import { Paper, BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { Link } from 'react-router-dom';
 import React from 'react';
@@ -15,9 +15,8 @@ const Navbar: React.FC<modeProps> = () => {
           <BottomNavigationAction component={Link} to='/' label="Home" icon={<FontAwesomeIcon icon={faHouseChimney} size='lg' />} />
           <BottomNavigationAction component={Link} to='/about' label="About Me" icon={<FontAwesomeIcon icon={faAddressCard} size='lg' />} />
          { !isMobile && <BottomNavigationAction component={Link} to='/career' label="Career Timeline" icon={<FontAwesomeIcon icon={faTimeline} size='lg' />} />}
-          <BottomNavigationAction component={Link} to='/audio' label={!isMobile ?"Vartalap" :"Vartalap"} icon={<FontAwesomeIcon icon={faHeadphones} size='lg' />} />
-          <BottomNavigationAction component={Link} to='/project' label="Nibandh" icon={<FontAwesomeIcon icon={faDiagramProject} size='lg' />} />
-         { !isMobile && <BottomNavigationAction component={Link} to='/feedback' label="Feedback" icon={<FontAwesomeIcon icon={faComments} size='lg' />} />}
+          <BottomNavigationAction component={Link} to='/project' label="Projects" icon={<FontAwesomeIcon icon={faDiagramProject} size='lg' />} />
+          !isMobile && <BottomNavigationAction component={Link} to='/feedback' label="Feedback" icon={<FontAwesomeIcon icon={faComments} size='lg' />} />
       
         </BottomNavigation>
       </Paper>

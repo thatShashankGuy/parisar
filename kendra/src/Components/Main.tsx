@@ -6,8 +6,6 @@ import CareerTimeline from './CareerTimline/CareerTimeline'
 import About from './About/About';
 import Service404 from './Shared/Service404';
 import {careerEvents} from '../Constants/DataObjects'
-import AudioIndex from './Audio/AudioIndex';
-import AudioPlayer from './Audio/AudioPlayer';
 
 const Main = () => {
   return (
@@ -17,8 +15,10 @@ const Main = () => {
         <Route path="/career" element={<CareerTimeline jobs={careerEvents}/>}/>
         <Route path="/project" element={<Projects />} />
         <Route path="/feedback" element={<Feedback />} />
-        <Route path="/audio" element={<AudioIndex />} />
-        <Route path="/player" element={<AudioPlayer />} />
+       
+        {/* vartalaap have its own site now 
+         <Route path="/audio" element={<AudioIndex />} />
+        <Route path="/player" element={<AudioPlayer />} /> */}
         <Route path = "*" element={<Service404 component={""}/>}/>
       </Routes>
   );

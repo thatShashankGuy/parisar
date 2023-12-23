@@ -35,5 +35,6 @@ export const AboutMe = {
 
 export const ImpRef = {
   nibandh_repo : "https://github.com/thatShashankGuy/nibandh",
-  nibandh_pages : "https://thatshashankguy.github.io/nibandh/"
+  nibandh_pages : "https://thatshashankguy.github.io/nibandh/",
+  vartalaap_site : "https://shashankshekhar-micro.pages.dev/"
 }

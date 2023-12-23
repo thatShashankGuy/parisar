@@ -35,23 +35,26 @@
   <main>
 
     <div class="feedback">
-    <h2><i class="fa-solid fa-pen-nib">&nbsp; Your feedback is important!</i></h2>
+    <h3><i class="fa-solid fa-pen-nib"></i>&nbsp; Your feedback is important!</h3>
     <p>{errorMessage ? errorMessage :'' }</p>
     <form>
 
-    <label for="email"><i class="fa-regular fa-lightbulb">&nbsp; Email:</i></label>
+    <label for="email"><i class="fa-regular fa-lightbulb"></i>&nbsp; Email:</label>
       <input type="email" id="email" bind:value={email} required/>
   
-      <label for="feedback"><i class="fa-regular fa-lightbulb">&nbsp; Feedback:</i></label>
+      <label for="feedback"><i class="fa-regular fa-lightbulb"></i>&nbsp; Feedback:</label>
       <textarea id="feedback" bind:value={feedback} required></textarea>
   
-      <button type="submit" on:click={handleSubmit}><i class="fa-solid fa-pen-nib">&nbsp; submit</i></button>
+      <button type="submit" style="border: 1px solid black; padding : 5% " on:click={handleSubmit}>
+        <i class="fa-solid fa-pen-nib"></i>
+        &nbsp; submit
+      </button>
     </form>
 
 </div>
     <div class="navbtn">
-        <button  on:click={goTOEp}><i class="fa-solid fa-headphones">&nbsp; Ep</i> </button>
-        <button  on:click={goHome}><i class="fa-solid fa-house-flag">&nbsp; Home </i></button>
+        <button  on:click={goTOEp}><i class="fa-solid fa-headphones"></i>&nbsp; Ep </button>
+        <button  on:click={goHome}><i class="fa-solid fa-house-flag"></i>&nbsp; Home </button>
     </div>
   </main>
     
@@ -61,6 +64,8 @@
     flex-direction: column;
     align-items: center;
     padding: 10%;
+    font-family:monospace; 
+    font-size: 1.5rem;
   }
 
   form {
@@ -69,6 +74,8 @@
     align-items: left;
     max-width: 300px;
     margin: 0 auto;
+    background: none;
+    border: none;
   }
 
   label {

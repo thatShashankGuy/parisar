@@ -56,7 +56,7 @@ const ModeSetter : React.FC<ModeSetterProps> = ({children}) => {
           borderRadius: 20 / 2,
         },
       }));
-      const [darkMode, setDarkMode] = useState(true);
+      const [darkMode, setDarkMode] = useState(false);
       const theme = createTheme({
         palette: {
           mode: darkMode ? 'dark' : 'light',
