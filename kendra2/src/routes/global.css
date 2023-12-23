@@ -1,0 +1,94 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%; 
+  }
+  
+  html {
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: black;
+    font-family: Arial, sans-serif; 
+  }
+  
+  
+  a {
+    font-weight: 500;
+    color: #1f1f21;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #0a0a0a;
+    cursor: pointer;
+  }
+  
+  
+  h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+  
+  
+  .card {
+    color: rgba(66, 45, 18, 0.319);
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+    font-size: 5rem;
+    color: #131312;
+    position: relative;
+  }
+  
+  ul {
+    text-align: left;
+    font-size: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .card {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1.8rem;
+      font-family: monospace;
+    }
+  
+    a {
+      color: #0a0a0a;
+    }
+  
+    button {
+      color: #0a0a0a;
+      border-color: black;
+      font-size: 1.1rem;
+    }
+  
+    ul {
+      font-size: 1.1rem;
+      padding: 0.1rem;
+    }
+  }
+  
+  button {
+    background-color: inherit;
+    padding: 1.3em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    border-color: black;
+  }
+  
+  button:hover {
+    border-color: #9ea1d2;
+  }
+  
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  
