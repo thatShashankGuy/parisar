@@ -1,6 +1,7 @@
 <script>
   import "@fortawesome/fontawesome-free/css/all.min.css";
   import './styles.css'
+  const img = 'images/listening.png'
 </script>
 
 <main>
@@ -19,9 +20,11 @@
   </div>
 
   <div class="card">
-    <strong>
-      <i class="fa-regular fa-lightbulb"></i>WELCOME TO VARTALAAP!
+
+     
       <ul>
+        <img class="profile-image" src={img} alt="">
+       <h3> <i class="fa-regular fa-lightbulb"></i>WELCOME TO VARTALAAP! </h3>
         <ul>
           <a href="/vartalaap">
             <i class="fa-regular fa-lightbulb">
@@ -39,18 +42,26 @@
             <strong>"kendra"</strong></a>
         </ul> 
       </ul>
-    </strong>
+
   </div>
 </main>
 
 <style>
+  
+  img{
+    width: 80%;
+    height: auto;
+    max-width: 100px;
+    object-fit: cover;
+    padding-left: 25%;
+}
   
   .social-links {
     position: fixed;
     top: 0;
     left: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     padding: 10px;
   }

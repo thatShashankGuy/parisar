@@ -1,13 +1,13 @@
 <script>
     import "@fortawesome/fontawesome-free/css/all.min.css";
     import { downloadResume } from '$lib/index.js'
-    const img = 'images/prof.png'
+    const img = 'images/chatting.png'
     const intro = 'Hi I am Shashank - a software engineer based in Bangalore, India'
 </script>
 
 <main  >
     <div class="profile-container">
-        <img class="profile-image" src={img} alt="Profile Photo">
+        <img class="profile-image" src={img} alt="">
         <br>
         <div class="social-links">
             <a href="https://github.com/thatShashankGuy" target="_blank">
@@ -51,7 +51,6 @@
     width: 80%;
     height: auto;
     max-width: 150px;
-    border-radius: 50%; /* Make it circular */
     object-fit: cover;
 }
 

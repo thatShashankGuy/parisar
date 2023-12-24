@@ -19,12 +19,12 @@
 
         &nbsp;
     </ul>
-    <h1 style="text-align: left;"><i class="fa-solid fa-lightbulb"></i>Announcements</h1>
+    <h1 style="text-align: left;"><i class="fa-solid fa-lightbulb"></i>  &nbsp; Announcements</h1>
     <ul>
 
         <li>
             Nibandh is looking for more contributors.If you like techincal writing and will like to contribute , please get it touch 
-            by <a href="mailto:shashankforworkshekhar@gmail.com">email</a> or go to <a href="nibandh_repo">Nibandh's git repo</a>
+            by <a href="mailto:shashankforworkshekhar@gmail.com">email</a> or go to <a href={ImpRef.nibandh_repo}>Nibandh's git repo</a>
         </li>
     </ul>
 </section>

@@ -51,7 +51,7 @@ ul {
 
 @media (max-width: 768px) {
   .card {
-    width: 100%;
+    width:97%;
     padding: 0.8rem;
     font-size: 1.8rem;
     font-family: monospace;

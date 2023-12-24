@@ -1,7 +1,9 @@
 <script>
   import "@fortawesome/fontawesome-free/css/all.min.css";
 </script>
-
+<head>
+  kendra
+</head>
     <main>
         <header>
           <div class="navb">
@@ -14,11 +16,10 @@
             <a class="profile-link" href="/contact">Contact </a>
           </div>
         </header>
-        <slot />
+        <section>
+          <slot />
+        </section>
       </main>
-
-
-
 <style>
 
   main {
@@ -33,7 +34,7 @@
   }
 
   .navb {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     display: flex;
