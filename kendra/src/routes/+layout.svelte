@@ -11,6 +11,8 @@
             &nbsp;
             <a class="profile-link" href="/about">About </a>
             &nbsp;
+            <a class="profile-link" href="/blogs">Blogs </a>
+            &nbsp;
             <a class="profile-link" href="/projects">Projects</a>
             &nbsp;
             <a class="profile-link" href="/contact">Contact </a>
@@ -63,11 +65,12 @@
   /* MOBILE */
   @media (max-width: 768px) {
     .navb {
-      padding: 1rem;
+      padding: 0.5rem;
+      padding-left: 0;
     }
 
     .navb a {
-      margin: 8px 15px;
+      margin: 6px 6px;
       padding: 0.2rem;
     }
 
