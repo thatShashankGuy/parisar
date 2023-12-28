@@ -1,17 +1,5 @@
 <script>
-  let blogPosts = [
-    {
-      title: "Coding My Way Out of Burnout",
-      link: "/blogs/B001",
-      publication_date: "December 25, 2023"
-    },
-    {
-      title: "Database Paradigms: ACID, BASE and CAP in brief",
-      link: "/blogs/B002",
-      publication_date: "December 28, 2023"
-    },
-    // Add more blog post objects as needed
-  ];
+  import {blogs} from '$lib/constants/index.js'
 </script>
 
 <style>
@@ -86,10 +74,10 @@
     <h1> <i class="fa-solid fa-lightbulb"></i>&nbsp; Read my blogs</h1>
   </div>
   <div class="container">
-    {#each blogPosts as post (post.link)}
+    {#each blogs as post (post.link)}
     <div class="blog-card">
       <i class="fa-solid fa-blog"></i> <a href={post.link} class="blog-title">{post.title}</a>
-      <p class="blog-description">{post.publication_date}</p>
+      <p class="blog-description">{post.date}</p>
     </div>
     {/each}
   </div>

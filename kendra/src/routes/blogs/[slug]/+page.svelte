@@ -1,19 +1,20 @@
 <script>
-  import B001 from '$lib/blogs/B001.md'
-  import B002 from '$lib/blogs/B002.md'
-  export let data;
+import Blog25Dec23 from '$lib/constants/blogs/blog25Dec23.md'
+import Blog28Dec23 from '$lib/constants/blogs/blog28Dec23.md'
 
-const blogName = data.slug
+export let data;
+let blogName = data.slug
 </script>
 
 <body>
-    {#if blogName === 'B001'}
-        <B001/>
-    {:else if blogName === 'B002'}
-        <B002/>
+  {#if blogName == "blog25Dec23"}
+  <Blog25Dec23/>
+  {:else if blogName ="blog28Dec23"}
+  <Blog28Dec23/>
   {:else}
-    <!-- Default case -->
-    <p>No such Article Found</p>
+  <p>
+    OOPS NO BLOG FOUND! 
+  </p>
   {/if}
 </body>
 
