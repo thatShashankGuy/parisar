@@ -15,7 +15,7 @@
             &nbsp;
             <a class="profile-link" href="/projects">Projects</a>
             &nbsp;
-            <a class="profile-link" href="/contact">Contact </a>
+            <a class="profile-link" href="/contact">Direct message </a>
           </div>
         </header>
         <section>
