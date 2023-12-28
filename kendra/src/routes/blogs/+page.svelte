@@ -5,6 +5,11 @@
       link: "/blogs/B001",
       publication_date: "December 25, 2023"
     },
+    {
+      title: "Database Paradigms: ACID, BASE and CAP in brief",
+      link: "/blogs/B002",
+      publication_date: "December 28, 2023"
+    },
     // Add more blog post objects as needed
   ];
 </script>

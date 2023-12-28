@@ -1,5 +1,6 @@
 <script>
   import B001 from '$lib/blogs/B001.md'
+  import B002 from '$lib/blogs/B002.md'
   export let data;
 
 const blogName = data.slug
@@ -8,9 +9,11 @@ const blogName = data.slug
 <body>
     {#if blogName === 'B001'}
         <B001/>
+    {:else if blogName === 'B002'}
+        <B002/>
   {:else}
     <!-- Default case -->
-    <p>Default content</p>
+    <p>No such Article Found</p>
   {/if}
 </body>
 
