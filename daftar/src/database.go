@@ -53,7 +53,7 @@ func select_allFeedback() ([]Feedback, error) {
 	return feedbackList, nil
 }
 
-func retrieve_ListOfEpisode_Vartalaap() ([]VartalaapIndex, error) {
+func retrieve_ListOfEpisode_Audio() ([]AudioIndex, error) {
 	db, err := databaseConnector()
 	if err != nil {
 		return nil, err
@@ -69,10 +69,10 @@ func retrieve_ListOfEpisode_Vartalaap() ([]VartalaapIndex, error) {
 
 	defer rows.Close()
 
-	var vList []VartalaapIndex
+	var vList []AudioIndex
 
 	for rows.Next() {
-		var v VartalaapIndex
+		var v AudioIndex
 		err := rows.Scan(&v.SerialNo, &v.Name, &v.EpisodeId)
 		if err != nil {
 			log.Fatalf("error occured while scaning rows %v", err)
@@ -83,4 +83,36 @@ func retrieve_ListOfEpisode_Vartalaap() ([]VartalaapIndex, error) {
 	}
 
 	return vList, nil
+}
+
+func add_audio_metadata(aud AudioIndex) (sql.Result, error) {
+	db, err := databaseConnector()
+	if err != nil {
+		return nil, err
+	}
+	sql := "INSERT INTO blogs_Table(title,serialNo,episodeId) values(?,?,?)"
+
+	result, err := db.Exec(sql, aud.Name, aud.SerialNo, aud.EpisodeId)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+func add_blog_metadata(blog Blogs) (sql.Result, error) {
+	db, err := databaseConnector()
+	if err != nil {
+		return nil, err
+	}
+	sql := "INSERT INTO blogs_Table(title,author,date,link) values(?,?,?,?)"
+
+	result, err := db.Exec(sql, blog.Title, blog.Author, blog.Date, blog.Link)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
 }

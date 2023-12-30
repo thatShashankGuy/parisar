@@ -38,8 +38,8 @@ func preSignedURLGeneratorHelper(bucket string, objectKey string, action string)
 Reads Items in provided bucket  and return list Object Output
 takes bucket name and prefix as inputs
 */
-func readItemsFromBucketHelper(bucket string, folder string) ([]VartalaapInfo, error) {
-	var vartalaapInfo []VartalaapInfo
+func readItemsFromBucketHelper(bucket string, folder string) ([]AudioInfo, error) {
+	var vartalaapInfo []AudioInfo
 	folder = folder + "/"
 	result, err := svc.ListObjects(bucket, folder)
 	if err != nil {
@@ -47,7 +47,7 @@ func readItemsFromBucketHelper(bucket string, folder string) ([]VartalaapInfo, e
 	}
 
 	for _, item := range result {
-		vartalaapInfo = append(vartalaapInfo, VartalaapInfo{
+		vartalaapInfo = append(vartalaapInfo, AudioInfo{
 			Name:         *item.Key,
 			Size:         *item.Size,
 			LastModified: item.LastModified.Format("2006-01-02T15:04:05Z07:00"),
