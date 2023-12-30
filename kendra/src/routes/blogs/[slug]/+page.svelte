@@ -1,6 +1,10 @@
 <script>
-import Blog25Dec23 from '$lib/constants/blogs/blog25Dec23.md'
 import Blog28Dec23 from '$lib/constants/blogs/blog28Dec23.md'
+import Blog25Dec23 from '$lib/constants/blogs/blog25Dec23.md'
+import Blog15Dec23 from '$lib/constants/blogs/blog15Dec23.md'
+import Blog26Nov23 from '$lib/constants/blogs/blog26Nov23.md'
+import Blog10Nov23 from '$lib/constants/blogs/blog10Nov23.md'
+
 
 export let data;
 let blogName = data.slug
@@ -9,8 +13,14 @@ let blogName = data.slug
 <body>
   {#if blogName == "blog25Dec23"}
   <Blog25Dec23/>
-  {:else if blogName ="blog28Dec23"}
+  {:else if blogName == "blog28Dec23"}
   <Blog28Dec23/>
+  {:else if blogName == "blog15Dec23"}
+  <Blog15Dec23/>
+  {:else if blogName == "blog26Nov23"}
+  <Blog26Nov23/>
+  {:else if blogName == "blog10Nov23"}
+  <Blog10Nov23/>
   {:else}
   <p>
     OOPS NO BLOG FOUND! 

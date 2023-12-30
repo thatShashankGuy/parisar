@@ -18,3 +18,15 @@ CREATE TABLE feedback_Table (
     PRIMARY KEY (pK)
 );
 
+CREATE TABLE blogs_Table(
+    pk integer NOT NULL AUTO_INCREMENT,
+    title varchar(255),
+    author varchar(255),
+    date varchar(255),
+    link varchar(255),
+    content text
+    createdAt timestamp DEFAULT CURRENT_TIMESTAMP,
+    updatedAt timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    PRIMARY KEY(pK)
+)
+
