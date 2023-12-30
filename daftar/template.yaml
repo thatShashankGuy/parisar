@@ -79,7 +79,10 @@ Resources:
           DOCS_ADDRESS : documents
           MY_AWS_REGION : ap-south-1
           SECRET : planetscalesecret
-          APP_ENV : PROD 
+          APP_ENV : PROD
+          BLOG_ADDRESS : blogs
+
+
   ParisarAdminBackend:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Metadata:
@@ -116,6 +119,41 @@ Resources:
           Properties:
             Path : /admin/v1/feedback
             Method : GET
+        OPTIONSALLFEEDBACK:
+          Type: Api
+          Properties:
+            Path : /admin/v1/feedback
+            Method : OPTIONS
+        POSTBLOGMETADATA:
+          Type: Api
+          Properties:
+            Path : /admin/v1/blog-metadata
+            Method : POST
+        OPTIONBLOGMETADATA:
+          Type: Api
+          Properties:
+            Path : /admin/v1/blog-metadata
+            Method : OPTIONS
+        POSTAUDIOMETADATA:
+          Type: Api
+          Properties:
+            Path : /admin/v1/audio-metadata
+            Method : POST
+        OPTIONAUDIOMETADATA:
+          Type: Api
+          Properties:
+            Path : /admin/v1/audio-metadata
+            Method : OPTIONS
+        POSTBLOGFILE:
+          Type: Api
+          Properties:
+            Path : /admin/v1/upload-blogs
+            Method : POST
+        OPTIONSBLOGFILE:
+          Type: Api
+          Properties:
+            Path : /admin/v1/upload-blogs
+            Method : OPTIONS
       Policies:
         - Statement:
             - Effect: Allow
@@ -138,7 +176,8 @@ Resources:
           AUDIO_ADDRESS : podcast
           MY_AWS_REGION : ap-south-1
           SECRET : planetscalesecret
-          APP_ENV : PROD 
+          APP_ENV : PROD
+          BLOG_ADDRESS : blogs
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM

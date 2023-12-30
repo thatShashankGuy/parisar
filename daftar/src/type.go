@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type uploadURLResponse struct {
 	URL string `json:"url"`
@@ -18,7 +20,7 @@ type PresignedURLResumeResponse struct {
 	URL string `json:"url"`
 }
 
-type VartalaapInfo struct {
+type AudioInfo struct {
 	Name         string `json:"name"`
 	Size         int64  `json:"size"`
 	LastModified string `json:"last_modified"`
@@ -36,10 +38,10 @@ type Feedback struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
-type VartalaapIndex struct {
+type AudioIndex struct {
 	SerialNo  string `json:"logId"`
-	EpisodeId string `json:"EpisodeId"`
-	Name      string `json:"Name"`
+	EpisodeId string `json:"episodeId"`
+	Name      string `json:"name"`
 }
 
 type CustomError struct {
@@ -48,4 +50,12 @@ type CustomError struct {
 
 func (E CustomError) Error() string {
 	return fmt.Sprintf("error : %s", E.message)
+}
+
+type Blogs struct {
+	Title   string `json:"title"`
+	Author  string `json:"Author"`
+	Link    string `json:"link"`
+	Date    string `json:"date"`
+	Content string `json:"content"`
 }

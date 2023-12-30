@@ -15,11 +15,12 @@ var (
 		"Access-Control-Allow-Methods": "POST, GET, PUT, OPTIONS",
 		"Access-Control-Allow-Headers": "Content-Type",
 	}
-	storageBucket   = os.Getenv("STORAGE_BUCKET")
-	vartalaapFolder = os.Getenv("AUDIO_ADDRESS")
-	documentFolder  = os.Getenv("DOCS_ADDRESS")
-	awsRegion       = os.Getenv("MY_AWS_REGION")
-	applicationEnv  = os.Getenv("APP_ENV")
+	storageBucket  = os.Getenv("STORAGE_BUCKET")
+	audioFolder    = os.Getenv("AUDIO_ADDRESS")
+	blogFolder     = os.Getenv("BLOG_ADDRESS")
+	documentFolder = os.Getenv("DOCS_ADDRESS")
+	awsRegion      = os.Getenv("MY_AWS_REGION")
+	// applicationEnv = os.Getenv("APP_ENV")
 )
 
 func main() {
@@ -31,7 +32,7 @@ func main() {
 
 		switch request.Path {
 		case "/api/v1/broadcast":
-			return vartalaapHandler(ctx, request)
+			return audioHandler(ctx, request)
 
 		case "/api/v1/resume":
 			return resumeHandler(ctx, request)
@@ -40,16 +41,25 @@ func main() {
 			return feedbackHandler(ctx, request)
 
 		case "/api/v1/episodelist":
-			return vartalaapIndexHandler(ctx, request)
+			return audioIndexHandler(ctx, request)
 
 		case "/admin/v1/broadcast":
-			return vartalaapInfoDashboardHandler(ctx, request)
+			return audioInfoDashboardHandler(ctx, request)
 
 		case "/admin/v1/upload-broadcast":
-			return uploadvartalaapViaDashboardHandler(ctx, request)
+			return uploadaudioViaDashboardHandler(ctx, request)
 
 		case "/admin/v1/feedback":
 			return feedbackHandler(ctx, request)
+
+		case "/admin/v1/blog-metadata":
+			return insertBlogMetadata(ctx, request)
+
+		case "/admin/v1/audio-metadata":
+			return insertAudioMetadata(ctx, request)
+
+		case "/admin/v1/upload-blogs":
+			return uploadBlogHandler(ctx, request)
 
 		default:
 			return events.APIGatewayProxyResponse{
