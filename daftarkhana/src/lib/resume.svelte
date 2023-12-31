@@ -1,3 +1,10 @@
+<script>
+    import {URLS} from '../service/config'
+    import {genPresignedUrlAndUpload} from '../service/api'
+
+    let fileData = null 
+</script>
+
 <main>
 
     <div>
@@ -6,14 +13,14 @@
         </h2>
         <form id="myForm">
             <section>
-                <label for="resume">
-                    Upload Resume
-                </label>
-                <br>
-                <input type="file" id="resume" name="resume"/><br><br>
-                
-                <button type="button" id="submitButton">
-                    submit
+                <label for="markdown">
+                    upload Resume  ** <strong>Rename the file to "Resume" before uploading</strong> ** 
+                 </label>
+                 &nbsp;
+                <input type="file" id="resume" name="resume" bind:this={fileData}/><br><br>
+             
+                <button type="button" id="submitButton" on:click={()=> genPresignedUrlAndUpload(fileData,URLS.uploadAudioFile)}>
+                    upload 
                 </button>
             </section>
         </form>

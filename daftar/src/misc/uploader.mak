@@ -1,4 +1,4 @@
-aws s3 cp ./vartalaap03.mp3 s3://thatshashankguy-storage-bucket/podcast/
+aws s3 cp ./vartalaap01.mp3 s3://thatshashankguy-storage-bucket/podcast/
 
 aws cloudformation describe-stacks --stack-name parisar-backend
 
@@ -12,4 +12,8 @@ VALUES ("vartalaap05","Little bit about interviewing","#5"),
 
 INSERT INTO feedback_Table(comment,email,source)
 VALUES("LETS ADD A COMMENT OURSELVES", "xyz@email.com","manual");
+
+
+ INSERT INTO vartalaap_Table(serialNo,title,episodeId)
+VALUES ("vartalaap02","Why I built parisar","#1");
 

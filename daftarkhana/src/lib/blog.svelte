@@ -1,61 +1,10 @@
 <script>
     import {URLS} from '../service/config'
+    import {sumbitMetadata} from '../service/api'
+    import  {genPresignedUrlAndUpload} from '../service/api'
     // @ts-ignore
     let metadata = ''
-    /**
-   * @type {string | Blob}
-   */
-    // @ts-ignore
-    let markdown 
-
-    async function sumbitMetadata(){
-        try {
-            const response = await fetch(URLS.blogMetadata,{
-                method:"POST",
-                headers :{
-                    "Content-Type" : "application/json",
-                },
-
-                body: metadata
-            })
-
-            if(!response.ok){
-                 alert(response.status)
-                 throw new Error(JSON.stringify(response))
-            }
-            alert("DONE")
-            return response
-
-        } catch (error) {
-            // @ts-ignore
-            alert(error.message)
-            throw new Error(error.message)
-        }
-    }
-
-    async function submitMarkdown(){
-        try {
-            const response = await fetch(URLS.uploadblogMarkdown,{
-                method:"POST",
-                headers :{
-                    "Content-Type" : "application/json",
-                },
-
-                body: metadata
-            })
-
-            if(!response.ok){
-                 alert(response.status)
-                 throw new Error(JSON.stringify(response))
-            }
-            alert("DONE")
-            return response
-        } catch (error) {
-                // @ts-ignore
-            alert(error.message)
-            throw new Error(error.message)
-        }
-    }
+    let fileData = null
 </script>
 
 <main>
@@ -69,7 +18,7 @@
             </label>
           <br>
             <textarea id="metadata" name="metadata" bind:value={metadata}></textarea> <br><br>
-            <button type="button" id="submitButton" on:click={sumbitMetadata}>
+            <button type="button" id="submitButton" on:click={()=> sumbitMetadata(metadata,URLS.blogMetadata)}>
                 submit 
             </button>
 
@@ -78,9 +27,9 @@
                upload markdown file
             </label>
             &nbsp;
-            <input type="file" id="markdown" name="markdown" bind:value={markdown}/><br><br>
+            <input type="file" id="markdown" name="markdown" bind:this={fileData}/><br><br>
             
-            <button type="button" id="submitButton" on:click={submitMarkdown}>
+            <button type="button" id="submitButton" on:click={()=> genPresignedUrlAndUpload(fileData,URLS.uploadblogMarkdown)}>
                 upload 
             </button>
             <br> <br> <br>

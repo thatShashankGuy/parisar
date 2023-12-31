@@ -154,6 +154,16 @@ Resources:
           Properties:
             Path : /admin/v1/upload-blogs
             Method : OPTIONS
+        POSTRESUMEFILE:
+          Type: Api
+          Properties:
+            Path : /admin/v1/upload-resume
+            Method : POST
+        OPTIONSRESUMEFILE:
+          Type: Api
+          Properties:
+            Path : /admin/v1/upload-resume
+            Method : OPTIONS
       Policies:
         - Statement:
             - Effect: Allow
@@ -178,6 +188,7 @@ Resources:
           SECRET : planetscalesecret
           APP_ENV : PROD
           BLOG_ADDRESS : blogs
+          DOCS_ADDRESS : documents
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM

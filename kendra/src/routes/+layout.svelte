@@ -28,7 +28,7 @@
     background-color: #a9c9ff;
     background-image: linear-gradient(180deg, #a9c9ff 0%, #ffbbec 100%);
     color: rgb(49, 56, 63);
-    font-family: monospace;
+    font-family:  Arial, sans-serif !important;
     margin: 0;
     padding: 0;
     overflow-x: hidden !important;

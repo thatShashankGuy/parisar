@@ -446,9 +446,61 @@ func uploadBlogHandler(ctx context.Context, request events.APIGatewayProxyReques
 				Body:       err.Error(),
 			}, nil
 		}
-
 		blogPath := blogFolder + "/" + req.FileName
 		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, blogPath, "upload")
+		if err != nil {
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		responseBody, err := json.Marshal(uploadURLResponse{URL: preSignedURL.URL})
+		headers["Content-Type"] = "application/json"
+		if err != nil {
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
+			Headers:    headers,
+			Body:       string(responseBody),
+		}, nil
+	case "OPTIONS":
+		headers["Content-Type"] = "application/json"
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusOK,
+			Headers:    headers,
+			Body:       "Handled OPTIONS",
+		}, nil
+	default:
+		return events.APIGatewayProxyResponse{
+			StatusCode: http.StatusInternalServerError,
+			Headers:    headers,
+			Body:       "something went wrong",
+		}, nil
+
+	}
+}
+
+func uploadResumeHandler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+
+	switch request.HTTPMethod {
+	case "POST":
+		var req uploadURLRequestBody
+		err := json.Unmarshal([]byte(request.Body), &req)
+		if err != nil {
+			return events.APIGatewayProxyResponse{
+				StatusCode: http.StatusInternalServerError,
+				Headers:    headers,
+				Body:       err.Error(),
+			}, nil
+		}
+		resumePath := documentFolder + "/" + req.FileName
+		preSignedURL, err := preSignedURLGeneratorHelper(storageBucket, resumePath, "upload")
 		if err != nil {
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusInternalServerError,

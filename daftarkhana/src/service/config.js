@@ -13,7 +13,8 @@ export const URLS = {
   blogMetadata : `${BASEURL}blog-metadata`,
   audioMetadata : `${BASEURL}audio-metadata`,
   feedback : `${BASEURL}feedback`,
-  uploadblogMarkdown : `${BASEURL}upload-blogs`
+  uploadblogMarkdown : `${BASEURL}upload-blogs`,
+  uploadAudioFile :`${BASEURL}upload-broadcast`
 }
 
 

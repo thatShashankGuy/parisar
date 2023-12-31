@@ -15,23 +15,23 @@ Started as barely porforlio exercise I quickly realised most of my work has been
 - I also host a semi technical podcast called
   `vartalaap` in here .
 So if interested please check it out.
-- The Web UI also have a link to `nibandh` my open source projects consisting of mutiple technical writings
+- `kendra` also hosts my _blogs_ 
 
 
 ### Technical Architecture
-- `UI - Kendra` - The The central UI is written in `React` and `Typescript` using `Material` as primary CSS library. UI is responsive and works well with desktop and mobile views.Consist of porfolio and show case project info
+- `UI - Kendra` - The The central UI is written in `React` and `Typescript` using `Material` as primary CSS library. UI is responsive and works well with desktop and mobile views.Consist of _porfolio_ and _blogs_
 
-- `UI - Vartalaap` - The Audio Podcast UI written in `Sveltekit` and `JavaScript`. UI is mobile first and is lean with Minimal third party dependency. 
+- `UI - Vartalaap` - The Audio Podcast UI written in `Sveltekit` and `JavaScript`. UI is mobile first and is lean with Minimal third party dependency. It host the _vartalaap_ - semi technical podcast
 
 - `Backend - Daftar` - To Keep things simpler, I chose to use serverless AWS lamba architecture and is a central backbone named `Daftar`. `All lambdas` are written in `Go` providing small bundle sizes and fast response time
 
-- `Database - Daftarkhana` - for database I utilize `Planet Scale DaaS with mySQL`I fondly named `Daftarkhana` .  `Daftar` saves the data in `Daftarkhana` tables as well as utilizes `AWS S3` for object storage.
+- `Database + Admin Panel- Daftarkhana` - for database I utilize `Planet Scale DaaS with mySQL`I fondly named `Daftarkhana` .  `Daftar` saves the data in `Daftarkhana` tables as well as utilizes `AWS S3` for object storage via a Admin Panel written in `Svelte` as a SPA , spinned up locally for now. Will be hosted on `cloudflare pages` after Auth0 integration.
 
-- `Hosting` - Both UIs are hosted with `CloudFlare Pages ` while `nibandh ` utilizes `Github pages`
+- `Hosting` - Both UIs are hosted with `CloudFlare Pages ` pages.
 
-- `CI/CD` - setup is in progress and is currently use `Terraforms` and `AWS SAM and Cloudformatons`
+- `CI/CD` - local automations in `bash` and python, will be using terraforms in future.(TBD)
 
-- `Authentication/Authorziation` - setup is in progress and will leverage `Auth0` and `Daftarkhana` setup
+- `Authentication/Authorziation` - setup is in progress and will leverage `Auth0` and `Daftarkhana` setup (TBD)
 
 
 ### Architecture Diagram

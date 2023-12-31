@@ -3,7 +3,6 @@
 </script>
 
 <style>
-  /* Container for blog posts */
   .container {
     display: flex;
     flex-direction: column;
@@ -32,13 +31,11 @@
     color: #333;
   }
 
-  /* Blog post description (publication date) */
   .blog-description {
     font-size: 14px;
     color: #888;
   }
 
-  /* Links in blog post */
   a {
     text-decoration: none;
     color: #333;
@@ -49,7 +46,7 @@
     color: #555;
   }
 
-  /* Media query for smaller screens */
+
   @media (max-width: 768px) {
     .container {
       padding: 10px;
@@ -76,7 +73,7 @@
   <div class="container">
     {#each blogs as post (post.link)}
     <div class="blog-card">
-      <i class="fa-solid fa-blog"></i> <a href={post.link} class="blog-title">{post.title}</a>
+      <i class="fa-solid fa-blog"></i> <a href={`blog/${post.link}`} class="blog-title">{post.title}</a>
       <p class="blog-description">{post.date}</p>
     </div>
     {/each}

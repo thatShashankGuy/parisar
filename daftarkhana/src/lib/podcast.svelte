@@ -1,37 +1,10 @@
 <script>
         import {URLS} from '../service/config'
+        import {sumbitMetadata,genPresignedUrlAndUpload} from '../service/api'
     // @ts-ignore
     let metadata = ''
-    /**
-   * @type {string | Blob}
-   */
-    // @ts-ignore
-    let audio 
-
-    async function sumbitMetadata(){
-        try {
-            const response = await fetch(URLS.audioMetadata,{
-                method:"POST",
-                headers :{
-                    "Content-Type" : "application/json",
-                },
-
-                body: metadata
-            })
-
-            if(!response.ok){
-                 alert(response.status)
-                 throw new Error(JSON.stringify(response))
-            }
-            alert("DONE")
-            return response
-
-        } catch (error) {
-            // @ts-ignore
-            alert(error.message)
-            throw new Error(error.message)
-        }
-    }
+    let fileData = null
+    
 </script>
 
 <main>
@@ -47,16 +20,23 @@
             </label>
           <br>
             <textarea id="metadata" name="metadata" bind:value={metadata}></textarea> <br><br>
-            
+            <button type="button" id="submitButton" on:click={() => sumbitMetadata(metadata,URLS.audioMetadata)}>
+                submit
+            </button>
+
             <label for="markdown">
                 Audio file
             </label>
             <br>
-            <input type="file" id="markdown" name="markdown" bind:value={audio}/><br><br>
-            
-            <button type="button" id="submitButton" on:click={sumbitMetadata}>
-                submit
-            </button>
+            <label for="markdown">
+                upload Audio file
+             </label>
+             &nbsp;
+             <input type="file" id="audio" name="audio" bind:this={fileData}/><br><br>
+             
+             <button type="button" id="submitButton" on:click={()=> genPresignedUrlAndUpload(fileData,URLS.uploadAudioFile)}>
+                 upload 
+             </button>
             <br> <br> <br>
             <div>
                 <label for="code">METADATA FORMAT : </label> <br>

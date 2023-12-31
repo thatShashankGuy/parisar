@@ -61,6 +61,8 @@ func main() {
 		case "/admin/v1/upload-blogs":
 			return uploadBlogHandler(ctx, request)
 
+		case "/admin/v1/upload-resume":
+			return uploadResumeHandler(ctx, request)
 		default:
 			return events.APIGatewayProxyResponse{
 				StatusCode: http.StatusBadRequest,
