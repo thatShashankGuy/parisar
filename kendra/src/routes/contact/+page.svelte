@@ -22,12 +22,27 @@
 </script>
 
 <section>
-  <h3>
- <i class="fa-solid fa-paper-plane"></i>&nbsp; Reach out via message board or
+  <h2>Get in touch via following socials</h2>
+  <h2>
+    <div class="social-links">
+      <a href="https://github.com/thatShashankGuy" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        &nbsp;
+        <a href="https://www.linkedin.com/in/thatshashanguy/" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        &nbsp;
+        <a href="mailto:shashankforworkshekhar@gmail.com" target="_blank">
+          <i class="fa-regular fa-envelope"></i>
+        </a>
+  </div>
+</h2>
+ <!-- <i class="fa-solid fa-paper-plane"></i>&nbsp; Reach out via message board or
     <a href="mailto:shashankforworkshekhar@gmail.com">email directly!</a>
-  </h3>
-  <p>{errorMessage ? errorMessage : ""}</p>
-  <form>
+  </h3> -->
+  <!-- <p>{errorMessage ? errorMessage : ""}</p> -->
+  <!-- <form>
     <label for="email"
       ><i class="fa-regular fa-lightbulb"></i>&nbsp; Email:</label
     >
@@ -46,7 +61,7 @@
    <i class="fa-solid fa-paper-plane"></i>
       &nbsp; submit
     </button>
-  </form>
+  </form> -->
 </section>
 
 
@@ -70,14 +85,18 @@
   }
 
 
+    .social-links a:hover {
+        color: #333;  
+    }
+
   @media (min-width: 769px) {
-    form {
+    /* form {
       padding: 2rem; 
       font-size: large; 
-    }
+    } */
   }
 
-  label {
+  /* label {
     margin-bottom: 8px;
   }
 
@@ -89,14 +108,14 @@
     background-color: antiquewhite;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
+  } */
 
   a {
     color: #333;
     text-decoration: underline;
   }
 
-  button {
+  /* button {
     background-color: inherit;
     padding: 0.1rem 0.1rem; 
     font-size: 1em; 
@@ -117,5 +136,5 @@
   button:focus,
   button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
-  }
+  } */
 </style>

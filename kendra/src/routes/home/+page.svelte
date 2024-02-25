@@ -9,7 +9,7 @@
     <div class="profile-container">
         <img class="profile-image" src={img} alt="">
         <br>
-        <div class="social-links">
+        <!-- <div class="social-links">
             <a href="https://github.com/thatShashankGuy" target="_blank">
                 <i class="fab fa-github"></i>
               </a>
@@ -21,7 +21,7 @@
               <a href="mailto:shashankforworkshekhar@gmail.com" target="_blank">
                 <i class="fa-regular fa-envelope"></i>
               </a>
-        </div>
+        </div> -->
         <div class="profile-info">
                 <h1>{intro}</h1>          
         </div>
@@ -57,7 +57,7 @@
     .profile-info {
         margin-top: 2rem; 
     }
-    .social-links a{
+    /* .social-links a{
         text-decoration: none;
         color: #333; 
         font-size: medium;
@@ -66,7 +66,7 @@
 
     .social-links a:hover {
         color: #333;  
-    }
+    } */
 
     button {
     background-color: inherit;
