@@ -12,8 +12,8 @@
             <a class="profile-link" href="/about">About </a>
             &nbsp;
             <a class="profile-link" href="/blogs">Blogs </a>
-            &nbsp;
-            <a class="profile-link" href="/projects">Projects</a>
+            <!-- &nbsp; -->
+            <!-- <a class="profile-link" href="/projects">Projects</a> -->
             &nbsp;
             <a class="profile-link" href="/contact">Contact </a>
           </div>

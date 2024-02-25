@@ -25,7 +25,7 @@
       <ul>
         <img class="profile-image" src={img} alt="">
        <h3> <i class="fa-regular fa-lightbulb"></i>WELCOME TO VARTALAAP! </h3>
-        <ul>
+        <!-- <ul>
           <a href="/vartalaap">
             <i class="fa-regular fa-lightbulb">
             </i> &nbsp; Click here for All Episode
@@ -41,8 +41,15 @@
             &nbsp; About me on 
             <strong>"kendra"</strong></a>
         </ul> 
-      </ul>
-
+      </ul> -->
+      <div class="container">
+        <div class="message">
+            We're sorry, but this site is no longer supported.
+        </div>
+        <div class="options">
+            <a href="https://shashankshekhar.pages.dev/"><u><strong>Visit our main website</strong></u></a>``
+        </div>
+    </div>
   </div>
 </main>
 
