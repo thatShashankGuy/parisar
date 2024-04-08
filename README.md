@@ -1,5 +1,7 @@
 # Welcome to _parisar_ 
-
+***DUE TO INACTIVITY I AM ONLY MAINTAINING KENDRA (MAIN SITE).*** 
+- *Source code for Daftar , Daftarkhanan and Vartalaap is still available but will not be updated further* 
+- *Vartalaap/Daftaar and Daftaarkhana is now defunct* 
 ### What is _parisar_?
 
   My one true repository hosting `Web UI + Backend Code + AWS infra configuration` for all my project showcases , announcements , podcast and portfolio.
