@@ -1,9 +1,9 @@
 <script>
-import Blog28Dec23 from '$lib/constants/blogs/blog28Dec23.md'
-import Blog25Dec23 from '$lib/constants/blogs/blog25Dec23.md'
-import Blog15Dec23 from '$lib/constants/blogs/blog15Dec23.md'
-import Blog26Nov23 from '$lib/constants/blogs/blog26Nov23.md'
-import Blog10Nov23 from '$lib/constants/blogs/blog10Nov23.md'
+import Typescript from '$lib/constants/blogs/typescript.md'
+import AcidBaseCap from '$lib/constants/blogs/acidbasecap.md'
+import Burnout from '$lib/constants/blogs/burnout.md'
+import Gopointers from '$lib/constants/blogs/gopointers.md'
+import IOnodejs from '$lib/constants/blogs/ionodejs.md'
 
 
 export let data;
@@ -11,16 +11,16 @@ let blogName = data.slug
 </script>
 
 <body>
-  {#if blogName == "blog25Dec23"}
-  <Blog25Dec23/>
-  {:else if blogName == "blog28Dec23"}
-  <Blog28Dec23/>
-  {:else if blogName == "blog15Dec23"}
-  <Blog15Dec23/>
-  {:else if blogName == "blog26Nov23"}
-  <Blog26Nov23/>
-  {:else if blogName == "blog10Nov23"}
-  <Blog10Nov23/>
+  {#if blogName == "typescript"}
+  <Typescript/>
+  {:else if blogName == "acidbasecap"}
+  <AcidBaseCap/>
+  {:else if blogName == "burnout"}
+  <Burnout/>
+  {:else if blogName == "gopointers"}
+  <Gopointers/>
+  {:else if blogName == "ionodejs"}
+  <IOnodejs/>
   {:else}
   <p>
     OOPS NO BLOG FOUND! 

@@ -2,11 +2,18 @@
 <section>
     <div class="timeline">
         <div class="timeline-item">
-            <div class="timeline-date">2022 onwards</div>
+            <div class="timeline-date">2024 - Present</div>
+            <div class="timeline-content">
+                <h3>Senior Software Development Engineer @ <i>NTT Limited</i></h3>
+                <!-- <p>Platform Integration - Azure , NodeJS , Kubernates, Dockers  </p> -->
+
+            </div>
+        </div>
+        <div class="timeline-item">
+            <div class="timeline-date">2022 - 2024</div>
             <div class="timeline-content">
                 <h3>Senior Software Engineer @ <i>Winjit Technologies</i></h3>
-                <p>Architecture and development across multiple <br> teams on various 
-                    projects and technologies </p>
+                <!-- <p>Software Architecture and Design - AWS Lamda, Angular, CI/CD, .Net, Node JS</p> -->
 
             </div>
         </div>
@@ -14,8 +21,7 @@
             <div class="timeline-date">2021 - 2022</div>
             <div class="timeline-content">
                 <h3>Software Engineer @ <i>Winjit Technologies</i></h3>
-                <p>Full stack development and testing with <br> 
-                    cloud native technolgies </p>
+                <!-- <p>Full stack development - AWS Lamdas, Angular, Dockers</p> -->
                 
             </div>
         </div>
@@ -23,8 +29,7 @@
             <div class="timeline-date">2018 -2021</div>
             <div class="timeline-content">
                 <h3>Senior Associate Software Development @ <i>NTT DATA</i></h3>
-                <p>Developing and supporting large porfolio <br>  of on-prem and 
-                    cloud applications and tools </p>
+                <!-- <p>Developing and supporting large porfolio - Dot Net,Powershell, React, SSIS <p> -->
             </div>
         </div>
 
@@ -43,7 +48,7 @@ section {
         padding-top: 2.2rem;
         padding-bottom: 0.2rem;
     }
-    p{
+    /* p{
         font-size: x-large;
         text-align: left;
     }
@@ -52,7 +57,7 @@ section {
         p{
             font-size: small;
         }
-    }
+    } */
 .timeline {
     position: relative;
     margin: 20px;
@@ -89,8 +94,8 @@ section {
     margin-top: 0;
 }
 
-.timeline p {
+/* .timeline p {
     margin-bottom: 0;
-}
+} */
 
 </style>

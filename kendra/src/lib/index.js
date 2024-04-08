@@ -1,6 +1,8 @@
 import { URLS
  } from "./config";
 
+import downloadUrl from './constants/resume/Resume2024.pdf'
+
 export const submitFeedBack = async (email,comment) => {
     const response = await fetch(URLS.Feedback,{
       method:"POST",
@@ -38,7 +40,6 @@ export const submitFeedBack = async (email,comment) => {
   };
 
 export const downloadResume = async () => {
-    const downloadUrl = await requestResumeURL()
     if (downloadUrl) {
       window.open(downloadUrl, '_blank');
     }

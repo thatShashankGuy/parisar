@@ -9,8 +9,6 @@ Now say a set of instructions called  **Program1** reading a large file  from a 
 
 Instead of waiting for **Program1** to run **Program2** NodeJS runs **Program1** asyncronously and let **Program2** start execution while **Program1** finishes its program to start **Program3**.
 
-![Alt text](/assets/nodeJSAdvance_img1.png)
-
 Javascript have three techniques to execute programs asyncronously 
 
 1. Callbacks functions - Original Manner Node used to handle async programs 

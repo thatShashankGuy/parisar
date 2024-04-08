@@ -32,7 +32,7 @@
         on:click={downloadResume}
       >
       <i class="fa-solid fa-paperclip"></i>
-       <b style="display: inline;"> &nbsp; Download Resume</b>
+       <b style="display: inline;"> &nbsp;Resume</b>
       </button></div>   
     </div>
 </main>

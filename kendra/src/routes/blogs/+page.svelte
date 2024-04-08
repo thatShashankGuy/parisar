@@ -73,7 +73,7 @@
   <div class="container">
     {#each blogs as post (post.link)}
     <div class="blog-card">
-      <i class="fa-solid fa-blog"></i> <a href={`blog/${post.link}`} class="blog-title">{post.title}</a>
+      <i class="fa-solid fa-blog"></i> <a href={`${post.link}`} class="blog-title">{post.title}</a>
       <p class="blog-description">{post.date}</p>
     </div>
     {/each}
