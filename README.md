@@ -1,5 +1,5 @@
 # Welcome to _parisar_ 
-***DUE TO INACTIVITY I AM ONLY MAINTAINING KENDRA (MAIN SITE).*** 
+***I built this site as a hobby project, I have since then moved on to work on other stuff. As this was more about fun I am not maintaining this.*** 
 - *Source code for Daftar , Daftarkhanan and Vartalaap is still available but will not be updated further* 
 - *Vartalaap/Daftaar and Daftaarkhana is now defunct* 
 ### What is _parisar_?
